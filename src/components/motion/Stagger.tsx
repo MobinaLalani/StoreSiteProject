@@ -12,10 +12,11 @@ interface StaggerProps {
 
 export default function Stagger({
   children,
-  
+
   className,
 }: StaggerProps) {
   return (
+    
     <motion.div
       className={className}
       variants={staggerContainer}
