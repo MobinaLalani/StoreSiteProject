@@ -12,6 +12,7 @@ interface StaggerProps {
 
 export default function Stagger({
   children,
+  
   className,
 }: StaggerProps) {
   return (
