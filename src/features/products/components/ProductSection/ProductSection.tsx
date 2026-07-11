@@ -23,6 +23,7 @@ export default function ProductSection({
 
   if (products.length === 0) {
     return <ProductEmpty />;
+    
   }
 
   return (
