@@ -1,11 +1,20 @@
 import ProductSectionHeader from "./ProductSectionHeader";
 import ProductGrid from "./ProductGrid";
 import ProductEmpty from "./ProductEmpty";
-import {products} from '../../../../data/products'
 
 import ProductGridSkeleton from "../skeletons/ProductGridSkeleton";
 
-export default function ProductSection() {
+import { products } from "../../../../data/products";
+
+interface ProductSectionProps {
+  title: string;
+  description?: string;
+}
+
+export default function ProductSection({
+  title,
+  description,
+}: ProductSectionProps) {
   const isLoading = false;
 
   if (isLoading) {
@@ -17,8 +26,8 @@ export default function ProductSection() {
   }
 
   return (
-    <section>
-      <ProductSectionHeader title="جدیدترین محصولات" />
+    <section className="py-20">
+      <ProductSectionHeader title={title} description={description} />
 
       <ProductGrid products={products} />
     </section>
