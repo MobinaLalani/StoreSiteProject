@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-
+import Link from "next/link";
 import { Product } from "../../../../types/product";
 
 import ProductImage from "./ProductImage";
@@ -25,7 +25,11 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       <div className="space-y-5 p-5">
         <div>
-          <h3 className="line-clamp-1 text-lg font-bold">{product.title}</h3>
+       <Link href={`/products/${product.slug}`}>
+  <h3 className="line-clamp-1 text-lg font-bold transition-colors hover:text-red-500">
+    {product.title}
+  </h3>
+</Link>
 
           <p className="mt-2 line-clamp-2 text-sm text-gray-500">
             {product.description}
