@@ -42,8 +42,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
       <ProductDescription product={product} />
       
-      
+
       <ProductSpecifications product={product} />
+      
 
       <RelatedProducts products={relatedProducts} />
     </main>
