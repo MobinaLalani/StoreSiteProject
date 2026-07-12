@@ -2,24 +2,35 @@ import { notFound } from "next/navigation";
 
 import { products } from "@/src/data/products";
 
-import ProductGallery from "@/src/features/products/ProductDetails/ProductGallery";
-import ProductInfo from "@/src/features/products/ProductDetails/ProductInfo";
-import ProductDescription from "@/src/features/products/ProductDetails/ProductDescription";
-import ProductSpecifications from "@/src/features/products/ProductDetails/ProductSpecifications";
-import RelatedProducts from "@/src/features/products/ProductDetails/RelatedProducts";
+import {
+  ProductGallery,
+  ProductInfo,
+  ProductDescription,
+  ProductSpecifications,
+  RelatedProducts,
+} from "@/src/features/products/ProductDetails";
 
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-export default function ProductPage({ params }: ProductPageProps) {
-  const product = products.find((item) => item.slug === params.slug);
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { slug } = await params;
+
+  const product = products.find((item) => item.slug === slug);
 
   if (!product) {
     notFound();
   }
+
+  const relatedProducts = products
+    .filter(
+      (item) =>
+        item.category.slug === product.category.slug && item.id !== product.id,
+    )
+    .slice(0, 4);
 
   return (
     <main className="mx-auto max-w-7xl space-y-20 px-4 py-10">
@@ -32,10 +43,8 @@ export default function ProductPage({ params }: ProductPageProps) {
       <ProductDescription product={product} />
 
       <ProductSpecifications product={product} />
-      <RelatedProducts
-        categorySlug={product.category.slug}
-        currentProductId={product.id}
-      />
+
+      <RelatedProducts products={relatedProducts} />
     </main>
   );
 }

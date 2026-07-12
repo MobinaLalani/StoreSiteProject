@@ -2,28 +2,16 @@
 
 import { motion } from "framer-motion";
 
-import { products } from "@/src/data/products";
+import { Product } from "@/src/types/product";
 
 import ProductCard from "../components/ProductCard/ProductCard";
 
 interface RelatedProductsProps {
-  categorySlug: string;
-  currentProductId: number;
+  products: Product[];
 }
 
-export default function RelatedProducts({
-  categorySlug,
-  currentProductId,
-}: RelatedProductsProps) {
-  const relatedProducts = products
-    .filter(
-      (product) =>
-        product.category.slug === categorySlug &&
-        product.id !== currentProductId,
-    )
-    .slice(0, 4);
-
-  if (relatedProducts.length === 0) {
+export default function RelatedProducts({ products }: RelatedProductsProps) {
+  if (products.length === 0) {
     return null;
   }
 
@@ -45,20 +33,16 @@ export default function RelatedProducts({
       }}
       className="space-y-8"
     >
-      {/* Header */}
+      <div>
+        <h2 className="text-3xl font-black">محصولات مرتبط</h2>
 
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-3xl font-black text-gray-900">محصولات مرتبط</h2>
-
-          <p className="mt-2 text-gray-500">محصولات مشابه این کالا</p>
-        </div>
+        <p className="mt-2 text-gray-500">
+          شاید این محصولات هم برای شما جذاب باشند.
+        </p>
       </div>
 
-      {/* Grid */}
-
       <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-        {relatedProducts.map((product) => (
+        {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>

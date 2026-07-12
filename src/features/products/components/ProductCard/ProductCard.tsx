@@ -14,6 +14,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  console.log("product", product);
   return (
     <motion.article
       layout
