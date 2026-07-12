@@ -28,7 +28,7 @@ export default function ProductSection({
   }
 
   return (
-    <section className="py-20">
+    <section className="py-20 m-10">
       <ProductSectionHeader title={title} description={description} />
 
       <ProductGrid products={products} />

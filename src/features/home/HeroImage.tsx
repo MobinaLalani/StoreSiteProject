@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Star, ShieldCheck } from "lucide-react";
-
+import heroPic from '@/public/Image/categories/camera.png'
 export default function HeroImage() {
   return (
     <div className="relative flex items-center justify-center">
@@ -77,7 +77,7 @@ export default function HeroImage() {
         className="relative z-10"
       >
         <Image
-          src="/images/hero-phone.png"
+          src={heroPic}
           alt="Hero Product"
           width={600}
           height={600}
