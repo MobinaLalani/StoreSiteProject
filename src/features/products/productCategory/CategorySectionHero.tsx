@@ -4,12 +4,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
-import { StaticImageData } from "next/image";
+
 
 interface Props {
   title: string;
   description: string;
-  image: string | StaticImageData;
+  image: string ;
   productCount: number;
   brandCount: number;
   averageRating: number;

@@ -22,9 +22,9 @@ export interface Product {
 
   description: string;
 
-  thumbnail: StaticImageData;
+  thumbnail: string;
 
-  images: StaticImageData[];
+  images: string[];
 
   price: number;
 
