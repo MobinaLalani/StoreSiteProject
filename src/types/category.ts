@@ -5,4 +5,5 @@ export interface Category {
   title: string;
   slug: string;
   image: StaticImageData;
+  description:string
 }

@@ -28,7 +28,7 @@ export default function ProductImage({ product }: Props) {
           className="flex h-72 items-center justify-center bg-gray-50"
         >
           <Image
-            src={product.image}
+            src={product.thumbnail}
             alt={product.title}
             width={220}
             height={220}

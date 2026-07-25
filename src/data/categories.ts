@@ -13,35 +13,42 @@ export const categories: Category[] = [
     title: "موبایل",
     slug: "mobile",
     image: mobileImage,
+    description:
+      "جدیدترین گوشی‌های هوشمند اپل، سامسونگ و شیائومی با بهترین قیمت.",
   },
   {
     id: 2,
     title: "لپ تاپ",
     slug: "laptop",
     image: laptopImage,
+    description: "انواع لپ‌تاپ‌های دانشجویی، مهندسی و گیمینگ.",
   },
   {
     id: 3,
     title: "هدفون",
     slug: "headphone",
     image: headphoneImage,
+    description: "هدفون‌های بی‌سیم و نویزکنسلینگ از برندهای معتبر.",
   },
   {
     id: 4,
     title: "ساعت",
     slug: "watch",
     image: laptopImage,
+    description: "جدیدترین ساعت‌های هوشمند با امکانات سلامتی و ورزشی.",
   },
   {
     id: 5,
     title: "دوربین",
     slug: "camera",
     image: laptopImage,
+    description:'تجربه بهترین خاطرات با بهترین ابزار'
   },
   {
     id: 6,
     title: "کنسول",
     slug: "gaming",
     image: laptopImage,
+    description: 'تجربه بهترینو حرفه ای ترین بازی ها'
   },
 ];

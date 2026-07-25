@@ -12,7 +12,7 @@ interface Props {
 
 export default function CategoryCard({ category }: Props) {
   return (
-    <Link href={`/products?category=${category.slug}`}>
+    <Link href={`/products/category/${category.slug}`}>
       <motion.article
         whileHover={{
           y: -8,
