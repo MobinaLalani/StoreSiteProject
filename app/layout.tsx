@@ -1,32 +1,13 @@
-import type { Metadata } from "next";
+import type { ReactNode } from "react";
 
-import "./globals.css";
+interface Props {
+  children: ReactNode;
+}
 
-import Header from "@/src/components/layout/Header";
-import Navbar from "@/src/components/layout/Navbar";
-import Footer from "@/src/components/layout/Footer";
-
-export const metadata: Metadata = {
-  title: "Shop",
-  description: "Modern Ecommerce",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="fa" dir="rtl">
-      <body className="bg-gray-50 text-slate-900">
-        <Header />
-
-        <Navbar />
-
-        <main>{children}</main>
-
-        <Footer />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
