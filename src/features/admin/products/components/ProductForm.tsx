@@ -8,10 +8,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Product } from "@/src/types/product";
 import { productSchema } from "../validations/product.schema";
+
 import Input from "@/src/features/admin/shared/ui/Input";
 import Textarea from "@/src/features/admin/shared/ui/Textarea";
 import Button from "@/src/features/admin/shared/ui/Button";
 
+import ImageUpload from "@/src/features/admin/shared/components/ImageUpload";
 
 type ProductFormValues = z.infer<typeof productSchema>;
 
@@ -32,13 +34,24 @@ export default function ProductForm({
 
   onSubmit,
 }: ProductFormProps) {
-const {
-  register,
-  handleSubmit,
-  reset,
-  formState: { errors },
-} = useForm<z.input<typeof productSchema>, unknown, z.output<typeof productSchema>>({
-  resolver: zodResolver(productSchema),
+  const {
+    register,
+
+    handleSubmit,
+
+    reset,
+
+    watch,
+
+    setValue,
+
+    formState: { errors },
+  } = useForm<
+    z.input<typeof productSchema>,
+    unknown,
+    z.output<typeof productSchema>
+  >({
+    resolver: zodResolver(productSchema),
 
     defaultValues: {
       title: "",
@@ -83,48 +96,50 @@ const {
     },
   });
 
+  const thumbnail = watch("thumbnail");
+
   useEffect(() => {
-reset({
-  title: initialValues?.title ?? "",
+    reset({
+      title: initialValues?.title ?? "",
 
-  slug: initialValues?.slug ?? "",
+      slug: initialValues?.slug ?? "",
 
-  shortDescription: initialValues?.shortDescription ?? "",
+      shortDescription: initialValues?.shortDescription ?? "",
 
-  description: initialValues?.description ?? "",
+      description: initialValues?.description ?? "",
 
-  thumbnail: initialValues?.thumbnail ?? "",
+      thumbnail: initialValues?.thumbnail ?? "",
 
-  images: initialValues?.images ?? [],
+      images: initialValues?.images ?? [],
 
-  price: initialValues?.price ?? 0,
+      price: initialValues?.price ?? 0,
 
-  oldPrice: initialValues?.oldPrice,
+      oldPrice: initialValues?.oldPrice,
 
-  discount: initialValues?.discount,
+      discount: initialValues?.discount,
 
-  rating: initialValues?.rating ?? 0,
+      rating: initialValues?.rating ?? 0,
 
-  reviewCount: initialValues?.reviewCount ?? 0,
+      reviewCount: initialValues?.reviewCount ?? 0,
 
-  stock: initialValues?.stock ?? 0,
+      stock: initialValues?.stock ?? 0,
 
-  sku: initialValues?.sku ?? "",
+      sku: initialValues?.sku ?? "",
 
-  brand: initialValues?.brand ?? "",
+      brand: initialValues?.brand ?? "",
 
-  categoryId: initialValues?.categoryId ?? 1,
+      categoryId: initialValues?.categoryId ?? 1,
 
-  tags: initialValues?.tags ?? [],
+      tags: initialValues?.tags ?? [],
 
-  colors: initialValues?.colors ?? [],
+      colors: initialValues?.colors ?? [],
 
-  specifications: initialValues?.specifications ?? [],
+      specifications: initialValues?.specifications ?? [],
 
-  status: initialValues?.status ?? "draft",
+      status: initialValues?.status ?? "draft",
 
-  isFeatured: initialValues?.isFeatured ?? false,
-});
+      isFeatured: initialValues?.isFeatured ?? false,
+    });
   }, [initialValues, reset]);
 
   async function submitHandler(data: ProductFormValues) {
@@ -181,12 +196,22 @@ reset({
         {...register("description")}
       />
 
-      <Input
-        label="تصویر اصلی"
-        placeholder="/Image/products/phone1.jpg"
-        error={errors.thumbnail?.message}
-        {...register("thumbnail")}
-      />
+      <div className="space-y-2">
+        <p className="text-sm font-medium text-gray-700">تصویر اصلی محصول</p>
+
+        <ImageUpload
+          value={thumbnail}
+          onChange={(url) => {
+            setValue("thumbnail", url as string, {
+              shouldValidate: true,
+            });
+          }}
+        />
+
+        {errors.thumbnail && (
+          <p className="text-sm text-red-500">{errors.thumbnail.message}</p>
+        )}
+      </div>
 
       <div className="grid grid-cols-2 gap-4">
         <Input
