@@ -19,8 +19,8 @@ const menu = [
     icon: LayoutDashboard,
   },
   {
-    title: "محصولات",
-    href: "/admin/products",
+    title: "کتگوری محصولات",
+    href: "/admin/Categories",
     icon: Package,
   },
   {

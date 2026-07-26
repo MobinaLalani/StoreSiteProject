@@ -1,13 +1,17 @@
-import type { ReactNode } from "react";
+import "./globals.css";
 
-interface Props {
-  children: ReactNode;
-}
+import ReactQueryProvider from "@/src/providers/ReactQueryProvider";
 
-export default function RootLayout({ children }: Props) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="fa" dir="rtl">
-      <body>{children}</body>
+      <body>
+        <ReactQueryProvider>{children}</ReactQueryProvider>
+      </body>
     </html>
   );
 }

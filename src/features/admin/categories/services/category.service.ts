@@ -34,7 +34,7 @@ export async function updateCategory(
   id: number,
   data: Partial<Omit<Category, "id">>,
 ): Promise<Category> {
-  const response = await fetch(`${BASE_URL}/${id}`, {
+  const response = await fetch(`/api/categories/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -43,12 +43,14 @@ export async function updateCategory(
   });
 
   if (!response.ok) {
-    throw new Error("Failed to update category.");
+    const error = await response.text();
+    console.log(error);
+
+    throw new Error(error);
   }
 
   return response.json();
 }
-
 export async function deleteCategory(id: number): Promise<void> {
   const response = await fetch(`${BASE_URL}/${id}`, {
     method: "DELETE",
