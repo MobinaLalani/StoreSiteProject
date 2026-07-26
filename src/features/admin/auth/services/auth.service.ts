@@ -1,7 +1,7 @@
 import { LoginFormValues } from "../validations/login.schema";
 
 export async function login(data: LoginFormValues) {
-  const response = await fetch("/api/admin/login", {
+  const response = await fetch("/api/login", {
     method: "POST",
 
     headers: {
