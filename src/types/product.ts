@@ -42,11 +42,19 @@ export interface Product {
 
   brand: string;
 
-  category: ProductCategory;
+  categoryId: number;
 
   tags: string[];
 
   colors: string[];
 
   specifications: ProductSpecification[];
+
+  status: "active" | "draft" | "archived";
+
+  isFeatured: boolean;
+
+  createdAt: string;
+
+  updatedAt: string;
 }

@@ -1,35 +1,28 @@
 import { Product } from "@/src/types/product";
 
-import phone1Image from "@/public/Image/products/phone1.jpg";
-import phone2Image from "@/public/Image/products/phone2.jpg";
-import laptop1Image from "@/public/Image/products/laptop1.jpg";
-import headphone2Image from "@/public/Image/products/headphone2.jpg";
-
 export const products: Product[] = [
   {
     id: 1,
-
     title: "iPhone 16 Pro",
-
     slug: "iphone-16-pro",
-
     shortDescription: "جدیدترین گوشی اپل",
-
     description:
       "آیفون 16 پرو با تراشه A18 Pro، نمایشگر OLED و دوربین حرفه‌ای نسل جدید، تجربه‌ای سریع و روان را ارائه می‌دهد.",
 
-    thumbnail: phone1Image,
+    thumbnail: "/Image/products/phone1.jpg",
 
-    images: [phone1Image, phone2Image, phone1Image, phone2Image],
+    images: [
+      "/Image/products/phone1.jpg",
+      "/Image/products/phone2.jpg",
+      "/Image/products/phone1.jpg",
+      "/Image/products/phone2.jpg",
+    ],
 
     price: 82000000,
-
     oldPrice: 87000000,
-
     discount: 8,
 
     rating: 4.8,
-
     reviewCount: 248,
 
     stock: 15,
@@ -38,11 +31,7 @@ export const products: Product[] = [
 
     brand: "Apple",
 
-    category: {
-      id: 1,
-      name: "موبایل",
-      slug: "mobile",
-    },
+    categoryId: 1,
 
     tags: ["5G", "OLED", "A18 Pro", "Face ID"],
 
@@ -66,32 +55,37 @@ export const products: Product[] = [
         value: "Apple A18 Pro",
       },
     ],
+
+    status: "active",
+
+    isFeatured: true,
+
+    createdAt: "2026-07-26T12:00:00Z",
+
+    updatedAt: "2026-07-26T12:00:00Z",
   },
 
   {
     id: 2,
-
     title: "MacBook Air M4",
-
     slug: "macbook-air-m4",
-
     shortDescription: "قدرت و سبکی",
-
     description:
       "مک‌بوک ایر M4 با طراحی فوق‌العاده سبک، عمر باتری طولانی و پردازنده قدرتمند Apple Silicon.",
 
-    thumbnail: laptop1Image,
+    thumbnail: "/Image/products/laptop1.jpg",
 
-    images: [laptop1Image, laptop1Image, laptop1Image],
+    images: [
+      "/Image/products/laptop1.jpg",
+      "/Image/products/laptop1.jpg",
+      "/Image/products/laptop1.jpg",
+    ],
 
     price: 112000000,
-
     oldPrice: 118000000,
-
     discount: 5,
 
     rating: 4.9,
-
     reviewCount: 103,
 
     stock: 6,
@@ -100,11 +94,7 @@ export const products: Product[] = [
 
     brand: "Apple",
 
-    category: {
-      id: 2,
-      name: "لپ تاپ",
-      slug: "laptop",
-    },
+    categoryId: 2,
 
     tags: ["M4", "Retina", "SSD"],
 
@@ -125,35 +115,39 @@ export const products: Product[] = [
       },
       {
         title: "نمایشگر",
-        value: '13.6"',
+        value: "13.6 اینچ",
       },
     ],
+
+    status: "active",
+
+    isFeatured: true,
+
+    createdAt: "2026-07-26T12:00:00Z",
+
+    updatedAt: "2026-07-26T12:00:00Z",
   },
 
   {
     id: 3,
-
     title: "Sony WH-1000XM5",
-
     slug: "sony-wh1000xm5",
-
     shortDescription: "هدفون نویز کنسلینگ",
-
     description:
       "هدفون پرچمدار سونی با حذف نویز هوشمند و کیفیت صدای فوق‌العاده.",
 
-    thumbnail: headphone2Image,
+    thumbnail: "/Image/products/headphone2.jpg",
 
-    images: [headphone2Image, headphone2Image],
+    images: [
+      "/Image/products/headphone2.jpg",
+      "/Image/products/headphone2.jpg",
+    ],
 
     price: 18900000,
-
     oldPrice: 21400000,
-
     discount: 12,
 
     rating: 4.7,
-
     reviewCount: 184,
 
     stock: 20,
@@ -162,11 +156,7 @@ export const products: Product[] = [
 
     brand: "Sony",
 
-    category: {
-      id: 3,
-      name: "هدفون",
-      slug: "headphone",
-    },
+    categoryId: 3,
 
     tags: ["Bluetooth", "Noise Cancelling"],
 
@@ -186,32 +176,33 @@ export const products: Product[] = [
         value: "250 گرم",
       },
     ],
+
+    status: "active",
+
+    isFeatured: false,
+
+    createdAt: "2026-07-26T12:00:00Z",
+
+    updatedAt: "2026-07-26T12:00:00Z",
   },
 
   {
     id: 4,
-
     title: "Apple Watch Ultra",
-
     slug: "apple-watch-ultra",
-
     shortDescription: "ساعت هوشمند اپل",
-
     description:
       "Apple Watch Ultra مناسب ورزشکاران و کاربران حرفه‌ای با GPS دقیق و بدنه مقاوم.",
 
-    thumbnail: phone2Image,
+    thumbnail: "/Image/products/phone2.jpg",
 
-    images: [phone2Image, phone2Image],
+    images: ["/Image/products/phone2.jpg", "/Image/products/phone2.jpg"],
 
     price: 49500000,
-
     oldPrice: 52000000,
-
     discount: 6,
 
     rating: 4.8,
-
     reviewCount: 74,
 
     stock: 10,
@@ -220,11 +211,7 @@ export const products: Product[] = [
 
     brand: "Apple",
 
-    category: {
-      id: 4,
-      name: "ساعت هوشمند",
-      slug: "smart-watch",
-    },
+    categoryId: 4,
 
     tags: ["GPS", "WatchOS"],
 
@@ -244,5 +231,13 @@ export const products: Product[] = [
         value: "100 متر",
       },
     ],
+
+    status: "active",
+
+    isFeatured: false,
+
+    createdAt: "2026-07-26T12:00:00Z",
+
+    updatedAt: "2026-07-26T12:00:00Z",
   },
 ];
