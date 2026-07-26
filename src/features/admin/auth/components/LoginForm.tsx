@@ -31,9 +31,11 @@ export default function LoginForm() {
 
   async function submitHandler(data: LoginFormValues) {
     try {
-      await loginMutation.mutateAsync(data);
+    await loginMutation.mutateAsync(data);
 
-      router.push("/admin/products");
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    router.push("/admin/products");
     } catch {}
   }
 
