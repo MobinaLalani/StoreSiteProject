@@ -4,9 +4,12 @@
     "title": "iPhone 16 Pro",
     "slug": "iphone-16-pro",
     "shortDescription": "جدیدترین گوشی اپل",
-    "description": "آیفون 16 پرو با تراشه A18 Pro، نمایشگر OLED و دوربین حرفه‌ای نسل جدید.",
+    "description": "آیفون 16 پرو با تراشه A18 Pro، نمایشگر OLED و دوربین حرفه‌ای نسل جدیددددد.",
     "thumbnail": "/Image/products/phone1.jpg",
-    "images": ["/Image/products/phone1.jpg", "/Image/products/phone2.jpg"],
+    "images": [
+      "/Image/products/phone1.jpg",
+      "/Image/products/phone2.jpg"
+    ],
     "price": 82000000,
     "oldPrice": 87000000,
     "discount": 8,
@@ -16,8 +19,17 @@
     "sku": "APL-IP16PRO",
     "brand": "Apple",
     "categoryId": 1,
-    "tags": ["5G", "OLED", "A18 Pro", "Face ID"],
-    "colors": ["Titanium", "Black", "White"],
+    "tags": [
+      "5G",
+      "OLED",
+      "A18 Pro",
+      "Face ID"
+    ],
+    "colors": [
+      "Titanium",
+      "Black",
+      "White"
+    ],
     "specifications": [
       {
         "title": "حافظه",
@@ -39,7 +51,7 @@
     "status": "active",
     "isFeatured": true,
     "createdAt": "2026-07-26T12:00:00Z",
-    "updatedAt": "2026-07-26T12:00:00Z"
+    "updatedAt": "2026-07-26T09:45:47.637Z"
   },
   {
     "id": 2,
@@ -48,7 +60,9 @@
     "shortDescription": "قدرت و سبکی",
     "description": "مک‌بوک ایر M4 با طراحی سبک و پردازنده Apple Silicon.",
     "thumbnail": "/Image/products/laptop1.jpg",
-    "images": ["/Image/products/laptop1.jpg"],
+    "images": [
+      "/Image/products/laptop1.jpg"
+    ],
     "price": 112000000,
     "oldPrice": 118000000,
     "discount": 5,
@@ -58,8 +72,15 @@
     "sku": "APL-MBA-M4",
     "brand": "Apple",
     "categoryId": 2,
-    "tags": ["M4", "Retina", "SSD"],
-    "colors": ["Silver", "Midnight"],
+    "tags": [
+      "M4",
+      "Retina",
+      "SSD"
+    ],
+    "colors": [
+      "Silver",
+      "Midnight"
+    ],
     "specifications": [
       {
         "title": "پردازنده",
@@ -86,7 +107,9 @@
     "shortDescription": "هدفون نویز کنسلینگ",
     "description": "هدفون پرچمدار سونی با حذف نویز هوشمند.",
     "thumbnail": "/Image/products/headphone2.jpg",
-    "images": ["/Image/products/headphone2.jpg"],
+    "images": [
+      "/Image/products/headphone2.jpg"
+    ],
     "price": 18900000,
     "oldPrice": 21400000,
     "discount": 12,
@@ -96,8 +119,14 @@
     "sku": "SONY-XM5",
     "brand": "Sony",
     "categoryId": 3,
-    "tags": ["Bluetooth", "Noise Cancelling"],
-    "colors": ["Black", "Silver"],
+    "tags": [
+      "Bluetooth",
+      "Noise Cancelling"
+    ],
+    "colors": [
+      "Black",
+      "Silver"
+    ],
     "specifications": [
       {
         "title": "نوع اتصال",

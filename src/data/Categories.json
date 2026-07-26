@@ -40,5 +40,12 @@
     "slug": "gaming",
     "image": "/Image/categories/gaming.png",
     "description": "تجربه بهترین و حرفه‌ای‌ترین بازی‌ها"
+  },
+  {
+    "id": 7,
+    "title": "کیف ",
+    "slug": "/bag",
+    "image": "/uploads/products/1785061971987.png",
+    "description": "این دسته بندی برای کیف های مختلف هستش"
   }
 ]

@@ -24,8 +24,8 @@ const menu = [
     icon: Package,
   },
   {
-    title: "دسته بندی ها",
-    href: "/admin/categories",
+    title: "محصولات",
+    href: "/admin/Products",
     icon: FolderTree,
   },
   {

@@ -11,10 +11,12 @@ import Input from "@/src/features/admin/shared/ui/Input";
 import Textarea from "@/src/features/admin/shared/ui/Textarea";
 import Button from "@/src/features/admin/shared/ui/Button";
 
+import ImageUpload from "@/src/features/admin/shared/components/ImageUpload";
+
 const categorySchema = z.object({
   title: z.string().min(2, "عنوان الزامی است."),
   slug: z.string().min(2, "Slug الزامی است."),
-  image: z.string().min(1, "آدرس تصویر الزامی است."),
+  image: z.string().min(1, "تصویر الزامی است."),
   description: z.string().min(5, "توضیحات الزامی است."),
 });
 
@@ -22,22 +24,34 @@ type CategoryFormValues = z.infer<typeof categorySchema>;
 
 interface CategoryFormProps {
   initialValues?: Category | null;
+
   loading?: boolean;
+
   onSubmit: (data: Omit<Category, "id">) => Promise<void>;
 }
 
 export default function CategoryForm({
   initialValues,
+
   loading = false,
+
   onSubmit,
 }: CategoryFormProps) {
   const {
     register,
+
     handleSubmit,
+
     reset,
+
+    setValue,
+
+    watch,
+
     formState: { errors },
   } = useForm<CategoryFormValues>({
     resolver: zodResolver(categorySchema),
+
     defaultValues: {
       title: "",
       slug: "",
@@ -46,11 +60,16 @@ export default function CategoryForm({
     },
   });
 
+  const image = watch("image");
+
   useEffect(() => {
     reset({
       title: initialValues?.title ?? "",
+
       slug: initialValues?.slug ?? "",
+
       image: initialValues?.image ?? "",
+
       description: initialValues?.description ?? "",
     });
   }, [initialValues, reset]);
@@ -80,12 +99,22 @@ export default function CategoryForm({
         {...register("slug")}
       />
 
-      <Input
-        label="تصویر"
-        placeholder="/Image/categories/mobile.jpg"
-        error={errors.image?.message}
-        {...register("image")}
-      />
+      <div className="space-y-2">
+        <p className="text-sm font-medium text-gray-700">تصویر دسته‌بندی</p>
+
+        <ImageUpload
+          value={image}
+          onChange={(url) => {
+            setValue("image", url as string, {
+              shouldValidate: true,
+            });
+          }}
+        />
+
+        {errors.image && (
+          <p className="text-sm text-red-500">{errors.image.message}</p>
+        )}
+      </div>
 
       <Textarea
         label="توضیحات"
@@ -97,7 +126,15 @@ export default function CategoryForm({
         {...register("description")}
       />
 
-      <div className="flex justify-end gap-3 border-t pt-5">
+      <div
+        className="
+flex
+justify-end
+gap-3
+border-t
+pt-5
+"
+      >
         <Button type="submit" loading={loading}>
           {initialValues ? "ویرایش دسته‌بندی" : "افزودن دسته‌بندی"}
         </Button>
