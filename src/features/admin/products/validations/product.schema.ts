@@ -1,31 +1,35 @@
 import { z } from "zod";
 
 export const productSchema = z.object({
-  title: z.string().min(3),
+  title: z.string().min(2, "عنوان الزامی است."),
 
-  slug: z.string().min(3),
+  slug: z.string().min(2, "Slug الزامی است."),
 
-  shortDescription: z.string(),
+  shortDescription: z.string().min(5, "توضیح کوتاه الزامی است."),
 
-  description: z.string(),
+  description: z.string().min(10, "توضیحات الزامی است."),
 
-  thumbnail: z.string(),
+  thumbnail: z.string().min(1, "تصویر اصلی الزامی است."),
 
   images: z.array(z.string()),
 
-  price: z.number().positive(),
+  price: z.coerce.number().positive("قیمت باید بیشتر از صفر باشد."),
 
-  oldPrice: z.number().optional(),
+  oldPrice: z.coerce.number().optional(),
 
-  discount: z.number().optional(),
+  discount: z.coerce.number().optional(),
 
-  stock: z.number(),
+  rating: z.coerce.number().default(0),
 
-  sku: z.string(),
+  reviewCount: z.coerce.number().default(0),
 
-  brand: z.string(),
+  stock: z.coerce.number().min(0),
 
-  categoryId: z.number(),
+  sku: z.string().min(2, "SKU الزامی است."),
+
+  brand: z.string().min(2, "برند الزامی است."),
+
+  categoryId: z.coerce.number(),
 
   tags: z.array(z.string()),
 
@@ -38,7 +42,7 @@ export const productSchema = z.object({
     }),
   ),
 
-  status: z.enum(["active", "inactive"]),
+  status: z.enum(["active", "draft", "archived"]),
 
   isFeatured: z.boolean(),
 });
