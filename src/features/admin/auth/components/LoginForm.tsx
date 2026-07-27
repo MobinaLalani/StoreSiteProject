@@ -35,7 +35,7 @@ export default function LoginForm() {
 
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    router.push("/admin/products");
+    router.push("/admin/Products");
     } catch {}
   }
 

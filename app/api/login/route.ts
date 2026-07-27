@@ -5,10 +5,10 @@ import { signToken } from "@/src/lib/auth";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-
+    console.log('body' ,body)
     if (
-      body.username !== process.env.ADMIN_USERNAME ||
-      body.password !== process.env.ADMIN_PASSWORD
+      body.username !== 'admin' ||
+      body.password !== "12345"
     ) {
       return NextResponse.json(
         {
