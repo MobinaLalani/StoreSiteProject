@@ -10,11 +10,15 @@ import {
   Headphones,
   Camera,
   Gamepad2,
-  ShoppingBasket,
+  ShoppingBag,
   Menu,
 } from "lucide-react";
 
 import Container from "../ui/Container";
+
+import { useCategoriesWithProducts } from "@/src/features/admin/categories/hooks/useCategoriesWithProducts";
+import { Product } from "@/src/types/product";
+import { Category } from "@/src/types/category";
 
 const links = [
   "موبایل",
@@ -26,47 +30,25 @@ const links = [
   "سوپرمارکت",
 ];
 
-const categories = [
-  {
-    title: "موبایل",
-    icon: Smartphone,
-    items: ["آیفون", "سامسونگ", "شیائومی", "پوکو"],
-  },
-  {
-    title: "لپ تاپ",
-    icon: Laptop,
-    items: ["Asus", "Lenovo", "HP", "Dell"],
-  },
-  {
-    title: "ساعت",
-    icon: Watch,
-    items: ["Apple", "Samsung", "Amazfit"],
-  },
-  {
-    title: "هدفون",
-    icon: Headphones,
-    items: ["Sony", "JBL", "Anker", "Apple"],
-  },
-  {
-    title: "دوربین",
-    icon: Camera,
-    items: ["Canon", "Nikon", "Sony"],
-  },
-  {
-    title: "گیمینگ",
-    icon: Gamepad2,
-    items: ["PS5", "Xbox", "Nintendo"],
-  },
-  {
-    title: "سوپرمارکت",
-    icon: ShoppingBasket,
-    items: ["مواد غذایی", "نوشیدنی", "تنقلات"],
-  },
-];
+const categoryIcons = {
+  mobile: Smartphone,
+  laptop: Laptop,
+  headphone: Headphones,
+  watch: Watch,
+  camera: Camera,
+  gaming: Gamepad2,
+  bag: ShoppingBag,
+};
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(categories[0]);
+
+  const { data: categories = [], isLoading } = useCategoriesWithProducts();
+
+  const [activeId, setActiveId] = useState<number | null>(null);
+
+  const active =
+    categories.find((item:Category) => item.id === activeId) ?? categories[0];
 
   return (
     <nav className="relative border-b bg-white">
@@ -108,33 +90,41 @@ export default function Navbar() {
                   transition={{
                     duration: 0.25,
                   }}
-                  className="absolute right-0 top-14 z-50 flex h-[420px] w-[700px] overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-2xl"
+                  className="absolute right-0 top-14 z-50 flex h-[420px] w-[720px] overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-2xl"
                 >
                   {/* Left */}
                   <div className="w-64 border-l bg-gray-50">
-                    {categories.map((category) => {
-                      const Icon = category.icon;
+                    {isLoading ? (
+                      <div className="p-5">در حال دریافت...</div>
+                    ) : (
+                      categories.map((category: Category) => {
+                        const Icon =
+                          categoryIcons[
+                            category.slug as keyof typeof categoryIcons
+                          ] ?? Menu;
 
-                      return (
-                        <button
-                          key={category.title}
-                          onMouseEnter={() => setActive(category)}
-                          className={`flex w-full items-center gap-3 px-5 py-4 text-right transition ${
-                            active.title === category.title
-                              ? "bg-white font-bold text-red-600"
-                              : "hover:bg-white"
-                          }`}
-                        >
-                          <Icon size={20} />
-                          {category.title}
-                        </button>
-                      );
-                    })}
+                        return (
+                          <button
+                            key={category.id}
+                            onMouseEnter={() => setActiveId(category.id)}
+                            className={`flex w-full items-center gap-3 px-5 py-4 text-right transition ${
+                              active?.id === category.id
+                                ? "bg-white font-bold text-red-600"
+                                : "hover:bg-white"
+                            }`}
+                          >
+                            <Icon size={20} />
+
+                            {category.title}
+                          </button>
+                        );
+                      })
+                    )}
                   </div>
 
                   {/* Right */}
                   <motion.div
-                    key={active.title}
+                    key={active?.id}
                     initial={{
                       opacity: 0,
                       x: 20,
@@ -148,18 +138,18 @@ export default function Navbar() {
                     }}
                     className="flex-1 p-8"
                   >
-                    <h3 className="mb-6 text-xl font-bold">{active.title}</h3>
+                    <h3 className="mb-6 text-xl font-bold">{active?.title}</h3>
 
                     <div className="grid grid-cols-2 gap-4">
-                      {active.items.map((item) => (
+                      {active?.products?.map((product:Product) => (
                         <motion.div
-                          key={item}
+                          key={product.id}
                           whileHover={{
                             x: -5,
                           }}
                           className="cursor-pointer rounded-xl bg-gray-50 p-4 transition hover:bg-red-50 hover:text-red-600"
                         >
-                          {item}
+                          {product.title}
                         </motion.div>
                       ))}
                     </div>
