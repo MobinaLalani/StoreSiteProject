@@ -6,8 +6,8 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-
-      <Categories />
+{/* 
+      <Categories /> */}
 
       <ProductSection
         title="جدیدترین محصولات"

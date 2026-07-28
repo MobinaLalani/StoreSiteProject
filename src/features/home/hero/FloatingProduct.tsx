@@ -50,7 +50,7 @@ export default function FloatingProduct({
           ease: "easeInOut",
         }}
 
-        className="rounded-3xl border border-white/40 bg-white/70 p-2 shadow-2xl backdrop-blur-xl"
+        className="rounded-3xl bg-transparent  p-2 "
       >
         <Image
           src={image}

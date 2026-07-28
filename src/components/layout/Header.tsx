@@ -23,7 +23,7 @@ export default function Header() {
     >
       <Container>
         <div className="flex h-20 items-center justify-between">
-          <h1 className="text-3xl font-black text-red-500">صنعت گستران</h1>
+          <h1 className="text-3xl font-black text-red-500">اتصال گستر </h1>
 
           <div className="flex w-full max-w-xl items-center rounded-xl border bg-gray-50 px-4">
             <Search size={20} className="text-gray-500" />

@@ -9,10 +9,10 @@ import FloatingCard from "./FloatingCard";
 
 import heroPic from "@/public/Image/products/sarsim.png";
 
-const product1 = "/Image/products/headphone2.jpg";
-const product2 = "/Image/products/laptop1.jpg";
-const product3 = "/Image/products/laptop2.jpg";
-const product4 = "/Image/products/phone2.jpg";
+const product1 = "/Image/products/batterycannectorcabel.png";
+const product2 = "/Image/products/cableshoe.png";
+const product3 = "/Image/products/gire.png";
+const product4 = "/Image/products/giresoosmari.png";
 
 export default function HeroImage() {
   return (
@@ -21,40 +21,46 @@ export default function HeroImage() {
       <div className="absolute h-[420px] w-[420px] rounded-full bg-red-100 blur-3xl" />
 
       {/* Floating Products */}
+      {/* Floating Products */}
+
       <FloatingProduct
         image={product1}
-        className="-left-12 top-4"
+        className="-left-24 top-24"
         duration={6}
         delay={0}
-        size={90}
+        rotate={8}
+  
       />
 
       <FloatingProduct
         image={product2}
-        className="-right-12 top-10"
+        className="right-8 -top-10"
         duration={7}
-        delay={0.5}
-        size={90}
+        delay={0.8}
+        rotate={10}
+       
       />
 
       <FloatingProduct
         image={product3}
-        className="-left-10 bottom-10"
-        duration={5}
-        delay={0.2}
-        size={90}
+        className="-left-2 bottom-4"
+        duration={5.5}
+        delay={1.4}
+        rotate={6}
+        
       />
 
       <FloatingProduct
         image={product4}
-        className="-right-8 bottom-0"
-        duration={6.5}
-        delay={0.8}
-        size={90}
+        className="right-[-60px] bottom-28"
+        duration={6.8}
+        delay={2}
+        rotate={12}
+       
       />
 
       {/* Floating Cards */}
-
+      {/* 
       <FloatingCard
         icon={Star}
         title="امتیاز کاربران"
@@ -93,7 +99,7 @@ export default function HeroImage() {
         iconBg="bg-purple-100"
         iconColor="text-purple-500"
         duration={6.5}
-      />
+      /> */}
 
       {/* Main Image */}
 
