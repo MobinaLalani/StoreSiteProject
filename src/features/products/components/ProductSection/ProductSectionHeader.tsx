@@ -48,7 +48,7 @@ export default function ProductSectionHeader({
       >
         <Link
           href={href}
-          className="group inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 font-medium text-slate-700 transition-all hover:border-red-500 hover:text-red-500"
+          className="group inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-5 py-3 font-medium text-slate-700 transition-all hover:border-red-500 hover:text-red-500"
         >
           {buttonText}
 

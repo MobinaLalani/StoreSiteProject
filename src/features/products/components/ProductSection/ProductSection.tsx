@@ -32,7 +32,7 @@ export default function ProductSection({
   return (
     <>
       <Container>
-        <section className="m-10 py-20">
+        <section className="m-10 mt-0 py-20">
           <ProductSectionHeader title={title} description={description} />
 
           <ProductGrid products={products} />

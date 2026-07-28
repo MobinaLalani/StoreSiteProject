@@ -2,9 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { categoryRepository } from "@/src/repositories/category.repository";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const categories = await categoryRepository.getAll();
+    const searchParams = request.nextUrl.searchParams;
+
+    const includeProducts = searchParams.get("includeProducts") === "true";
+
+    const categories = includeProducts
+      ? await categoryRepository.getAllWithProducts()
+      : await categoryRepository.getAll();
 
     return NextResponse.json(categories);
   } catch (error) {
