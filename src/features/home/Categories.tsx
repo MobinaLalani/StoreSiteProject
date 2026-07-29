@@ -9,6 +9,7 @@ import { categories } from "@/src/data/categories";
 import CategoryCard from "./CategoryCard";
 
 export default function Categories() {
+  
   return (
     <section className="py-20">
       <Container>
