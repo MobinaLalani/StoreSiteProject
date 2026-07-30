@@ -1,5 +1,6 @@
 export const queryKeys = {
   categories: ["categories"] as const,
+  categoriesWithProducts: ["categories", "with-products"] as const,
 
   products: ["products"] as const,
 

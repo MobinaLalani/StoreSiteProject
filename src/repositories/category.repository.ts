@@ -2,10 +2,14 @@ import fs from "fs/promises";
 import path from "path";
 
 import { Category } from "@/src/types/category";
-
+import { Product } from "@/src/types/product";
 const filePath = path.join(process.cwd(), "src", "data", "categories.json");
-
-export class CategoryRepository {
+const productFilePath = path.join(
+  process.cwd(),
+  "src",
+  "data",
+  "products.json",
+);export class CategoryRepository {
   async getAll(): Promise<Category[]> {
     const file = await fs.readFile(filePath, "utf-8");
 
@@ -70,6 +74,19 @@ export class CategoryRepository {
     await fs.writeFile(filePath, JSON.stringify(filtered, null, 2), "utf-8");
 
     return true;
+  }
+  async getAllWithProducts(): Promise<(Category & { products: Product[] })[]> {
+    const categories = await this.getAll();
+
+    const productFile = await fs.readFile(productFilePath, "utf-8");
+    const products: Product[] = JSON.parse(productFile);
+
+    return categories.map((category) => ({
+      ...category,
+      products: products.filter(
+        (product) => product.categoryId === category.id,
+      ),
+    }));
   }
 }
 

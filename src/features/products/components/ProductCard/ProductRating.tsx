@@ -12,9 +12,17 @@ export default function ProductRating({ product }: Props) {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-1">
-        <Star size={18} className="fill-yellow-400 text-yellow-400" />
-
-        <span className="font-semibold">{product.rating}</span>
+        {[...Array(5)].map((_, index) => (
+          <Star
+            key={index}
+            size={18}
+            className={
+              index < Math.floor(product.rating)
+                ? "fill-yellow-400 text-yellow-400"
+                : "fill-gray-200 text-gray-200"
+            }
+          />
+        ))}
       </div>
 
       <span className="text-sm text-green-600">

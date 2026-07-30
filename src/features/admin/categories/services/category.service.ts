@@ -60,3 +60,13 @@ export async function deleteCategory(id: number): Promise<void> {
     throw new Error("Failed to delete category.");
   }
 }
+
+export async function getCategoriesWithProducts() {
+  const response = await fetch("/api/categories?includeProducts=true");
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch categories with products.");
+  }
+
+  return response.json();
+}

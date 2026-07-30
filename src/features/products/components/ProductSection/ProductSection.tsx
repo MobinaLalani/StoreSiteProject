@@ -2,6 +2,8 @@ import ProductSectionHeader from "./ProductSectionHeader";
 import ProductGrid from "./ProductGrid";
 import ProductEmpty from "./ProductEmpty";
 
+import Container from "../../../../components/ui/Container";
+
 import ProductGridSkeleton from "../skeletons/ProductGridSkeleton";
 
 import { products } from "../../../../data/products";
@@ -28,10 +30,14 @@ export default function ProductSection({
   }
 
   return (
-    <section className="py-20 m-10">
-      <ProductSectionHeader title={title} description={description} />
+    <>
+      <Container>
+        <section className="m-10 mt-0 py-20">
+          <ProductSectionHeader title={title} description={description} />
 
-      <ProductGrid products={products} />
-    </section>
+          <ProductGrid products={products} />
+        </section>
+      </Container>
+    </>
   );
 }

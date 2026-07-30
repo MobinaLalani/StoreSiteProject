@@ -20,11 +20,11 @@ export default function ProductCard({ product }: ProductCardProps) {
   layout
   whileHover={{ y: -8 }}
   transition={{ duration: 0.25 }}
-  className="group flex h-[520px] flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm hover:shadow-2xl"
+  className="group flex h-[520px] flex-col overflow-hidden rounded-3xl border border-gray-200 bg-gray-100 shadow-sm hover:shadow-2xl"
 >
   <ProductImage product={product} />
 
-  <div className="flex flex-1 flex-col space-y-5 p-5">
+  <div className="flex flex-1 flex-col space-y-5 p-8">
     <div className="flex-1">
       <Link href={`/products/${product.slug}`}>
         <h3 className="line-clamp-1 text-lg font-bold transition-colors hover:text-red-500">

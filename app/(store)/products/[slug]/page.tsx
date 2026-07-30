@@ -28,7 +28,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const relatedProducts = products
     .filter(
       (item) =>
-        item.category.slug === product.category.slug && item.id !== product.id,
+        item.slug === product.slug && item.id !== product.id,
     )
     .slice(0, 4);
 

@@ -9,7 +9,7 @@ export const products: Product[] = [
     description:
       "آیفون 16 پرو با تراشه A18 Pro، نمایشگر OLED و دوربین حرفه‌ای نسل جدید، تجربه‌ای سریع و روان را ارائه می‌دهد.",
 
-    thumbnail: "/Image/products/phone1.jpg",
+    thumbnail: "/Image/products/batterycannectorcabel.png",
 
     images: [
       "/Image/products/phone1.jpg",
@@ -73,7 +73,7 @@ export const products: Product[] = [
     description:
       "مک‌بوک ایر M4 با طراحی فوق‌العاده سبک، عمر باتری طولانی و پردازنده قدرتمند Apple Silicon.",
 
-    thumbnail: "/Image/products/laptop1.jpg",
+    thumbnail: "/Image/products/cableshoe.png",
 
     images: [
       "/Image/products/laptop1.jpg",
@@ -136,7 +136,7 @@ export const products: Product[] = [
     description:
       "هدفون پرچمدار سونی با حذف نویز هوشمند و کیفیت صدای فوق‌العاده.",
 
-    thumbnail: "/Image/products/headphone2.jpg",
+    thumbnail: "/Image/products/gire.png",
 
     images: [
       "/Image/products/headphone2.jpg",
@@ -194,7 +194,7 @@ export const products: Product[] = [
     description:
       "Apple Watch Ultra مناسب ورزشکاران و کاربران حرفه‌ای با GPS دقیق و بدنه مقاوم.",
 
-    thumbnail: "/Image/products/phone2.jpg",
+    thumbnail: "/Image/products/giresoosmari.png",
 
     images: ["/Image/products/phone2.jpg", "/Image/products/phone2.jpg"],
 
