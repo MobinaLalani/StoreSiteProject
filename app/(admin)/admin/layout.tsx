@@ -16,7 +16,7 @@ export default function AdminLayout({ children }: Props) {
       <div className="flex flex-1 flex-col overflow-hidden">
         <Header />
 
-        <main className="flex-1 overflow-y-auto p-8">{children}</main>
+        <main className="hide-scrollbar flex-1 overflow-y-auto p-8">{children}</main>
 
         <Footer />
       </div>

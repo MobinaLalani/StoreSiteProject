@@ -56,6 +56,7 @@ export default function ProductModal({
         max-w-3xl
         max-h-[90vh]
         overflow-y-auto
+        hide-scrollbar
         rounded-2xl
         bg-white
         shadow-xl

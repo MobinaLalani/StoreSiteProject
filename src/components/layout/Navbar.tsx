@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronDown,
@@ -19,16 +20,6 @@ import Container from "../ui/Container";
 import { useCategoriesWithProducts } from "@/src/features/admin/categories/hooks/useCategoriesWithProducts";
 import { Product } from "@/src/types/product";
 import { Category } from "@/src/types/category";
-
-const links = [
-  "موبایل",
-  "لپ تاپ",
-  "ساعت",
-  "هدفون",
-  "دوربین",
-  "گیمینگ",
-  "سوپرمارکت",
-];
 
 const categoryIcons = {
   mobile: Smartphone,
@@ -50,6 +41,9 @@ export default function Navbar() {
   const active =
     categories.find((item:Category) => item.id === activeId) ?? categories[0];
 
+  const categoryHref = (slug: string) =>
+    `/products/category/${encodeURIComponent(slug.replace(/^\/+|\/+$/g, ""))}`;
+
   return (
     <nav className="relative border-b bg-white">
       <Container>
@@ -60,7 +54,7 @@ export default function Navbar() {
             onMouseEnter={() => setOpen(true)}
             onMouseLeave={() => setOpen(false)}
           >
-            <button className="flex items-center gap-2 rounded-xl bg-red-50 px-4 py-2 font-semibold text-red-600 transition hover:bg-red-100">
+            <button onClick={() => setOpen((value) => !value)} className="flex items-center gap-2 rounded-xl bg-red-50 px-4 py-2 font-semibold text-red-600 transition hover:bg-red-100">
               <Menu size={18} />
               دسته بندی ها
               <ChevronDown
@@ -104,9 +98,11 @@ export default function Navbar() {
                           ] ?? Menu;
 
                         return (
-                          <button
+                          <Link
                             key={category.id}
+                            href={categoryHref(category.slug)}
                             onMouseEnter={() => setActiveId(category.id)}
+                            onClick={() => setOpen(false)}
                             className={`flex w-full items-center gap-3 px-5 py-4 text-right transition ${
                               active?.id === category.id
                                 ? "bg-white font-bold text-red-600"
@@ -116,7 +112,7 @@ export default function Navbar() {
                             <Icon size={20} />
 
                             {category.title}
-                          </button>
+                          </Link>
                         );
                       })
                     )}
@@ -138,7 +134,7 @@ export default function Navbar() {
                     }}
                     className="flex-1 p-8"
                   >
-                    <h3 className="mb-6 text-xl font-bold">{active?.title}</h3>
+                    {active && <Link href={categoryHref(active.slug)} onClick={() => setOpen(false)} className="mb-6 inline-block text-xl font-bold hover:text-red-600">{active.title}</Link>}
 
                     <div className="grid grid-cols-2 gap-4">
                       {active?.products?.map((product:Product) => (
@@ -149,7 +145,7 @@ export default function Navbar() {
                           }}
                           className="cursor-pointer rounded-xl bg-gray-50 p-4 transition hover:bg-red-50 hover:text-red-600"
                         >
-                          {product.title}
+                          <Link href={`/products/${encodeURIComponent(product.slug)}`} onClick={() => setOpen(false)} className="block">{product.title}</Link>
                         </motion.div>
                       ))}
                     </div>
@@ -161,9 +157,9 @@ export default function Navbar() {
 
           {/* Normal Links */}
           <ul className="flex items-center gap-8">
-            {links.map((item) => (
+            {categories.slice(0, 7).map((category: Category) => (
               <motion.li
-                key={item}
+                key={category.id}
                 whileHover={{
                   y: -3,
                   color: "#ef4444",
@@ -173,7 +169,7 @@ export default function Navbar() {
                 }}
                 className="cursor-pointer text-sm font-medium"
               >
-                {item}
+                <Link href={categoryHref(category.slug)}>{category.title}</Link>
               </motion.li>
             ))}
           </ul>

@@ -39,3 +39,13 @@ body {
   color: var(--foreground);
   font-family: 'YekanBakh', sans-serif;
 }
+
+/* Keep modal/form areas scrollable without showing a bulky scrollbar. */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
