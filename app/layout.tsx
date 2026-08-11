@@ -1,6 +1,14 @@
 import "./globals.css";
 
+import type { Metadata, Viewport } from "next";
 import ReactQueryProvider from "@/src/providers/ReactQueryProvider";
+
+export const metadata: Metadata = {
+  manifest: "/manifest.webmanifest",
+  formatDetection: { email: false, address: false, telephone: false },
+};
+
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#ef4444" };
 
 export default function RootLayout({
   children,
@@ -9,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fa" dir="rtl">
-      <body suppressHydrationWarning>
+      <body suppressHydrationWarning className="antialiased">
         <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>

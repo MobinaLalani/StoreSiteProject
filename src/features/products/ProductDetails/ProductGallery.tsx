@@ -26,8 +26,9 @@ export default function ProductGallery({ product }: ProductGalleryProps) {
           alt={product.title}
           width={450}
           height={450}
+          sizes="(max-width: 1024px) 90vw, 45vw"
           className="object-contain"
-          priority
+          preload
         />
       </motion.div>
 
@@ -46,6 +47,7 @@ export default function ProductGallery({ product }: ProductGalleryProps) {
               alt={`${product.title}-${index}`}
               width={90}
               height={90}
+              sizes="80px"
               className="h-20 w-20 object-cover"
             />
           </button>

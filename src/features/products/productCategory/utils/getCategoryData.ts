@@ -10,7 +10,7 @@ export async function getCategoryData(slug: string) {
   }
 
   const categoryProducts = products.filter(
-    (product) => product.categoryId === category.id,
+    (product) => product.categoryId === category.id && product.status === "active",
   );
 
   const averageRating =

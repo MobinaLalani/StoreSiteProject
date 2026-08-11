@@ -1,4 +1,7 @@
+import type { Metadata } from "next";
 import LoginForm from "@/src/features/admin/auth/components/LoginForm";
+
+export const metadata: Metadata = { title: "ورود مدیریت", robots: { index: false, follow: false, nocache: true } };
 
 export default function LoginPage() {
   return (

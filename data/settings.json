@@ -37,6 +37,8 @@
         "description": "تامین و فروش تجهیزات صنعتی و ابزارآلات با مشاوره تخصصی",
         "keywords": "تجهیزات صنعتی, ابزارآلات, اتصال گستر",
         "shareImage": "",
+        "siteUrl": "http://localhost:3000",
+        "googleSiteVerification": "",
         "allowIndexing": true
     }
 }

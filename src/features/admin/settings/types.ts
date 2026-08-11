@@ -3,5 +3,5 @@ export interface SiteSettings {
   inquiry: { phoneEnabled: boolean; whatsappEnabled: boolean; buttonText: string; whatsappMessage: string; afterHoursMessage: string };
   social: { instagram: string; telegram: string; linkedin: string; aparat: string };
   appearance: { primaryColor: string; heroTitle: string; heroDescription: string; heroImage: string; showCategories: boolean; showFeaturedProducts: boolean };
-  seo: { title: string; description: string; keywords: string; shareImage: string; allowIndexing: boolean };
+  seo: { title: string; description: string; keywords: string; shareImage: string; siteUrl: string; googleSiteVerification: string; allowIndexing: boolean };
 }

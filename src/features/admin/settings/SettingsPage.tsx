@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Building2, MessageCircle, Palette, Save, Search, Share2 } from "lucide-react";
 import { useAdminSettings, useUpdateSettings } from "./hooks/useSettings";
 import type { SiteSettings } from "./types";
@@ -26,7 +26,6 @@ function SettingsEditor({ initial }: { initial: SiteSettings }) {
   const [active, setActive] = useState<TabId>("store");
   const [data, setData] = useState(initial);
   const update = useUpdateSettings();
-  useEffect(() => setData(initial), [initial]);
   const setSection = <K extends keyof SiteSettings>(section: K, key: keyof SiteSettings[K], value: unknown) => setData((previous) => ({ ...previous, [section]: { ...previous[section], [key]: value } }));
 
   return <div dir="rtl" className="space-y-5">
@@ -63,6 +62,8 @@ function SettingsEditor({ initial }: { initial: SiteSettings }) {
         <SettingsField label="عنوان سایت" value={data.seo.title} onChange={(e) => setSection("seo", "title", e.target.value)} />
         <SettingsField label="کلمات کلیدی" value={data.seo.keywords} onChange={(e) => setSection("seo", "keywords", e.target.value)} />
         <SettingsField label="تصویر اشتراک‌گذاری" dir="ltr" value={data.seo.shareImage} onChange={(e) => setSection("seo", "shareImage", e.target.value)} />
+        <SettingsField label="آدرس اصلی سایت (دامنه کامل)" dir="ltr" value={data.seo.siteUrl} onChange={(e) => setSection("seo", "siteUrl", e.target.value)} />
+        <SettingsField label="کد تأیید Google Search Console" dir="ltr" value={data.seo.googleSiteVerification} onChange={(e) => setSection("seo", "googleSiteVerification", e.target.value)} />
         <SettingsToggle label="اجازه ایندکس موتورهای جستجو" checked={data.seo.allowIndexing} onChange={(value) => setSection("seo", "allowIndexing", value)} />
         <div className="md:col-span-2"><SettingsTextarea label="توضیحات سایت" value={data.seo.description} onChange={(e) => setSection("seo", "description", e.target.value)} /></div>
       </div>}

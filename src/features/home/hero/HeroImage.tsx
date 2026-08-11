@@ -2,10 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Star, ShieldCheck, Truck, CreditCard } from "lucide-react";
-
 import FloatingProduct from "./FloatingProduct";
-import FloatingCard from "./FloatingCard";
 
 import heroPic from "@/public/Image/products/sarsim.png";
 
@@ -118,10 +115,11 @@ export default function HeroImage() {
       >
         <Image
           src={heroPic}
-          alt="Hero Product"
+          alt="تجهیزات و اتصالات صنعتی اتصال گستر"
           width={600}
           height={600}
-          priority
+          preload
+          sizes="(max-width: 1024px) 90vw, 600px"
           className="drop-shadow-[0_40px_50px_rgba(0,0,0,.18)]"
         />
       </motion.div>

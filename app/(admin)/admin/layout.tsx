@@ -1,9 +1,12 @@
 import { ReactNode } from "react";
+import type { Metadata } from "next";
 
 import Header from "@/src/components/layout/admin/Header";
 import Sidebar from "@/src/components/layout/admin/Sidebar";
 import Footer from "@/src/components/layout/admin/Footer";
 import '../../globals.css'
+
+export const metadata: Metadata = { title: "مدیریت فروشگاه", robots: { index: false, follow: false, nocache: true } };
 interface Props {
   children: ReactNode;
 }

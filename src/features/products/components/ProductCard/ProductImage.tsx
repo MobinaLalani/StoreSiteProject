@@ -32,6 +32,7 @@ export default function ProductImage({ product }: Props) {
             alt={product.title}
             width={220}
             height={220}
+            sizes="(max-width: 640px) 80vw, (max-width: 1024px) 40vw, 220px"
             className="object-contain"
           />
         </motion.div>
