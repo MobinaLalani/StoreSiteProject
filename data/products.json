@@ -1,130 +1,153 @@
 [
-    {
-        "id": 1,
-        "title": "iPhone 16 Pro1",
-        "slug": "iphone-16-pro",
-        "shortDescription": "جدیدترین گوشی اپل",
-        "description": "آیفون 16 پرو با تراشه A18 Pro، نمایشگر OLED و دوربین حرفه‌ای نسل جدیددددد.",
-        "thumbnail": "/Image/products/phone1.jpg",
-        "images": [
-            "/Image/products/phone1.jpg",
-            "/Image/products/phone2.jpg"
-        ],
-        "rating": 4.8,
-        "reviewCount": 248,
-        "stock": 15,
-        "categoryId": 1,
-        "tags": [
-            "5G",
-            "OLED",
-            "A18 Pro",
-            "Face ID"
-        ],
-        "colors": [
-            "Titanium",
-            "Black",
-            "White"
-        ],
-        "specifications": [
-            {
-                "title": "حافظه",
-                "value": "256GB"
-            },
-            {
-                "title": "رم",
-                "value": "8GB"
-            },
-            {
-                "title": "نمایشگر",
-                "value": "6.3 inch OLED"
-            },
-            {
-                "title": "پردازنده",
-                "value": "Apple A18 Pro"
-            }
-        ],
-        "status": "active",
-        "isFeatured": true,
-        "createdAt": "2026-07-26T12:00:00Z",
-        "updatedAt": "2026-08-02T06:05:40+00:00"
-    },
-    {
-        "id": 2,
-        "title": "MacBook Air M4",
-        "slug": "macbook-air-m4",
-        "shortDescription": "قدرت و سبکی",
-        "description": "مک‌بوک ایر M4 با طراحی سبک و پردازنده Apple Silicon.",
-        "thumbnail": "/Image/products/laptop1.jpg",
-        "images": [
-            "/Image/products/laptop1.jpg"
-        ],
-        "rating": 4.9,
-        "reviewCount": 103,
-        "stock": 6,
-        "categoryId": 2,
-        "tags": [
-            "M4",
-            "Retina",
-            "SSD"
-        ],
-        "colors": [
-            "Silver",
-            "Midnight"
-        ],
-        "specifications": [
-            {
-                "title": "پردازنده",
-                "value": "Apple M4"
-            },
-            {
-                "title": "رم",
-                "value": "16GB"
-            },
-            {
-                "title": "حافظه",
-                "value": "512GB SSD"
-            }
-        ],
-        "status": "active",
-        "isFeatured": true,
-        "createdAt": "2026-07-26T12:00:00Z",
-        "updatedAt": "2026-07-26T12:00:00Z"
-    },
-    {
-        "id": 3,
-        "title": "Sony WH-1000XM5",
-        "slug": "sony-wh1000xm5",
-        "shortDescription": "هدفون نویز کنسلینگ",
-        "description": "هدفون پرچمدار سونی با حذف نویز هوشمند.",
-        "thumbnail": "/Image/products/headphone2.jpg",
-        "images": [
-            "/Image/products/headphone2.jpg"
-        ],
-        "rating": 4.7,
-        "reviewCount": 184,
-        "stock": 20,
-        "categoryId": 3,
-        "tags": [
-            "Bluetooth",
-            "Noise Cancelling"
-        ],
-        "colors": [
-            "Black",
-            "Silver"
-        ],
-        "specifications": [
-            {
-                "title": "نوع اتصال",
-                "value": "Bluetooth 5.3"
-            },
-            {
-                "title": "شارژدهی",
-                "value": "30 ساعت"
-            }
-        ],
-        "status": "active",
-        "isFeatured": false,
-        "createdAt": "2026-07-26T12:00:00Z",
-        "updatedAt": "2026-07-26T12:00:00Z"
-    }
+  {
+    "id": 1,
+    "title": "iPhone 16 Pro1",
+    "slug": "iphone-16-pro",
+    "shortDescription": "جدیدترین گوشی اپل",
+    "description": "آیفون 16 پرو با تراشه A18 Pro، نمایشگر OLED و دوربین حرفه‌ای نسل جدیددددد.",
+    "thumbnail": "/Image/products/phone1.jpg",
+    "images": [
+      "/Image/products/phone1.jpg",
+      "/Image/products/phone2.jpg"
+    ],
+    "rating": 5,
+    "reviewCount": 248,
+    "stock": 15,
+    "categoryId": 1,
+    "tags": [
+      "5G",
+      "OLED",
+      "A18 Pro",
+      "Face ID"
+    ],
+    "colors": [
+      "Titanium",
+      "Black",
+      "White"
+    ],
+    "specifications": [
+      {
+        "title": "حافظه",
+        "value": "256GB"
+      },
+      {
+        "title": "رم",
+        "value": "8GB"
+      },
+      {
+        "title": "نمایشگر",
+        "value": "6.3 inch OLED"
+      },
+      {
+        "title": "پردازنده",
+        "value": "Apple A18 Pro"
+      }
+    ],
+    "status": "active",
+    "isFeatured": true,
+    "createdAt": "2026-07-26T12:00:00Z",
+    "updatedAt": "2026-08-11T08:48:22.837Z"
+  },
+  {
+    "id": 2,
+    "title": "MacBook Air M4",
+    "slug": "macbook-air-m4",
+    "shortDescription": "قدرت و سبکی",
+    "description": "مک‌بوک ایر M4 با طراحی سبک و پردازنده Apple Silicon.",
+    "thumbnail": "/Image/products/laptop1.jpg",
+    "images": [
+      "/Image/products/laptop1.jpg"
+    ],
+    "rating": 4.9,
+    "reviewCount": 103,
+    "stock": 6,
+    "categoryId": 2,
+    "tags": [
+      "M4",
+      "Retina",
+      "SSD"
+    ],
+    "colors": [
+      "Silver",
+      "Midnight"
+    ],
+    "specifications": [
+      {
+        "title": "پردازنده",
+        "value": "Apple M4"
+      },
+      {
+        "title": "رم",
+        "value": "16GB"
+      },
+      {
+        "title": "حافظه",
+        "value": "512GB SSD"
+      }
+    ],
+    "status": "active",
+    "isFeatured": true,
+    "createdAt": "2026-07-26T12:00:00Z",
+    "updatedAt": "2026-07-26T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "title": "Sony WH-1000XM5",
+    "slug": "sony-wh1000xm5",
+    "shortDescription": "هدفون نویز کنسلینگ",
+    "description": "هدفون پرچمدار سونی با حذف نویز هوشمند.",
+    "thumbnail": "/Image/products/headphone2.jpg",
+    "images": [
+      "/Image/products/headphone2.jpg"
+    ],
+    "rating": 4.7,
+    "reviewCount": 184,
+    "stock": 20,
+    "categoryId": 3,
+    "tags": [
+      "Bluetooth",
+      "Noise Cancelling"
+    ],
+    "colors": [
+      "Black",
+      "Silver"
+    ],
+    "specifications": [
+      {
+        "title": "نوع اتصال",
+        "value": "Bluetooth 5.3"
+      },
+      {
+        "title": "شارژدهی",
+        "value": "30 ساعت"
+      }
+    ],
+    "status": "active",
+    "isFeatured": false,
+    "createdAt": "2026-07-26T12:00:00Z",
+    "updatedAt": "2026-07-26T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "rating": 0,
+    "reviewCount": 0,
+    "tags": [],
+    "colors": [],
+    "specifications": [],
+    "status": "draft",
+    "isFeatured": false,
+    "title": "تست",
+    "slug": "/test",
+    "shortDescription": "سییییبیبل",
+    "description": "یسیسییبلیبل",
+    "thumbnail": "/uploads/products/3cbbb9479539602d4975bd062f5a4745.png",
+    "images": [
+      "/uploads/products/7f39b84c9ea501c1b30c1a69240dac93.png",
+      "/uploads/products/f840fc7aec6d967c74f39868ddf41324.png"
+    ],
+    "stock": 4255,
+    "categoryId": 1,
+    "createdAt": "2026-08-11T08:44:15.465Z",
+    "updatedAt": "2026-08-11T08:44:15.465Z"
+  }
 ]

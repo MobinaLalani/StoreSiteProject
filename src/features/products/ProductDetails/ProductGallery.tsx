@@ -11,7 +11,8 @@ interface ProductGalleryProps {
 }
 
 export default function ProductGallery({ product }: ProductGalleryProps) {
-  const [selectedImage, setSelectedImage] = useState(product.images[0]);
+  const gallery = [...new Set([product.thumbnail, ...product.images].filter(Boolean))];
+  const [selectedImage, setSelectedImage] = useState(gallery[0]);
 
   return (
     <div className="space-y-5">
@@ -32,7 +33,7 @@ export default function ProductGallery({ product }: ProductGalleryProps) {
 
       {/* Thumbnails */}
       <div className="flex gap-4 overflow-x-auto">
-        {product.images.map((image, index) => (
+        {gallery.map((image, index) => (
           <button
             key={index}
             onClick={() => setSelectedImage(image)}

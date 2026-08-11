@@ -13,7 +13,7 @@ export const productSchema = z.object({
 
   images: z.array(z.string()),
 
-  rating: z.coerce.number().default(0),
+  rating: z.coerce.number().min(0).max(5).default(0),
 
   reviewCount: z.coerce.number().default(0),
 

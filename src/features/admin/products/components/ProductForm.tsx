@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Star } from "lucide-react";
 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -87,6 +88,9 @@ export default function ProductForm({
   });
 
   const thumbnail = watch("thumbnail");
+  const images = watch("images") ?? [];
+  const rating = Number(watch("rating") ?? 0);
+  const [hoveredRating, setHoveredRating] = useState(0);
 
   useEffect(() => {
     reset({
@@ -126,15 +130,11 @@ export default function ProductForm({
     await onSubmit({
       ...data,
 
-      images: initialValues?.images ?? [],
-
       tags: initialValues?.tags ?? [],
 
       colors: initialValues?.colors ?? [],
 
       specifications: initialValues?.specifications ?? [],
-
-      rating: initialValues?.rating ?? 0,
 
       reviewCount: initialValues?.reviewCount ?? 0,
     });
@@ -200,6 +200,79 @@ export default function ProductForm({
           error={errors.stock?.message}
           {...register("stock")}
         />
+      </div>
+
+      <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-bold text-gray-800">امتیاز محصول</p>
+            <p className="mt-1 text-xs text-gray-500">برای تعیین امتیاز روی یکی از ستاره‌ها کلیک کنید.</p>
+          </div>
+
+          <div
+            className="flex items-center gap-1"
+            dir="ltr"
+            onMouseLeave={() => setHoveredRating(0)}
+          >
+            {[1, 2, 3, 4, 5].map((value) => {
+              const active = value <= (hoveredRating || rating);
+              return (
+                <button
+                  key={value}
+                  type="button"
+                  aria-label={`${value} ستاره`}
+                  title={`${value} ستاره`}
+                  onMouseEnter={() => setHoveredRating(value)}
+                  onFocus={() => setHoveredRating(value)}
+                  onBlur={() => setHoveredRating(0)}
+                  onClick={() => {
+                    setValue("rating", value, {
+                      shouldDirty: true,
+                      shouldValidate: true,
+                    });
+                  }}
+                  className="rounded-lg p-1 transition hover:scale-110 focus:outline-none focus:ring-2 focus:ring-amber-300"
+                >
+                  <Star
+                    size={30}
+                    className={active
+                      ? "fill-amber-400 text-amber-400"
+                      : "fill-transparent text-gray-300"}
+                  />
+                </button>
+              );
+            })}
+            <span className="ml-2 min-w-8 text-center text-sm font-bold text-gray-600">
+              {rating}/5
+            </span>
+          </div>
+        </div>
+
+        {errors.rating && (
+          <p className="mt-3 text-sm text-red-500">{errors.rating.message}</p>
+        )}
+      </div>
+
+      <div className="space-y-2">
+        <div>
+          <p className="text-sm font-medium text-gray-700">گالری تصاویر محصول</p>
+          <p className="mt-1 text-xs text-gray-500">می‌توانید چند تصویر را هم‌زمان انتخاب کنید. برای حذف هر تصویر روی علامت × بزنید.</p>
+        </div>
+
+        <ImageUpload
+          multiple
+          value={images}
+          onChange={(urls) => {
+            setValue("images", urls as string[], {
+              shouldValidate: true,
+              shouldDirty: true,
+            });
+          }}
+        />
+
+        {errors.images && (
+          <p className="text-sm text-red-500">{errors.images.message}</p>
+        )}
       </div>
 
       <div className="flex items-center gap-3">

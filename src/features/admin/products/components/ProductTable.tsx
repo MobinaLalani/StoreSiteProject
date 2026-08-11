@@ -90,38 +90,6 @@ export default function ProductTable({
     },
 
     {
-      key: "status",
-
-      title: "وضعیت",
-
-      render: (product) => (
-        <span
-          className={`
-            rounded-lg
-            px-3
-            py-1
-            text-xs
-            font-medium
-
-            ${
-              product.status === "active"
-                ? "bg-green-100 text-green-700"
-                : product.status === "draft"
-                  ? "bg-yellow-100 text-yellow-700"
-                  : "bg-gray-100 text-gray-700"
-            }
-          `}
-        >
-          {product.status === "active"
-            ? "فعال"
-            : product.status === "draft"
-              ? "پیش‌نویس"
-              : "آرشیو"}
-        </span>
-      ),
-    },
-
-    {
       key: "isFeatured",
 
       title: "ویژه",
