@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { attemptLogin, signToken, tokenTtl } from "@/src/lib/auth";
-import { readJson, updateJson } from "@/src/lib/json-store";
+import { updateJson } from "@/src/lib/json-store";
 
 interface Activity { username: string; success: boolean; ip: string; createdAt: string }
 
@@ -17,6 +17,7 @@ export async function POST(request: NextRequest) {
   const ttl = await tokenTtl();
   const token = await signToken(username);
   const response = NextResponse.json({ success: true, token, tokenType: "Bearer", expiresIn: ttl, user: { username } });
-  response.cookies.set("admin_token", token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax", path: "/", maxAge: ttl });
+  const protocol = request.headers.get("x-forwarded-proto") ?? request.nextUrl.protocol.replace(":", "");
+  response.cookies.set("admin_token", token, { httpOnly: true, secure: protocol === "https", sameSite: "lax", path: "/", maxAge: ttl });
   return response;
 }

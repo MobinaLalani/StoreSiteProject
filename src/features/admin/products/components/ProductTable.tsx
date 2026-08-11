@@ -59,61 +59,6 @@ export default function ProductTable({
       render: (product) => (
         <div>
           <p className="font-semibold text-gray-900">{product.title}</p>
-
-          <span
-            className="
-            rounded-lg
-            bg-gray-100
-            px-2
-            py-1
-            text-xs
-            text-gray-500
-          "
-          >
-            {product.sku}
-          </span>
-        </div>
-      ),
-    },
-
-    {
-      key: "brand",
-
-      title: "برند",
-
-      render: (product) => (
-        <span className="text-gray-700">{product.brand}</span>
-      ),
-    },
-
-    {
-      key: "price",
-
-      title: "قیمت",
-
-      render: (product) => (
-        <div className="flex flex-col">
-          <span
-            className="
-            font-semibold
-            text-gray-900
-          "
-          >
-            {product.price.toLocaleString()}
-            تومان
-          </span>
-
-          {product.oldPrice && (
-            <span
-              className="
-                text-xs
-                text-gray-400
-                line-through
-              "
-            >
-              {product.oldPrice.toLocaleString()}
-            </span>
-          )}
         </div>
       ),
     },

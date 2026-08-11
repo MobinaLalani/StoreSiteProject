@@ -6,7 +6,6 @@ import { Product } from "../../../../types/product";
 
 import ProductImage from "./ProductImage";
 import ProductRating from "./ProductRating";
-import ProductPrice from "./ProductPrice";
 import ProductActions from "./ProductActions";
 
 interface ProductCardProps {
@@ -39,8 +38,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
     <ProductRating product={product} />
 
-    {/* <ProductPrice product={product} /> */}
-    <ProductActions />
+    <ProductActions productId={product.id} productTitle={product.title} />
   </div>
 </motion.article>
   );

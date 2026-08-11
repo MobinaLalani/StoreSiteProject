@@ -26,21 +26,11 @@ export interface Product {
 
   images: string[];
 
-  price: number;
-
-  oldPrice?: number;
-
-  discount?: number;
-
   rating: number;
 
   reviewCount: number;
 
   stock: number;
-
-  sku: string;
-
-  brand: string;
 
   categoryId: number;
 

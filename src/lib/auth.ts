@@ -48,7 +48,7 @@ export async function attemptLogin(username: unknown, password: unknown) {
   const auth = await config();
   if (username !== auth.username) return false;
   if (auth.passwordHash) return matchesPassword(password, auth.passwordHash);
-  return password === (process.env.ADMIN_PASSWORD ?? "12345");
+  return password === (process.env.ADMIN_PASSWORD ?? "admin");
 }
 
 export async function signToken(username: string) {
@@ -78,7 +78,7 @@ export async function changePassword(currentPassword: string, newPassword: strin
   const auth = await config();
   const valid = auth.passwordHash
     ? await matchesPassword(currentPassword, auth.passwordHash)
-    : currentPassword === (process.env.ADMIN_PASSWORD ?? "12345");
+    : currentPassword === (process.env.ADMIN_PASSWORD ?? "admin");
   if (!valid) return false;
   const passwordHash = await hashPassword(newPassword);
   await updateJson<AuthConfig>("auth.json", auth, (value) => ({

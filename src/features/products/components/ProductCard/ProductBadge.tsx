@@ -3,21 +3,9 @@
 import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 
-import { Product } from "../../../../types/product";
-
-interface Props {
-  product: Product;
-}
-
-export default function ProductBadge({ product }: Props) {
+export default function ProductBadge() {
   return (
     <>
-      {product.discount && (
-        <span className="absolute left-4 top-4 z-20 rounded-full bg-red-500 px-3 py-1 text-xs font-bold text-white">
-          %{product.discount}
-        </span>
-      )}
-
       <motion.button
         whileHover={{
           scale: 1.15,

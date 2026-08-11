@@ -13,21 +13,11 @@ export const productSchema = z.object({
 
   images: z.array(z.string()),
 
-  price: z.coerce.number().positive("قیمت باید بیشتر از صفر باشد."),
-
-  oldPrice: z.coerce.number().optional(),
-
-  discount: z.coerce.number().optional(),
-
   rating: z.coerce.number().default(0),
 
   reviewCount: z.coerce.number().default(0),
 
   stock: z.coerce.number().min(0),
-
-  sku: z.string().min(2, "SKU الزامی است."),
-
-  brand: z.string().min(2, "برند الزامی است."),
 
   categoryId: z.coerce.number(),
 

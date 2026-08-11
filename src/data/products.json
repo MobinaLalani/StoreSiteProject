@@ -10,14 +10,9 @@
       "/Image/products/phone1.jpg",
       "/Image/products/phone2.jpg"
     ],
-    "price": 82000000,
-    "oldPrice": 87000000,
-    "discount": 8,
     "rating": 4.8,
     "reviewCount": 248,
     "stock": 15,
-    "sku": "APL-IP16PRO",
-    "brand": "Apple",
     "categoryId": 1,
     "tags": [
       "5G",
@@ -63,14 +58,9 @@
     "images": [
       "/Image/products/laptop1.jpg"
     ],
-    "price": 112000000,
-    "oldPrice": 118000000,
-    "discount": 5,
     "rating": 4.9,
     "reviewCount": 103,
     "stock": 6,
-    "sku": "APL-MBA-M4",
-    "brand": "Apple",
     "categoryId": 2,
     "tags": [
       "M4",
@@ -110,14 +100,9 @@
     "images": [
       "/Image/products/headphone2.jpg"
     ],
-    "price": 18900000,
-    "oldPrice": 21400000,
-    "discount": 12,
     "rating": 4.7,
     "reviewCount": 184,
     "stock": 20,
-    "sku": "SONY-XM5",
-    "brand": "Sony",
     "categoryId": 3,
     "tags": [
       "Bluetooth",

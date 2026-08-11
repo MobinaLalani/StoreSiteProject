@@ -11,7 +11,6 @@ interface Props {
   description: string;
   image: string ;
   productCount: number;
-  brandCount: number;
   averageRating: number;
   slug: string;
 }
@@ -21,7 +20,6 @@ export default function CategorySectionHero({
   description,
   image,
   productCount,
-  brandCount,
   averageRating,
   slug,
 }: Props) {
@@ -47,11 +45,6 @@ export default function CategorySectionHero({
             <div className="rounded-2xl bg-white p-5 shadow-sm border">
               <p className="text-3xl font-bold">{productCount}</p>
               <span className="text-sm text-gray-500">محصول</span>
-            </div>
-
-            <div className="rounded-2xl bg-white p-5 shadow-sm border">
-              <p className="text-3xl font-bold">{brandCount}</p>
-              <span className="text-sm text-gray-500">برند</span>
             </div>
 
             <div className="rounded-2xl bg-white p-5 shadow-sm border">

@@ -1,11 +1,10 @@
 "use client";
 
-import { Star, Boxes, BadgeCheck } from "lucide-react";
+import { Star, Boxes } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface CategoryInfoProps {
   productCount: number;
-  brandCount: number;
   averageRating: number;
 }
 
@@ -16,11 +15,6 @@ const cards = [
     icon: Boxes,
   },
   {
-    key: "brands",
-    title: "برند",
-    icon: BadgeCheck,
-  },
-  {
     key: "rating",
     title: "امتیاز",
     icon: Star,
@@ -29,18 +23,16 @@ const cards = [
 
 export default function CategoryInfo({
   productCount,
-  brandCount,
   averageRating,
 }: CategoryInfoProps) {
   const values = {
     products: productCount,
-    brands: brandCount,
     rating: averageRating,
   };
 
   return (
     <section className="my-12">
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2">
         {cards.map((card, index) => {
           const Icon = card.icon;
 

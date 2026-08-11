@@ -12,8 +12,6 @@ export function getCategoryData(slug: string) {
     (product) => product.categoryId === category.id,
   );
 
-  const brands = [...new Set(categoryProducts.map((item) => item.brand))];
-
   const averageRating =
     categoryProducts.length > 0
       ? Number(
@@ -28,8 +26,6 @@ export function getCategoryData(slug: string) {
     category,
     products: categoryProducts,
     productCount: categoryProducts.length,
-    brandCount: brands.length,
-    brands,
     averageRating,
   };
 }

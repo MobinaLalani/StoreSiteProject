@@ -5,7 +5,6 @@ import { Star, CheckCircle2, Truck, ShieldCheck } from "lucide-react";
 
 import { Product } from "@/src/types/product";
 
-import ProductPrice from "./ProductPrice";
 import ProductActions from "./ProductActions";
 
 interface ProductInfoProps {
@@ -15,12 +14,6 @@ interface ProductInfoProps {
 export default function ProductInfo({ product }: ProductInfoProps) {
   return (
     <div className="flex flex-col space-y-8">
-      {/* Brand */}
-
-      <span className="text-sm font-semibold text-red-500">
-        {product.brand}
-      </span>
-
       {/* Title */}
 
       <motion.h1
@@ -51,13 +44,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
           <span>{product.stock > 0 ? "موجود در انبار" : "ناموجود"}</span>
         </div>
-      </div>
-
-      {/* SKU */}
-
-      <div className="text-sm text-gray-500">
-        کد کالا :
-        <span className="mr-2 font-semibold text-gray-800">{product.sku}</span>
       </div>
 
       {/* Colors */}
@@ -94,13 +80,9 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         </div>
       </div>
 
-      {/* Price */}
-
-      <ProductPrice product={product} />
-
       {/* Actions */}
 
-      <ProductActions />
+      <ProductActions productId={product.id} productTitle={product.title} />
 
       {/* Services */}
 

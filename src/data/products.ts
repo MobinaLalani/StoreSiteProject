@@ -18,18 +18,13 @@ export const products: Product[] = [
       "/Image/products/phone2.jpg",
     ],
 
-    price: 82000000,
-    oldPrice: 87000000,
-    discount: 8,
 
     rating: 4.8,
     reviewCount: 248,
 
     stock: 15,
 
-    sku: "APL-IP16PRO",
 
-    brand: "Apple",
 
     categoryId: 1,
 
@@ -81,18 +76,13 @@ export const products: Product[] = [
       "/Image/products/laptop1.jpg",
     ],
 
-    price: 112000000,
-    oldPrice: 118000000,
-    discount: 5,
 
     rating: 4.9,
     reviewCount: 103,
 
     stock: 6,
 
-    sku: "APL-MBA-M4",
 
-    brand: "Apple",
 
     categoryId: 2,
 
@@ -143,18 +133,13 @@ export const products: Product[] = [
       "/Image/products/headphone2.jpg",
     ],
 
-    price: 18900000,
-    oldPrice: 21400000,
-    discount: 12,
 
     rating: 4.7,
     reviewCount: 184,
 
     stock: 20,
 
-    sku: "SONY-XM5",
 
-    brand: "Sony",
 
     categoryId: 3,
 
@@ -198,18 +183,13 @@ export const products: Product[] = [
 
     images: ["/Image/products/phone2.jpg", "/Image/products/phone2.jpg"],
 
-    price: 49500000,
-    oldPrice: 52000000,
-    discount: 6,
 
     rating: 4.8,
     reviewCount: 74,
 
     stock: 10,
 
-    sku: "APL-WATCH-ULTRA",
 
-    brand: "Apple",
 
     categoryId: 4,
 

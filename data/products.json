@@ -13,8 +13,6 @@
         "rating": 4.8,
         "reviewCount": 248,
         "stock": 15,
-        "sku": "APL-IP16PRO",
-        "brand": "Apple",
         "categoryId": 1,
         "tags": [
             "5G",
@@ -63,8 +61,6 @@
         "rating": 4.9,
         "reviewCount": 103,
         "stock": 6,
-        "sku": "APL-MBA-M4",
-        "brand": "Apple",
         "categoryId": 2,
         "tags": [
             "M4",
@@ -107,8 +103,6 @@
         "rating": 4.7,
         "reviewCount": 184,
         "stock": 20,
-        "sku": "SONY-XM5",
-        "brand": "Sony",
         "categoryId": 3,
         "tags": [
             "Bluetooth",

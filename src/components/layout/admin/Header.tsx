@@ -1,6 +1,7 @@
 "use client";
 
-import { Bell, Search, UserCircle2 } from "lucide-react";
+import Link from "next/link";
+import { Bell, ExternalLink, Search, UserCircle2 } from "lucide-react";
 
 export default function Header() {
   return (
@@ -12,6 +13,16 @@ export default function Header() {
       </div>
 
       <div className="flex items-center gap-5">
+        <Link
+          href="/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex min-h-11 items-center gap-2 rounded-xl bg-red-500 px-4 font-semibold text-white transition hover:bg-red-600"
+        >
+          <ExternalLink size={18} />
+          <span>بازگشت به فروشگاه</span>
+        </Link>
+
         <div className="relative">
           <Search className="absolute right-3 top-3 text-gray-400" size={18} />
 

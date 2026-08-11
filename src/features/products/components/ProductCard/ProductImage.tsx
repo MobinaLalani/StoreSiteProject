@@ -15,7 +15,7 @@ interface Props {
 export default function ProductImage({ product }: Props) {
   return (
     <div className="relative overflow-hidden">
-      <ProductBadge product={product} />
+      <ProductBadge />
 
       <Link href={`/products/${product.slug}`}>
         <motion.div

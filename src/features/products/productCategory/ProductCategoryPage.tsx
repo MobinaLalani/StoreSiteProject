@@ -20,7 +20,7 @@ export default function ProductCategoryPage({
     notFound();
   }
 
-  const { category, products, productCount, brandCount, averageRating } = data;
+  const { category, products, productCount, averageRating } = data;
 
   return (
     <main className="container mx-auto px-4 py-10">
@@ -32,13 +32,11 @@ export default function ProductCategoryPage({
         image={category.image}
         slug={category.slug}
         productCount={productCount}
-        brandCount={brandCount}
         averageRating={averageRating}
       />
 
       <CategoryInfo
         productCount={productCount}
-        brandCount={brandCount}
         averageRating={averageRating}
       />
 

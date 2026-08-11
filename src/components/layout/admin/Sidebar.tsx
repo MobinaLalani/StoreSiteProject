@@ -7,9 +7,9 @@ import {
   LayoutDashboard,
   Package,
   FolderTree,
-  ShoppingCart,
-  Users,
+  MessageCircle,
   Settings,
+  ShieldCheck,
 } from "lucide-react";
 
 const menu = [
@@ -29,19 +29,19 @@ const menu = [
     icon: FolderTree,
   },
   {
-    title: "سفارش ها",
-    href: "/admin/orders",
-    icon: ShoppingCart,
-  },
-  {
-    title: "کاربران",
-    href: "/admin/users",
-    icon: Users,
+    title: "درخواست‌های تماس",
+    href: "/admin/inquiries",
+    icon: MessageCircle,
   },
   {
     title: "تنظیمات",
     href: "/admin/settings",
     icon: Settings,
+  },
+  {
+    title: "امنیت حساب",
+    href: "/admin/security",
+    icon: ShieldCheck,
   },
 ];
 

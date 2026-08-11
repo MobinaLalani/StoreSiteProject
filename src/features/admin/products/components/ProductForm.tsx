@@ -66,21 +66,11 @@ export default function ProductForm({
 
       images: [],
 
-      price: 0,
-
-      oldPrice: undefined,
-
-      discount: undefined,
-
       rating: 0,
 
       reviewCount: 0,
 
       stock: 0,
-
-      sku: "",
-
-      brand: "",
 
       categoryId: 1,
 
@@ -112,21 +102,11 @@ export default function ProductForm({
 
       images: initialValues?.images ?? [],
 
-      price: initialValues?.price ?? 0,
-
-      oldPrice: initialValues?.oldPrice,
-
-      discount: initialValues?.discount,
-
       rating: initialValues?.rating ?? 0,
 
       reviewCount: initialValues?.reviewCount ?? 0,
 
       stock: initialValues?.stock ?? 0,
-
-      sku: initialValues?.sku ?? "",
-
-      brand: initialValues?.brand ?? "",
 
       categoryId: initialValues?.categoryId ?? 1,
 
@@ -213,44 +193,14 @@ export default function ProductForm({
         )}
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <Input
-          label="قیمت"
-          type="number"
-          error={errors.price?.message}
-          {...register("price")}
-        />
-
-        <Input
-          label="قیمت قبل"
-          type="number"
-          error={errors.oldPrice?.message}
-          {...register("oldPrice")}
-        />
-      </div>
-
-      <div className="grid grid-cols-2 gap-4">
+      <div>
         <Input
           label="موجودی"
           type="number"
           error={errors.stock?.message}
           {...register("stock")}
         />
-
-        <Input
-          label="SKU"
-          placeholder="APL-IP16PRO"
-          error={errors.sku?.message}
-          {...register("sku")}
-        />
       </div>
-
-      <Input
-        label="برند"
-        placeholder="Apple"
-        error={errors.brand?.message}
-        {...register("brand")}
-      />
 
       <div className="flex items-center gap-3">
         <input type="checkbox" {...register("isFeatured")} />

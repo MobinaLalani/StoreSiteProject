@@ -4,8 +4,10 @@ import { motion } from "framer-motion";
 import { ShoppingCart, User, Search } from "lucide-react";
 
 import Container from "../ui/Container";
+import { usePublicSettings } from "@/src/features/admin/settings/hooks/useSettings";
 
 export default function Header() {
+  const { data } = usePublicSettings();
   return (
     <motion.header
       initial={{
@@ -23,7 +25,7 @@ export default function Header() {
     >
       <Container>
         <div className="flex h-20 items-center justify-between">
-          <h1 className="text-3xl font-black text-red-500">اتصال گستر </h1>
+          <h1 className="text-3xl font-black text-red-500">{data?.store.name || "اتصال گستر"}</h1>
 
           <div className="flex w-full max-w-xl items-center rounded-xl border bg-gray-50 px-4">
             <Search size={20} className="text-gray-500" />
