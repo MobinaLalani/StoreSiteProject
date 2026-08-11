@@ -1,11 +1,5 @@
-import React from 'react'
+import ProductSection from "@/src/features/products/components/ProductSection/ProductSection";
 
-function page() {
-  return (
-    <div>
-      xdfgvdzfg
-    </div>
-  )
+export default function ProductsPage() {
+  return <ProductSection title="همه محصولات" description="محصولات موجود فروشگاه" />;
 }
-
-export default page

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { products } from "@/src/data/products";
+import { productRepository } from "@/src/repositories/product.repository";
 
 import {
   ProductGallery,
@@ -16,10 +16,12 @@ interface ProductPageProps {
   }>;
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
-
-  const product = products.find((item) => item.slug === slug);
+  const products = await productRepository.getAll();
+  const product = products.find((item) => item.slug === decodeURIComponent(slug));
 
   if (!product) {
     notFound();
@@ -28,7 +30,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const relatedProducts = products
     .filter(
       (item) =>
-        item.slug === product.slug && item.id !== product.id,
+        item.categoryId === product.categoryId && item.id !== product.id,
     )
     .slice(0, 4);
 

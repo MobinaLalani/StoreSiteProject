@@ -1,7 +1,8 @@
-import { products } from "@/src/data/products";
-import { categories } from "@/src/data/categories";
+import { productRepository } from "@/src/repositories/product.repository";
+import { categoryRepository } from "@/src/repositories/category.repository";
 
-export function getCategoryData(slug: string) {
+export async function getCategoryData(slug: string) {
+  const [products, categories] = await Promise.all([productRepository.getAll(), categoryRepository.getAll()]);
   const category = categories.find((item) => item.slug === slug);
 
   if (!category) {

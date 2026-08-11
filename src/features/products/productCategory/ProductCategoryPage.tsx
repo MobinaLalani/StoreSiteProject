@@ -11,10 +11,10 @@ interface ProductCategoryPageProps {
   slug: string;
 }
 
-export default function ProductCategoryPage({
+export default async function ProductCategoryPage({
   slug,
 }: ProductCategoryPageProps) {
-  const data = getCategoryData(slug);
+  const data = await getCategoryData(slug);
 
   if (!data) {
     notFound();
