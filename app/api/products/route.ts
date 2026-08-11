@@ -1,85 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-
 import { productRepository } from "@/src/repositories/product.repository";
+import { errorResponse, jsonBody, requireAdmin } from "@/src/lib/api";
+import type { Product } from "@/src/types/product";
+import { filterProduct, validateProduct } from "@/src/lib/product-input";
 
-export async function GET() {
-  try {
-    const products = await productRepository.getAll();
-
-    return NextResponse.json(products);
-  } catch (error) {
-    console.error(error);
-
-    return NextResponse.json(
-      {
-        message: "خطا در دریافت محصولات",
-      },
-      {
-        status: 500,
-      },
-    );
-  }
-}
-
+export async function GET() { return NextResponse.json(await productRepository.getAll()); }
 export async function POST(request: NextRequest) {
+  const auth = await requireAdmin(request); if (auth.response) return auth.response;
+  const body = await jsonBody(request); if (!body) return NextResponse.json({ message: "Request body must be valid JSON" }, { status: 400 });
+  const data = filterProduct(body); const errors = validateProduct(data, true);
+  if (Object.keys(errors).length) return NextResponse.json({ message: "Validation failed", errors }, { status: 422 });
   try {
-    const body = await request.json();
-
-    const newProduct = await productRepository.create({
-      title: body.title,
-
-      slug: body.slug,
-
-      shortDescription: body.shortDescription,
-
-      description: body.description,
-
-      thumbnail: body.thumbnail,
-
-      images: body.images,
-
-      price: body.price,
-
-      oldPrice: body.oldPrice,
-
-      discount: body.discount,
-
-      rating: body.rating ?? 0,
-
-      reviewCount: body.reviewCount ?? 0,
-
-      stock: body.stock,
-
-      sku: body.sku,
-
-      brand: body.brand,
-
-      categoryId: body.categoryId,
-
-      tags: body.tags ?? [],
-
-      colors: body.colors ?? [],
-
-      specifications: body.specifications ?? [],
-
-      status: body.status ?? "active",
-
-      isFeatured: body.isFeatured ?? false,
-    });
-
-    return NextResponse.json(newProduct, {
-      status: 201,
-    });
-  } catch (error) {
-    console.error(error);
-
-    return NextResponse.json(
-      {
-        message: "خطا در ایجاد محصول",
-      },
-      {
-        status: 500,
-      },
-    );
-  }
+    const defaults = { rating: 0, reviewCount: 0, tags: [], colors: [], specifications: [], status: "active" as const, isFeatured: false };
+    return NextResponse.json(await productRepository.create({ ...defaults, ...data } as Omit<Product, "id" | "createdAt" | "updatedAt">), { status: 201 });
+  } catch (error) { return errorResponse(error, "خطا در ایجاد محصول"); }
 }

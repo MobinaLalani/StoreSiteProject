@@ -14,5 +14,9 @@ await cp(
   path.join(standalone, ".next", "static"),
   { recursive: true, force: true },
 );
+await cp(path.join(root, "data"), path.join(standalone, "data"), {
+  recursive: true,
+  force: true,
+});
 
 console.log("Standalone deployment prepared in .next/standalone");

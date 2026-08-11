@@ -1,63 +1,20 @@
+import { randomBytes } from "node:crypto";
+import { mkdir, writeFile } from "node:fs/promises";
+import path from "node:path";
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdmin } from "@/src/lib/api";
 
-import fs from "fs/promises";
-import path from "path";
-
+const extensions: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif" };
 export async function POST(request: NextRequest) {
-  try {
-    const formData = await request.formData();
-
-    const file = formData.get("file") as File;
-
-    if (!file) {
-      return NextResponse.json(
-        {
-          message: "فایلی ارسال نشده است.",
-        },
-        {
-          status: 400,
-        },
-      );
-    }
-
-    const bytes = await file.arrayBuffer();
-
-    const buffer = Buffer.from(bytes);
-
-    const uploadDir = path.join(process.cwd(), "public", "uploads", "products");
-
-    await fs.mkdir(uploadDir, {
-      recursive: true,
-    });
-
-    const extension = file.name.split(".").pop();
-
-    const fileName = `${Date.now()}.${extension}`;
-
-    const filePath = path.join(uploadDir, fileName);
-
-    await fs.writeFile(filePath, buffer);
-
-    const url = `/uploads/products/${fileName}`;
-
-    return NextResponse.json(
-      {
-        url,
-      },
-      {
-        status: 201,
-      },
-    );
-  } catch (error) {
-    console.error(error);
-
-    return NextResponse.json(
-      {
-        message: "خطا در آپلود تصویر",
-      },
-      {
-        status: 500,
-      },
-    );
-  }
+  const auth = await requireAdmin(request); if (auth.response) return auth.response;
+  const file = (await request.formData()).get("file");
+  if (!(file instanceof File)) return NextResponse.json({ message: "No valid file was uploaded" }, { status: 422 });
+  if (file.size > 5 * 1024 * 1024) return NextResponse.json({ message: "Image must be smaller than 5 MB" }, { status: 422 });
+  const extension = extensions[file.type];
+  if (!extension) return NextResponse.json({ message: "Only JPG, PNG, WEBP and GIF images are allowed" }, { status: 422 });
+  const filename = `${randomBytes(16).toString("hex")}.${extension}`;
+  const directory = path.join(process.cwd(), "public", "uploads", "products");
+  await mkdir(directory, { recursive: true });
+  await writeFile(path.join(directory, filename), Buffer.from(await file.arrayBuffer()));
+  return NextResponse.json({ url: `/uploads/products/${filename}` }, { status: 201 });
 }

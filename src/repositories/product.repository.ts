@@ -1,15 +1,11 @@
-import fs from "fs/promises";
-import path from "path";
-
 import { Product } from "@/src/types/product";
+import { readJson, updateJson } from "@/src/lib/json-store";
 
-const filePath = path.join(process.cwd(), "src", "data", "products.json");
+const filename = "products.json";
 
 export class ProductRepository {
   async getAll(): Promise<Product[]> {
-    const file = await fs.readFile(filePath, "utf-8");
-
-    return JSON.parse(file);
+    return readJson<Product[]>(filename, []);
   }
 
   async getById(id: number): Promise<Product | undefined> {
@@ -21,27 +17,12 @@ export class ProductRepository {
   async create(
     data: Omit<Product, "id" | "createdAt" | "updatedAt">,
   ): Promise<Product> {
-    const products = await this.getAll();
-
-    const now = new Date().toISOString();
-
-    const newProduct: Product = {
-      id:
-        products.length > 0
-          ? Math.max(...products.map((item) => item.id)) + 1
-          : 1,
-
-      ...data,
-
-      createdAt: now,
-
-      updatedAt: now,
-    };
-
-    products.push(newProduct);
-
-    await fs.writeFile(filePath, JSON.stringify(products, null, 2), "utf-8");
-
+    let newProduct!: Product;
+    await updateJson<Product[]>(filename, [], (products) => {
+      const now = new Date().toISOString();
+      newProduct = { id: products.length ? Math.max(...products.map((item) => item.id)) + 1 : 1, ...data, createdAt: now, updatedAt: now };
+      return [...products, newProduct];
+    });
     return newProduct;
   }
 
@@ -49,39 +30,24 @@ export class ProductRepository {
     id: number,
     data: Partial<Omit<Product, "id">>,
   ): Promise<Product | null> {
-    const products = await this.getAll();
-
-    const index = products.findIndex((item) => item.id === id);
-
-    if (index === -1) {
-      return null;
-    }
-
-    products[index] = {
-      ...products[index],
-
-      ...data,
-
-      updatedAt: new Date().toISOString(),
-    };
-
-    await fs.writeFile(filePath, JSON.stringify(products, null, 2), "utf-8");
-
-    return products[index];
+    let updated: Product | null = null;
+    await updateJson<Product[]>(filename, [], (products) => products.map((product) => {
+      if (product.id !== id) return product;
+      const { id: _id, createdAt: _createdAt, ...safeData } = data as Partial<Product>;
+      void _id; void _createdAt;
+      updated = { ...product, ...safeData, updatedAt: new Date().toISOString() };
+      return updated;
+    }));
+    return updated;
   }
 
   async delete(id: number): Promise<boolean> {
-    const products = await this.getAll();
-
-    const filtered = products.filter((item) => item.id !== id);
-
-    if (filtered.length === products.length) {
-      return false;
-    }
-
-    await fs.writeFile(filePath, JSON.stringify(filtered, null, 2), "utf-8");
-
-    return true;
+    let deleted = false;
+    await updateJson<Product[]>(filename, [], (products) => products.filter((item) => {
+      if (item.id === id) deleted = true;
+      return item.id !== id;
+    }));
+    return deleted;
   }
 }
 

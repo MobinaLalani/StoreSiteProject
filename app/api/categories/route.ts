@@ -1,56 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-
 import { categoryRepository } from "@/src/repositories/category.repository";
-
+import { jsonBody, requireAdmin } from "@/src/lib/api";
+import type { Category } from "@/src/types/category";
+import { categoryErrors, categoryInput } from "@/src/lib/category-input";
 export async function GET(request: NextRequest) {
-  try {
-    const searchParams = request.nextUrl.searchParams;
-
-    const includeProducts = searchParams.get("includeProducts") === "true";
-
-    const categories = includeProducts
-      ? await categoryRepository.getAllWithProducts()
-      : await categoryRepository.getAll();
-
-    return NextResponse.json(categories);
-  } catch (error) {
-    console.error(error);
-
-    return NextResponse.json(
-      {
-        message: "خطا در دریافت دسته‌بندی‌ها",
-      },
-      {
-        status: 500,
-      },
-    );
-  }
+  return NextResponse.json(request.nextUrl.searchParams.get("includeProducts") === "true" ? await categoryRepository.getAllWithProducts() : await categoryRepository.getAll());
 }
-
 export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json();
-
-    const newCategory = await categoryRepository.create({
-      title: body.title,
-      slug: body.slug,
-      image: body.image,
-      description: body.description,
-    });
-
-    return NextResponse.json(newCategory, {
-      status: 201,
-    });
-  } catch (error) {
-    console.error(error);
-
-    return NextResponse.json(
-      {
-        message: "خطا در ایجاد دسته‌بندی",
-      },
-      {
-        status: 500,
-      },
-    );
-  }
+  const auth = await requireAdmin(request); if (auth.response) return auth.response;
+  const body = await jsonBody(request); if (!body) return NextResponse.json({ message: "Request body must be valid JSON" }, { status: 400 });
+  const data = categoryInput(body); const errors = categoryErrors(data, true);
+  if (Object.keys(errors).length) return NextResponse.json({ message: "Validation failed", errors }, { status: 422 });
+  return NextResponse.json(await categoryRepository.create({ image: "", description: "", ...data } as Omit<Category, "id">), { status: 201 });
 }
