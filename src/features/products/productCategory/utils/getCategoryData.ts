@@ -9,7 +9,7 @@ export function getCategoryData(slug: string) {
   }
 
   const categoryProducts = products.filter(
-    (product) => product.category.slug === slug,
+    (product) => product.categoryId === category.id,
   );
 
   const brands = [...new Set(categoryProducts.map((item) => item.brand))];
