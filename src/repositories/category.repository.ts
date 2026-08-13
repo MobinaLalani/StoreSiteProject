@@ -43,7 +43,7 @@ export class CategoryRepository {
     }));
     return deleted;
   }
-  async getAllWithProducts(): Promise<(Category & { products: Product[] })[]> {
+  async getAllWithProducts(activeOnly = false): Promise<(Category & { products: Product[] })[]> {
     const categories = await this.getAll();
 
     const products = await readJson<Product[]>("products.json", []);
@@ -51,7 +51,7 @@ export class CategoryRepository {
     return categories.map((category) => ({
       ...category,
       products: products.filter(
-        (product) => product.categoryId === category.id,
+        (product) => product.categoryId === category.id && (!activeOnly || product.status === "active"),
       ),
     }));
   }

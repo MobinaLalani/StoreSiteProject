@@ -4,7 +4,7 @@ import { jsonBody, requireAdmin } from "@/src/lib/api";
 import type { Category } from "@/src/types/category";
 import { categoryErrors, categoryInput } from "@/src/lib/category-input";
 export async function GET(request: NextRequest) {
-  return NextResponse.json(request.nextUrl.searchParams.get("includeProducts") === "true" ? await categoryRepository.getAllWithProducts() : await categoryRepository.getAll());
+  return NextResponse.json(request.nextUrl.searchParams.get("includeProducts") === "true" ? await categoryRepository.getAllWithProducts(true) : await categoryRepository.getAll());
 }
 export async function POST(request: NextRequest) {
   const auth = await requireAdmin(request); if (auth.response) return auth.response;

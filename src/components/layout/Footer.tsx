@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { Clock3, Mail, MapPin, PhoneCall } from "lucide-react";
 import Container from "../ui/Container";
 import { usePublicSettings } from "@/src/features/admin/settings/hooks/useSettings";
@@ -13,7 +12,7 @@ export default function Footer() {
   return <motion.footer id="contact" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-14 scroll-mt-24 border-t border-slate-800 bg-slate-950 text-white sm:mt-24">
     <Container>
       <div className="grid gap-10 py-10 sm:py-14 md:grid-cols-2 lg:grid-cols-4">
-        <div><h3 className="text-2xl font-black">{store?.name || "اتصال گستر"}</h3><p className="mt-4 leading-8 text-slate-400">{store?.shortDescription || "تأمین و فروش تجهیزات صنعتی"}</p><Link href="/#about" className="mt-4 inline-block font-bold text-red-400 hover:text-red-300">درباره ما</Link></div>
+        <div><h3 className="text-2xl font-black">{store?.name || "اتصال گستر"}</h3><p className="mt-4 leading-8 text-slate-400">{store?.shortDescription || "تأمین و فروش تجهیزات صنعتی"}</p></div>
         <div><h4 className="font-black">اطلاعات تماس</h4><div className="mt-4 space-y-3 text-sm text-slate-400">
           {store?.landline && <a href={`tel:${store.landline.replace(/[^\d+]/g, "")}`} className="flex items-center gap-3 hover:text-white"><PhoneCall size={17} className="text-red-400" /><span dir="ltr">{store.landline}</span></a>}
           {store?.mobile && <a href={`tel:${store.mobile.replace(/[^\d+]/g, "")}`} className="flex items-center gap-3 hover:text-white"><PhoneCall size={17} className="text-red-400" /><span dir="ltr">{store.mobile}</span></a>}

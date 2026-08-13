@@ -54,6 +54,8 @@ export default function ProductPage() {
   }
 
   function handleEdit(product: Product) {
+    createMutation.reset();
+    updateMutation.reset();
     setSelectedProduct(product);
 
     setModalOpen(true);
@@ -81,6 +83,8 @@ export default function ProductPage() {
         search={search}
         onSearchChange={setSearch}
         onAddProduct={() => {
+          createMutation.reset();
+          updateMutation.reset();
           setSelectedProduct(null);
 
           setModalOpen(true);
@@ -99,7 +103,10 @@ export default function ProductPage() {
         title={selectedProduct ? "ویرایش محصول" : "افزودن محصول"}
         product={selectedProduct}
         loading={createMutation.isPending || updateMutation.isPending}
+        error={(selectedProduct ? updateMutation.error : createMutation.error)?.message}
         onClose={() => {
+          createMutation.reset();
+          updateMutation.reset();
           setModalOpen(false);
 
           setSelectedProduct(null);

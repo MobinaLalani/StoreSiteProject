@@ -23,6 +23,8 @@ interface ProductFormProps {
 
   loading?: boolean;
 
+  submissionError?: string;
+
   onSubmit: (
     data: Omit<Product, "id" | "createdAt" | "updatedAt">,
   ) => Promise<void>;
@@ -32,6 +34,8 @@ export default function ProductForm({
   initialValues,
 
   loading = false,
+
+  submissionError,
 
   onSubmit,
 }: ProductFormProps) {
@@ -81,7 +85,7 @@ export default function ProductForm({
 
       specifications: [],
 
-      status: "draft",
+      status: "active",
 
       isFeatured: false,
     },
@@ -120,7 +124,7 @@ export default function ProductForm({
 
       specifications: initialValues?.specifications ?? [],
 
-      status: initialValues?.status ?? "draft",
+      status: initialValues?.status ?? "active",
 
       isFeatured: initialValues?.isFeatured ?? false,
     });
@@ -156,7 +160,8 @@ export default function ProductForm({
       <Input
         label="Slug"
         placeholder="iphone-16-pro"
-        error={errors.slug?.message}
+        error={errors.slug?.message || submissionError}
+        hint="این مقدار آدرس اختصاصی محصول است و نمی‌تواند تکراری باشد."
         {...register("slug")}
       />
 

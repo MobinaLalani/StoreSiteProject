@@ -1,9 +1,10 @@
 import { Product } from "@/src/types/product";
 
 const BASE_URL = "/api/products";
+async function responseError(response: Response, fallback: string) { const body = await response.json().catch(() => null) as { message?: string } | null; return new Error(body?.message || fallback); }
 
 export async function getProducts(): Promise<Product[]> {
-  const response = await fetch(BASE_URL);
+  const response = await fetch(`${BASE_URL}?scope=admin`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch products.");
@@ -26,7 +27,7 @@ export async function createProduct(
   });
 
   if (!response.ok) {
-    throw new Error("Failed to create product.");
+    throw await responseError(response, "ایجاد محصول ناموفق بود.");
   }
 
   return response.json();
@@ -47,11 +48,7 @@ export async function updateProduct(
   });
 
   if (!response.ok) {
-    const error = await response.text();
-
-    console.log(error);
-
-    throw new Error(error);
+    throw await responseError(response, "ویرایش محصول ناموفق بود.");
   }
 
   return response.json();

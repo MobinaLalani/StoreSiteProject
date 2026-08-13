@@ -134,7 +134,7 @@
     "tags": [],
     "colors": [],
     "specifications": [],
-    "status": "draft",
+    "status": "active",
     "isFeatured": false,
     "title": "تست",
     "slug": "/test",
@@ -149,5 +149,48 @@
     "categoryId": 1,
     "createdAt": "2026-08-11T08:44:15.465Z",
     "updatedAt": "2026-08-11T08:44:15.465Z"
+  },
+  {
+    "id": 5,
+    "rating": 4,
+    "reviewCount": 0,
+    "tags": [],
+    "colors": [],
+    "specifications": [],
+    "status": "active",
+    "isFeatured": false,
+    "title": "گیره بزرگ",
+    "slug": "/bag",
+    "shortDescription": "بزرگترین سایز گیره",
+    "description": "یبیبیبیییی",
+    "thumbnail": "/uploads/products/1cf1b9d3f0297d2e9a7375eaf6626c36.png",
+    "images": [
+      "/uploads/products/5112045d154b51b6eb3fdd27e5ed5b1c.png",
+      "/uploads/products/db2f234ae3f98cda73352960897376b7.png"
+    ],
+    "stock": 12,
+    "categoryId": 1,
+    "createdAt": "2026-08-13T06:37:26.375Z",
+    "updatedAt": "2026-08-13T06:37:26.375Z"
+  },
+  {
+    "id": 6,
+    "rating": 3,
+    "reviewCount": 0,
+    "tags": [],
+    "colors": [],
+    "specifications": [],
+    "isFeatured": false,
+    "title": "این دومین تست من هستش",
+    "slug": "2iphone-16-pro",
+    "shortDescription": "جدیدترین گوشی اپل",
+    "description": "dffgfdfdfgdf",
+    "thumbnail": "/uploads/products/b75c51cdc018b13d84a6a23cf8152a74.png",
+    "images": [],
+    "stock": 65,
+    "categoryId": 1,
+    "status": "active",
+    "createdAt": "2026-08-13T06:41:53.282Z",
+    "updatedAt": "2026-08-13T06:41:53.282Z"
   }
 ]

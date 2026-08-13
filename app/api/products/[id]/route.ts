@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { productRepository } from "@/src/repositories/product.repository";
+import { DuplicateProductSlugError, productRepository } from "@/src/repositories/product.repository";
 import { jsonBody, requireAdmin } from "@/src/lib/api";
 import { filterProduct, validateProduct } from "@/src/lib/product-input";
 
@@ -14,8 +14,13 @@ async function update(request: NextRequest, { params }: Context) {
   const data = filterProduct(body); const errors = validateProduct(data, false);
   if (!Object.keys(data).length) errors.body = "At least one field is required";
   if (Object.keys(errors).length) return NextResponse.json({ message: "Validation failed", errors }, { status: 422 });
-  const item = await productRepository.update(Number((await params).id), data);
-  return item ? NextResponse.json(item) : NextResponse.json({ message: "Product not found" }, { status: 404 });
+  try {
+    const item = await productRepository.update(Number((await params).id), data);
+    return item ? NextResponse.json(item) : NextResponse.json({ message: "Product not found" }, { status: 404 });
+  } catch (error) {
+    if (error instanceof DuplicateProductSlugError) return NextResponse.json({ message: error.message, errors: { slug: error.message } }, { status: 409 });
+    throw error;
+  }
 }
 export const PUT = update;
 export const PATCH = update;

@@ -28,5 +28,5 @@ export default async function StoreLayout({ children }: Readonly<{ children: Rea
     address: settings.store.address ? { "@type": "PostalAddress", streetAddress: settings.store.address, addressCountry: "IR" } : undefined,
     sameAs: Object.values(settings.social).filter(Boolean),
   };
-  return <div className="bg-gray-50 text-slate-900"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(organization) }} /><PublicSettingsEffects /><Header /><Navbar /><main id="main-content">{children}</main><Footer /></div>;
+  return <div className="bg-gray-50 pb-[calc(4.25rem+env(safe-area-inset-bottom))] text-slate-900 lg:pb-0"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(organization) }} /><PublicSettingsEffects /><Header /><Navbar /><main id="main-content">{children}</main><Footer /></div>;
 }

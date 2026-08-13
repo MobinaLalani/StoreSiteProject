@@ -11,6 +11,8 @@ interface ProductModalProps {
 
   loading?: boolean;
 
+  error?: string;
+
   product?: Product | null;
 
   title: string;
@@ -26,6 +28,8 @@ export default function ProductModal({
   open,
 
   loading = false,
+
+  error,
 
   product,
 
@@ -90,6 +94,7 @@ export default function ProductModal({
         <div className="p-6">
           <ProductForm
             loading={loading}
+            submissionError={error}
             initialValues={product}
             onSubmit={onSubmit}
           />
