@@ -17,7 +17,7 @@ export default function ProductActions({ productId, productTitle, variant = "car
   const whatsappUrl = `https://wa.me/${whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(message)}`;
 
   return <>
-    <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.96 }} onClick={() => setOpen(true)} className={`flex w-full items-center justify-center gap-3 rounded-2xl bg-red-500 font-semibold text-white transition hover:bg-red-600 ${variant === "detail" ? "min-h-14 px-6 py-4" : "py-4"}`}><PhoneCall size={20} />{settings?.inquiry.buttonText || "استعلام"}</motion.button>
+    <motion.button whileHover={{ scale: 1.015 }} whileTap={{ scale: 0.98 }} onClick={() => setOpen(true)} className={`flex w-full items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-l from-red-500 to-red-600 font-bold text-white shadow-lg shadow-red-500/15 transition hover:shadow-red-500/25 ${variant === "detail" ? "min-h-14 px-6 py-4" : "min-h-12 px-4 py-3"}`}><PhoneCall size={19} />{settings?.inquiry.buttonText || "استعلام"}</motion.button>
     {open && typeof document !== "undefined" && createPortal(<AnimatePresence><motion.div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <button aria-label="بستن" className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setOpen(false)} />
       <motion.div initial={{ scale: .95, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} className="hide-scrollbar relative z-10 max-h-[78svh] w-full max-w-sm overflow-y-auto rounded-2xl bg-white p-4 shadow-2xl sm:max-h-[88vh] sm:max-w-md sm:rounded-3xl sm:p-6">

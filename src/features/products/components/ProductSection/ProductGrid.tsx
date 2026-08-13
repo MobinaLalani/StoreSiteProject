@@ -29,15 +29,17 @@ export default function ProductGrid({ products }: ProductGridProps) {
       className="
         grid
         grid-cols-1
-        gap-8
+        gap-5
         sm:grid-cols-2
         lg:grid-cols-3
+        lg:gap-6
         xl:grid-cols-4
       "
     >
       {products.map((product) => (
         <motion.div
           key={product.id}
+          className="h-full"
           variants={{
             hidden: {
               opacity: 0,

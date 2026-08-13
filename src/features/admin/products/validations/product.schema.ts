@@ -19,7 +19,7 @@ export const productSchema = z.object({
 
   stock: z.coerce.number().min(0),
 
-  categoryId: z.coerce.number(),
+  categoryId: z.coerce.number().int("دسته‌بندی نامعتبر است.").positive("انتخاب دسته‌بندی الزامی است."),
 
   tags: z.array(z.string()),
 

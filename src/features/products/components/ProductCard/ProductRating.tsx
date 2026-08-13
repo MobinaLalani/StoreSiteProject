@@ -1,33 +1,7 @@
-"use client";
-
 import { Star } from "lucide-react";
+import type { Product } from "@/src/types/product";
 
-import { Product } from "../../../../types/product";
-
-interface Props {
-  product: Product;
-}
-
-export default function ProductRating({ product }: Props) {
-  return (
-    <div className="flex items-center justify-between">
-      <div className="flex items-center gap-1">
-        {[...Array(5)].map((_, index) => (
-          <Star
-            key={index}
-            size={18}
-            className={
-              index < Math.floor(product.rating)
-                ? "fill-yellow-400 text-yellow-400"
-                : "fill-gray-200 text-gray-200"
-            }
-          />
-        ))}
-      </div>
-
-      <span className="text-sm text-green-600">
-        {product.stock > 0 ? "موجود" : "ناموجود"}
-      </span>
-    </div>
-  );
+export default function ProductRating({ product }: { product: Product }) {
+  if (product.rating <= 0) return <span className="text-xs text-slate-400">بدون امتیاز</span>;
+  return <div className="inline-flex items-center gap-1.5" aria-label={`امتیاز ${product.rating} از ۵`}><span className="grid h-7 w-7 place-items-center rounded-lg bg-amber-50"><Star size={15} className="fill-amber-400 text-amber-400" /></span><strong className="text-sm text-slate-700">{product.rating.toLocaleString("fa-IR", { maximumFractionDigits: 1 })}</strong>{product.reviewCount > 0 && <span className="text-[11px] text-slate-400">({product.reviewCount.toLocaleString("fa-IR")})</span>}</div>;
 }

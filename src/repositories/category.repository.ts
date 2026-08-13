@@ -43,6 +43,10 @@ export class CategoryRepository {
     }));
     return deleted;
   }
+  async hasProducts(id: number): Promise<boolean> {
+    const products = await readJson<Product[]>("products.json", []);
+    return products.some((product) => product.categoryId === id);
+  }
   async getAllWithProducts(activeOnly = false): Promise<(Category & { products: Product[] })[]> {
     const categories = await this.getAll();
 

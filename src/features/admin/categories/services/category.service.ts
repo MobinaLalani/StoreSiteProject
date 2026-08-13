@@ -2,6 +2,11 @@ import { Category } from "@/src/types/category";
 
 const BASE_URL = "/api/categories";
 
+async function categoryError(response: Response, fallback: string) {
+  const body = await response.json().catch(() => null) as { message?: string } | null;
+  return new Error(body?.message || fallback);
+}
+
 export async function getCategories(): Promise<Category[]> {
   const response = await fetch(BASE_URL);
 
@@ -24,7 +29,7 @@ export async function createCategory(
   });
 
   if (!response.ok) {
-    throw new Error("Failed to create category.");
+    throw await categoryError(response, "ایجاد دسته‌بندی ناموفق بود.");
   }
 
   return response.json();
@@ -43,10 +48,7 @@ export async function updateCategory(
   });
 
   if (!response.ok) {
-    const error = await response.text();
-    console.log(error);
-
-    throw new Error(error);
+    throw await categoryError(response, "ویرایش دسته‌بندی ناموفق بود.");
   }
 
   return response.json();
@@ -57,7 +59,7 @@ export async function deleteCategory(id: number): Promise<void> {
   });
 
   if (!response.ok) {
-    throw new Error("Failed to delete category.");
+    throw await categoryError(response, "حذف دسته‌بندی ناموفق بود.");
   }
 }
 

@@ -21,5 +21,7 @@ export const PUT = update;
 export const PATCH = update;
 export async function DELETE(request: NextRequest, { params }: Context) {
   const auth = await requireAdmin(request); if (auth.response) return auth.response;
-  return (await categoryRepository.delete(Number((await params).id))) ? new NextResponse(null, { status: 204 }) : NextResponse.json({ message: "Category not found" }, { status: 404 });
+  const id = Number((await params).id);
+  if (await categoryRepository.hasProducts(id)) return NextResponse.json({ message: "این دسته‌بندی دارای محصول است و قابل حذف نیست." }, { status: 409 });
+  return (await categoryRepository.delete(id)) ? new NextResponse(null, { status: 204 }) : NextResponse.json({ message: "Category not found" }, { status: 404 });
 }

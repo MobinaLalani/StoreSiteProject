@@ -2,43 +2,44 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Product } from "../../../../types/product";
-
+import { ArrowUpLeft, PackageCheck, PackageX } from "lucide-react";
+import type { Product } from "@/src/types/product";
 import ProductImage from "./ProductImage";
 import ProductRating from "./ProductRating";
 import ProductActions from "./ProductActions";
 
-interface ProductCardProps {
-  product: Product;
-}
+export default function ProductCard({ product }: { product: Product }) {
+  const href = `/products/${encodeURIComponent(product.slug.replace(/^\/+|\/+$/g, ""))}`;
+  const available = product.stock > 0;
 
-export default function ProductCard({ product }: ProductCardProps) {
   return (
-<motion.article
-  layout
-  whileHover={{ y: -8 }}
-  transition={{ duration: 0.25 }}
-  className="group flex h-[520px] flex-col overflow-hidden rounded-3xl border border-gray-200 bg-gray-100 shadow-sm hover:shadow-2xl"
->
-  <ProductImage product={product} />
+    <motion.article layout whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 300, damping: 24 }} className="group relative flex h-full min-h-[31rem] flex-col overflow-hidden rounded-[1.75rem] border border-slate-200/80 bg-white shadow-[0_8px_30px_rgba(15,23,42,.06)] transition-[border-color,box-shadow] duration-300 hover:border-red-200 hover:shadow-[0_22px_55px_rgba(15,23,42,.14)]">
+      <ProductImage product={product} href={href} />
 
-  <div className="flex flex-1 flex-col space-y-5 p-8">
-    <div className="flex-1">
-      <Link href={`/products/${product.slug}`}>
-        <h3 className="line-clamp-1 text-lg font-bold transition-colors hover:text-red-500">
-          {product.title}
-        </h3>
-      </Link>
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <ProductRating product={product} />
+          <span className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold ${available ? "bg-emerald-50 text-emerald-700" : "bg-slate-100 text-slate-500"}`}>
+            {available ? <PackageCheck size={14} /> : <PackageX size={14} />}
+            {available ? "موجود" : "ناموجود"}
+          </span>
+        </div>
 
-      <p className="mt-2 line-clamp-2 text-sm text-gray-500">
-        {product.description}
-      </p>
-    </div>
+        <Link href={href} className="group/title block focus:outline-none">
+          <h3 className="line-clamp-2 min-h-14 text-lg font-black leading-7 text-slate-900 transition-colors group-hover/title:text-red-600">{product.title}</h3>
+        </Link>
+        <p className="mt-2 line-clamp-2 min-h-12 text-sm leading-6 text-slate-500">{product.shortDescription || product.description}</p>
 
-    <ProductRating product={product} />
+        {product.tags.length > 0 && <div className="mt-3 flex min-h-7 flex-wrap gap-1.5 overflow-hidden">{product.tags.slice(0, 2).map((tag) => <span key={tag} className="max-w-28 truncate rounded-lg bg-slate-50 px-2 py-1 text-[10px] font-semibold text-slate-500">{tag}</span>)}</div>}
 
-    <ProductActions productId={product.id} productTitle={product.title} />
-  </div>
-</motion.article>
+        <div className="mt-auto pt-4">
+          <div className="mb-3 flex items-center justify-between border-t border-slate-100 pt-3">
+            <span className="text-xs text-slate-400">{available ? `${product.stock.toLocaleString("fa-IR")} عدد موجود` : "برای موجودی تماس بگیرید"}</span>
+            <Link href={href} aria-label={`مشاهده ${product.title}`} className="inline-flex items-center gap-1 text-xs font-bold text-slate-600 transition hover:text-red-600">جزئیات <ArrowUpLeft size={15} /></Link>
+          </div>
+          <ProductActions productId={product.id} productTitle={product.title} />
+        </div>
+      </div>
+    </motion.article>
   );
 }

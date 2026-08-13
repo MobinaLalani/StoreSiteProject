@@ -11,7 +11,7 @@ export function validateProduct(data: Partial<Product>, creating: boolean) {
   for (const field of ["title", "slug", "shortDescription", "description", "thumbnail"] as const)
     if ((creating || field in data) && (typeof data[field] !== "string" || !data[field]?.trim())) errors[field] = `${field} is required`;
   for (const field of ["stock", "categoryId"] as const)
-    if ((creating || field in data) && (typeof data[field] !== "number" || Number(data[field]) < 0)) errors[field] = `${field} must be a positive number`;
+    if ((creating || field in data) && (typeof data[field] !== "number" || !Number.isFinite(data[field]) || Number(data[field]) < (field === "categoryId" ? 1 : 0))) errors[field] = `${field} must be a valid positive number`;
   for (const field of ["images", "tags", "colors", "specifications"] as const)
     if (field in data && !Array.isArray(data[field])) errors[field] = `${field} must be an array`;
   if (data.status && !["active", "draft", "archived"].includes(data.status)) errors.status = "Invalid status";

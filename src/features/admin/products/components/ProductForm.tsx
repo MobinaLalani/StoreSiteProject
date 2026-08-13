@@ -13,6 +13,7 @@ import { productSchema } from "../validations/product.schema";
 import Input from "@/src/features/admin/shared/ui/Input";
 import Textarea from "@/src/features/admin/shared/ui/Textarea";
 import Button from "@/src/features/admin/shared/ui/Button";
+import ProductCategorySelect from "./ProductCategorySelect";
 
 import ImageUpload from "@/src/features/admin/shared/components/ImageUpload";
 
@@ -77,7 +78,7 @@ export default function ProductForm({
 
       stock: 0,
 
-      categoryId: 1,
+      categoryId: 0,
 
       tags: [],
 
@@ -116,7 +117,7 @@ export default function ProductForm({
 
       stock: initialValues?.stock ?? 0,
 
-      categoryId: initialValues?.categoryId ?? 1,
+      categoryId: initialValues?.categoryId ?? 0,
 
       tags: initialValues?.tags ?? [],
 
@@ -160,7 +161,7 @@ export default function ProductForm({
       <Input
         label="Slug"
         placeholder="iphone-16-pro"
-        error={errors.slug?.message || submissionError}
+        error={errors.slug?.message || (submissionError?.includes("آدرس محصول") ? submissionError : undefined)}
         hint="این مقدار آدرس اختصاصی محصول است و نمی‌تواند تکراری باشد."
         {...register("slug")}
       />
@@ -171,6 +172,8 @@ export default function ProductForm({
         error={errors.shortDescription?.message}
         {...register("shortDescription")}
       />
+
+      <ProductCategorySelect error={errors.categoryId?.message} {...register("categoryId")} />
 
       <Textarea
         label="توضیحات"
@@ -287,6 +290,7 @@ export default function ProductForm({
       </div>
 
       <div className="flex justify-end border-t pt-5">
+        {submissionError && !submissionError.includes("آدرس محصول") && <p role="alert" className="ml-auto rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-600">{submissionError}</p>}
         <Button type="submit" loading={loading}>
           {initialValues ? "ویرایش محصول" : "افزودن محصول"}
         </Button>

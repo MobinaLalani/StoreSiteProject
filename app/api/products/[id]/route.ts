@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { DuplicateProductSlugError, productRepository } from "@/src/repositories/product.repository";
 import { jsonBody, requireAdmin } from "@/src/lib/api";
 import { filterProduct, validateProduct } from "@/src/lib/product-input";
+import { categoryRepository } from "@/src/repositories/category.repository";
 
 type Context = { params: Promise<{ id: string }> };
 export async function GET(_request: NextRequest, { params }: Context) {
@@ -12,6 +13,7 @@ async function update(request: NextRequest, { params }: Context) {
   const auth = await requireAdmin(request); if (auth.response) return auth.response;
   const body = await jsonBody(request); if (!body) return NextResponse.json({ message: "Request body must be valid JSON" }, { status: 400 });
   const data = filterProduct(body); const errors = validateProduct(data, false);
+  if (typeof data.categoryId === "number" && !(await categoryRepository.getById(data.categoryId))) errors.categoryId = "دسته‌بندی انتخاب‌شده وجود ندارد.";
   if (!Object.keys(data).length) errors.body = "At least one field is required";
   if (Object.keys(errors).length) return NextResponse.json({ message: "Validation failed", errors }, { status: 422 });
   try {

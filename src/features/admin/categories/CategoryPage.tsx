@@ -77,6 +77,7 @@ export default function CategoryPage() {
   }
 
   function handleDeleteCategory(category: Category) {
+    deleteCategory.reset();
     setSelectedCategory(category);
     setDeleteOpen(true);
   }
@@ -136,8 +137,10 @@ export default function CategoryPage() {
       <DeleteCategoryDialog
         open={deleteOpen}
         loading={deleteCategory.isPending}
+        error={deleteCategory.error?.message}
         category={selectedCategory}
         onClose={() => {
+          deleteCategory.reset();
           setDeleteOpen(false);
           setSelectedCategory(null);
         }}

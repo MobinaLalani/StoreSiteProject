@@ -1,22 +1,6 @@
-"use client";
+import { Sparkles } from "lucide-react";
 
-import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
-
-export default function ProductBadge() {
-  return (
-    <>
-      <motion.button
-        whileHover={{
-          scale: 1.15,
-        }}
-        whileTap={{
-          scale: 0.9,
-        }}
-        className="absolute right-4 top-4 z-20 rounded-full bg-white p-2 shadow-md"
-      >
-        <Heart size={18} className="text-gray-500" />
-      </motion.button>
-    </>
-  );
+export default function ProductBadge({ featured }: { featured: boolean }) {
+  if (!featured) return null;
+  return <span className="absolute right-3 top-3 z-20 inline-flex items-center gap-1.5 rounded-full border border-white/80 bg-white/90 px-3 py-1.5 text-[11px] font-black text-red-600 shadow-sm backdrop-blur"><Sparkles size={14} />پیشنهاد ویژه</span>;
 }

@@ -7,6 +7,7 @@ import { Category } from "@/src/types/category";
 interface DeleteCategoryDialogProps {
   open: boolean;
   loading?: boolean;
+  error?: string;
   category: Category | null;
 
   onClose: () => void;
@@ -16,6 +17,7 @@ interface DeleteCategoryDialogProps {
 export default function DeleteCategoryDialog({
   open,
   loading = false,
+  error,
   category,
   onClose,
   onConfirm,
@@ -38,6 +40,8 @@ export default function DeleteCategoryDialog({
           <span className="mx-1 font-bold">{category.title}</span>
           مطمئن هستید؟
         </p>
+
+        {error && <p role="alert" className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-center text-sm font-medium text-red-600">{error}</p>}
 
         <div className="mt-8 flex gap-3">
           <button
