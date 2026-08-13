@@ -1,128 +1,24 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
-import FloatingProduct from "./FloatingProduct";
+import Link from "next/link";
+import { ArrowUpLeft, PackageCheck } from "lucide-react";
+import type { Product } from "@/src/types/product";
 
-import heroPic from "@/public/Image/products/sarsim.png";
-
-const product1 = "/Image/products/batterycannectorcabel.png";
-const product2 = "/Image/products/cableshoe.png";
-const product3 = "/Image/products/gire.png";
-const product4 = "/Image/products/giresoosmari.png";
-
-export default function HeroImage() {
-  return (
-    <div className="relative flex items-center justify-center">
-      {/* Glow */}
-      <div className="absolute h-[420px] w-[420px] rounded-full bg-red-100 blur-3xl" />
-
-      {/* Floating Products */}
-      {/* Floating Products */}
-
-      <FloatingProduct
-        image={product1}
-        className="-left-24 top-24"
-        duration={6}
-        delay={0}
-        rotate={8}
-  
-      />
-
-      <FloatingProduct
-        image={product2}
-        className="right-8 -top-10"
-        duration={7}
-        delay={0.8}
-        rotate={10}
-       
-      />
-
-      <FloatingProduct
-        image={product3}
-        className="-left-2 bottom-4"
-        duration={5.5}
-        delay={1.4}
-        rotate={6}
-        
-      />
-
-      <FloatingProduct
-        image={product4}
-        className="right-[-60px] bottom-28"
-        duration={6.8}
-        delay={2}
-        rotate={12}
-       
-      />
-
-      {/* Floating Cards */}
-      {/* 
-      <FloatingCard
-        icon={Star}
-        title="امتیاز کاربران"
-        value="4.9 / 5"
-        className="-left-8 top-32"
-        iconBg="bg-yellow-100"
-        iconColor="text-yellow-500"
-        duration={5}
-      />
-
-      <FloatingCard
-        icon={ShieldCheck}
-        title="ضمانت اصالت"
-        value="100%"
-        className="-right-4 top-40"
-        iconBg="bg-green-100"
-        iconColor="text-green-500"
-        duration={6}
-      />
-
-      <FloatingCard
-        icon={Truck}
-        title="ارسال سریع"
-        value="۲۴ ساعته"
-        className="-left-4 bottom-28"
-        iconBg="bg-blue-100"
-        iconColor="text-blue-500"
-        duration={5.5}
-      />
-
-      <FloatingCard
-        icon={CreditCard}
-        title="پرداخت امن"
-        value="آنلاین"
-        className="-right-6 bottom-20"
-        iconBg="bg-purple-100"
-        iconColor="text-purple-500"
-        duration={6.5}
-      /> */}
-
-      {/* Main Image */}
-
-      <motion.div
-        whileHover={{
-          scale: 1.03,
-        }}
-        animate={{
-          y: [-8, 8, -8],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-        }}
-        className="relative z-20"
-      >
-        <Image
-          src={heroPic}
-          alt="تجهیزات و اتصالات صنعتی اتصال گستر"
-          width={600}
-          height={600}
-          preload
-          sizes="(max-width: 1024px) 90vw, 600px"
-          className="drop-shadow-[0_40px_50px_rgba(0,0,0,.18)]"
-        />
-      </motion.div>
+export default function HeroImage({ products }: { products: Product[] }) {
+  const primary = products[0];
+  if (!primary) return <div className="aspect-square rounded-[2rem] border border-dashed border-slate-300 bg-white/60"/>;
+  const others = products.slice(1, 3);
+  const href = `/products/${encodeURIComponent(primary.slug.replace(/^\/+|\/+$/g, ""))}`;
+  return <div className="relative mx-auto max-w-[34rem]">
+    <div className="absolute inset-8 rounded-full bg-red-200/60 blur-3xl"/>
+    <div className="relative overflow-hidden rounded-[2rem] border border-white/80 bg-white/85 p-3 shadow-[0_30px_80px_rgba(15,23,42,.14)] backdrop-blur-xl sm:rounded-[2.5rem] sm:p-5">
+      <div className="relative aspect-[1.05/1] overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-slate-50 via-white to-red-50 sm:rounded-[2rem]">
+        <Image src={primary.thumbnail} alt={primary.title} fill preload sizes="(max-width: 1024px) 92vw, 44vw" className="object-contain p-7 sm:p-10"/>
+        {primary.isFeatured && <span className="absolute right-3 top-3 rounded-full bg-red-500 px-3 py-1.5 text-[11px] font-black text-white shadow-lg">پیشنهاد ویژه</span>}
+      </div>
+      <div className="flex items-center gap-3 px-1 pb-1 pt-4"><div className="min-w-0 flex-1"><p className="text-xs font-bold text-red-500">جدیدترین انتخاب</p><h2 className="mt-1 truncate text-base font-black text-slate-900 sm:text-lg">{primary.title}</h2></div><Link href={href} aria-label={`مشاهده ${primary.title}`} className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-slate-950 text-white"><ArrowUpLeft size={19}/></Link></div>
     </div>
-  );
+    {others.map((product, index) => <Link key={product.id} href={`/products/${encodeURIComponent(product.slug.replace(/^\/+|\/+$/g, ""))}`} className={`absolute bottom-20 hidden w-44 items-center gap-2 rounded-2xl border border-white bg-white/90 p-2.5 shadow-xl backdrop-blur sm:flex ${index === 0 ? "-right-12" : "-left-10 bottom-40"}`}><span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-slate-50"><Image src={product.thumbnail} alt="" fill sizes="48px" className="object-contain p-1"/></span><span className="min-w-0"><strong className="block truncate text-xs text-slate-800">{product.title}</strong><small className="mt-1 flex items-center gap-1 text-[10px] text-emerald-600"><PackageCheck size={11}/>موجود</small></span></Link>)}
+  </div>;
 }

@@ -18,7 +18,7 @@ export default function ProductSectionHeader({
   buttonText = "مشاهده همه",
 }: ProductSectionHeaderProps) {
   return (
-    <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+    <div className="mb-7 flex items-end justify-between gap-4 sm:mb-10">
       {/* Left */}
 
       <motion.div
@@ -27,12 +27,12 @@ export default function ProductSectionHeader({
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-3xl font-black text-slate-900 lg:text-4xl">
+        <span className="text-xs font-black text-red-500 sm:text-sm">پیشنهادهای تازه</span><h2 className="mt-1 text-2xl font-black text-slate-900 sm:text-3xl lg:text-4xl">
           {title}
         </h2>
 
         {description && (
-          <p className="mt-3 max-w-2xl text-base leading-7 text-slate-500">
+          <p className="mt-2 max-w-2xl text-xs leading-6 text-slate-500 sm:text-base sm:leading-7">
             {description}
           </p>
         )}
@@ -48,7 +48,7 @@ export default function ProductSectionHeader({
       >
         <Link
           href={href}
-          className="group inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-5 py-3 font-medium text-slate-700 transition-all hover:border-red-500 hover:text-red-500"
+          className="group inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 text-xs font-bold text-slate-700 transition-all hover:border-red-500 hover:text-red-500 sm:gap-2 sm:px-5 sm:text-sm"
         >
           {buttonText}
 

@@ -1,83 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-
 import Container from "../../../components/ui/Container";
-
-import BackgroundEffects from "./BackgroundEffects";
 import HeroContent from "./HeroContent";
 import HeroImage from "./HeroImage";
+import type { Product } from "@/src/types/product";
 
-export default function Hero() {
-  return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-white via-slate-50 to-red-50">
-      {/* Background */}
-      <BackgroundEffects />
-
-      {/* Decorative Grid */}
-      <div className="absolute inset-0 opacity-[0.04]">
-        <div
-          className="h-full w-full"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right,#000 1px,transparent 1px),
-              linear-gradient(to bottom,#000 1px,transparent 1px)
-            `,
-            backgroundSize: "60px 60px",
-          }}
-        />
+export default function Hero({ products, categoryCount }: { products: Product[]; categoryCount: number }) {
+  return <section className="relative overflow-hidden bg-[#f8fafc] pb-10 pt-5 sm:pb-16 sm:pt-10 lg:pb-24 lg:pt-14">
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(239,68,68,.13),transparent_30%),radial-gradient(circle_at_85%_75%,rgba(59,130,246,.10),transparent_28%)]" />
+    <div className="absolute inset-0 opacity-[.035]" style={{ backgroundImage: "linear-gradient(#0f172a 1px,transparent 1px),linear-gradient(90deg,#0f172a 1px,transparent 1px)", backgroundSize: "40px 40px" }}/>
+    <Container>
+      <div className="relative grid items-center gap-8 lg:grid-cols-[1fr_.92fr] lg:gap-14">
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .55 }}><HeroContent productCount={products.length} categoryCount={categoryCount}/></motion.div>
+        <motion.div initial={{ opacity: 0, scale: .96, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: .65, delay: .1 }}><HeroImage products={products}/></motion.div>
       </div>
-
-      {/* Decorative Gradient */}
-      <div className="absolute inset-x-0 top-0 h-60 bg-gradient-to-b from-red-50/70 to-transparent" />
-
-      <Container>
-        <div className="relative z-10 grid min-h-screen items-center gap-20 py-24 lg:grid-cols-2">
-          {/* Left */}
-          <motion.div
-            initial={{
-              opacity: 0,
-              x: -60,
-            }}
-            whileInView={{
-              opacity: 1,
-              x: 0,
-            }}
-            viewport={{ once: true }}
-            transition={{
-              duration: 0.8,
-              ease: "easeOut",
-            }}
-          >
-            <HeroContent />
-          </motion.div>
-
-          {/* Right */}
-          <motion.div
-            initial={{
-              opacity: 0,
-              x: 60,
-              scale: 0.95,
-            }}
-            whileInView={{
-              opacity: 1,
-              x: 0,
-              scale: 1,
-            }}
-            viewport={{ once: true }}
-            transition={{
-              duration: 0.9,
-              ease: "easeOut",
-            }}
-            className="relative flex items-center justify-center"
-          >
-            <HeroImage />
-          </motion.div>
-        </div>
-      </Container>
-
-      {/* Bottom Fade */}
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent" />
-    </section>
-  );
+    </Container>
+  </section>;
 }

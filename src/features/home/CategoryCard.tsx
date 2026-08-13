@@ -2,79 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { ArrowUpLeft } from "lucide-react";
+import type { Category } from "@/src/types/category";
 
-import { Category } from "@/src/types/category";
-
-interface Props {
-  category: Category;
-}
-
-export default function CategoryCard({ category }: Props) {
-  return (
-    <Link href={`/products/category/${category.slug}`}>
-      <motion.article
-        whileHover={{
-          y: -8,
-          scale: 1.04,
-        }}
-        whileTap={{
-          scale: 0.97,
-        }}
-        transition={{
-          duration: 0.25,
-        }}
-        className="
-          group
-          rounded-3xl
-          border
-          border-gray-200
-          bg-white
-          p-6
-          shadow-sm
-          transition-all
-          hover:border-red-200
-          hover:shadow-xl
-        "
-      >
-        <div className="flex flex-col items-center">
-          <div
-            className="
-              relative
-              flex
-              h-24
-              w-24
-              items-center
-              justify-center
-              rounded-full
-              bg-gray-100
-              transition-all
-              group-hover:bg-red-50
-            "
-          >
-            <Image
-              src={category.image}
-              alt={category.title}
-              width={60}
-              height={60}
-              className="object-contain"
-            />
-          </div>
-
-          <h3
-            className="
-              mt-5
-              text-lg
-              font-bold
-              text-gray-800
-              transition-colors
-              group-hover:text-red-500
-            "
-          >
-            {category.title}
-          </h3>
-        </div>
-      </motion.article>
-    </Link>
-  );
+export default function CategoryCard({ category }: { category: Category }) {
+  const href = `/products/category/${encodeURIComponent(category.slug.replace(/^\/+|\/+$/g, ""))}`;
+  return <Link href={href} className="group w-[8.75rem] shrink-0 snap-start sm:w-auto"><article className="h-full rounded-2xl border border-slate-200/80 bg-white p-2.5 shadow-sm transition active:scale-[.98] sm:rounded-3xl sm:p-3 sm:hover:-translate-y-1 sm:hover:border-red-200 sm:hover:shadow-xl"><div className="relative aspect-square overflow-hidden rounded-xl bg-gradient-to-br from-slate-50 to-red-50/70 sm:rounded-2xl"><Image src={category.image} alt={category.title} fill sizes="(max-width:640px) 130px, 16vw" className="object-contain p-4 transition duration-300 sm:group-hover:scale-105"/></div><div className="flex items-center justify-between gap-1 px-1 pb-1 pt-3"><h3 className="truncate text-sm font-black text-slate-800">{category.title}</h3><ArrowUpLeft size={15} className="shrink-0 text-slate-300 transition group-hover:text-red-500"/></div></article></Link>;
 }

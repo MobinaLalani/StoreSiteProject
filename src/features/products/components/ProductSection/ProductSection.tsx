@@ -26,7 +26,7 @@ export default function ProductSection({
   return (
     <>
       <Container>
-        <section className="mx-0 py-12 sm:mx-6 sm:py-16 lg:mx-10 lg:py-20" aria-label={title}>
+        <section className="mx-0 py-10 sm:mx-2 sm:py-16 lg:mx-6 lg:py-20" aria-label={title}>
           <ProductSectionHeader title={title} description={description} />
 
           <ProductGrid products={products} />
