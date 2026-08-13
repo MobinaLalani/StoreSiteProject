@@ -1,42 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { Bell, ExternalLink, Search, UserCircle2 } from "lucide-react";
+import { ExternalLink, UserCircle2 } from "lucide-react";
 
 export default function Header() {
   return (
-    <header className="flex h-20 items-center justify-between border-b bg-white px-8">
+    <header className="flex min-h-16 items-center justify-between gap-3 border-b bg-white px-3 py-2 sm:px-5 md:h-20 md:px-8">
       <div>
-        <h2 className="text-2xl font-bold">داشبورد</h2>
+        <h2 className="text-lg font-black sm:text-xl md:text-2xl">مدیریت فروشگاه</h2>
 
-        <p className="text-sm text-gray-500">خوش آمدید</p>
+        <p className="hidden text-sm text-gray-500 sm:block">مدیریت اطلاعات فروشگاه</p>
       </div>
 
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-2 md:gap-5">
         <Link
           href="/"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex min-h-11 items-center gap-2 rounded-xl bg-red-500 px-4 font-semibold text-white transition hover:bg-red-600"
+          className="flex min-h-11 items-center gap-2 rounded-xl bg-red-500 px-3 font-semibold text-white transition hover:bg-red-600 md:px-4"
         >
           <ExternalLink size={18} />
-          <span>بازگشت به فروشگاه</span>
+          <span className="hidden sm:inline">بازگشت به فروشگاه</span>
         </Link>
 
-        <div className="relative">
-          <Search className="absolute right-3 top-3 text-gray-400" size={18} />
-
-          <input
-            placeholder="جستجو..."
-            className="rounded-xl border py-2 pr-10 pl-4 outline-none focus:border-red-500"
-          />
-        </div>
-
-        <button className="rounded-full bg-gray-100 p-3 hover:bg-gray-200">
-          <Bell size={20} />
-        </button>
-
-        <button className="flex items-center gap-2">
+        <div className="hidden items-center gap-2 md:flex">
           <UserCircle2 size={40} />
 
           <div className="text-right">
@@ -44,7 +31,7 @@ export default function Header() {
 
             <span className="text-xs text-gray-500">Administrator</span>
           </div>
-        </button>
+        </div>
       </div>
     </header>
   );

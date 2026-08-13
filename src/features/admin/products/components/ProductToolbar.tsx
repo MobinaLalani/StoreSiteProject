@@ -22,17 +22,15 @@ export default function ProductToolbar({
   return (
     <div
       className="
-        mb-6
+        mb-4
         flex
         flex-col
         gap-4
         rounded-2xl
         bg-white
-        p-5
+        p-3
         shadow-sm
-        md:flex-row
-        md:items-center
-        md:justify-between
+        sm:p-4 md:flex-row md:items-center md:justify-between
       "
     >
       <SearchInput
@@ -49,12 +47,12 @@ export default function ProductToolbar({
           justify-center
           gap-2
           rounded-xl
-          bg-blue-600
+          min-h-12 w-full bg-red-600
           px-5
           py-3
           text-white
           transition
-          hover:bg-blue-700
+          hover:bg-red-700 md:w-auto
         "
       >
         <Plus size={18} />

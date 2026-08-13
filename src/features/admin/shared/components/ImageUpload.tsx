@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import Image from "next/image";
 
-import { Upload, X } from "lucide-react";
+import { ImagePlus, Loader2, X } from "lucide-react";
 
 interface ImageUploadProps {
   value?: string | string[];
@@ -78,25 +78,26 @@ export default function ImageUpload({
           cursor-pointer
           items-center
           justify-center
-          gap-2
+          min-h-28 flex-col gap-2
           rounded-xl
           border-2
           border-dashed
           border-gray-300
-          p-6
+          p-4
           transition
-          hover:bg-gray-50
+          active:scale-[.99] sm:min-h-32 sm:p-6 sm:hover:bg-gray-50
         "
       >
-        <Upload size={20} />
-
-        {loading ? "در حال آپلود..." : "انتخاب تصویر"}
+        {loading ? <Loader2 size={24} className="animate-spin text-red-500" /> : <ImagePlus size={26} className="text-red-500" />}
+        <span className="text-sm font-bold text-slate-700">{loading ? "در حال آپلود..." : multiple ? "انتخاب تصاویر گالری" : "انتخاب تصویر اصلی"}</span>
+        {!loading && <span className="text-xs text-slate-400">برای انتخاب لمس کنید</span>}
 
         <input
           type="file"
           hidden
           multiple={multiple}
           accept="image/*"
+          disabled={loading}
           onChange={(e) => {
             if (e.target.files) {
               uploadFiles(e.target.files);
@@ -108,9 +109,7 @@ export default function ImageUpload({
       {images.length > 0 && (
         <div
           className="
-              flex
-              flex-wrap
-              gap-3
+              grid grid-cols-3 gap-2 sm:grid-cols-5 sm:gap-3
             "
         >
           {images.map((image) => (
@@ -118,8 +117,7 @@ export default function ImageUpload({
               key={image}
               className="
                       relative
-                      h-24
-                      w-24
+                      aspect-square w-full
                     "
             >
               <Image
@@ -138,11 +136,9 @@ export default function ImageUpload({
                 onClick={() => removeImage(image)}
                 className="
                         absolute
-                        -right-2
-                        -top-2
+                        right-1 top-1 grid h-8 w-8 place-items-center
                         rounded-full
                         bg-red-600
-                        p-1
                         text-white
                       "
               >

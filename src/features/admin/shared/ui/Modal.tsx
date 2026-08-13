@@ -70,7 +70,7 @@ export default function Modal({
             className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm"
           />
 
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-5">
+          <div className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-5">
             <motion.div
               initial={{
                 opacity: 0,
@@ -95,7 +95,8 @@ export default function Modal({
                 w-full
                 ${width[size]}
                 overflow-hidden
-                rounded-2xl
+                rounded-t-3xl
+                sm:rounded-2xl
                 bg-white
                 shadow-2xl
               `}
@@ -113,7 +114,7 @@ export default function Modal({
                 </div>
               )}
 
-              <div className="hide-scrollbar max-h-[70vh] overflow-y-auto p-6">{children}</div>
+              <div className="hide-scrollbar max-h-[82dvh] overflow-y-auto bg-slate-50 p-3 sm:max-h-[75vh] sm:p-6">{children}</div>
 
               {footer && (
                 <div className="border-t bg-gray-50 px-6 py-4">{footer}</div>

@@ -49,7 +49,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-72 border-l border-gray-200 bg-white">
+    <><aside className="hidden w-72 shrink-0 border-l border-gray-200 bg-white md:block">
       <div className="border-b p-6">
         <h1 className="text-2xl font-bold">Store Admin</h1>
       </div>
@@ -81,5 +81,7 @@ export default function Sidebar() {
         })}
       </nav>
     </aside>
+    <nav aria-label="ناوبری مدیریت" className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_30px_rgba(15,23,42,.1)] backdrop-blur-xl md:hidden"><div className="flex h-16 items-stretch overflow-x-auto px-1">{menu.slice(0, 5).map((item) => { const Icon = item.icon; const active = pathname === item.href; return <Link key={item.href} href={item.href} className={`flex min-w-[4.5rem] flex-1 flex-col items-center justify-center gap-1 px-1 text-[10px] font-bold ${active ? "text-red-600" : "text-slate-500"}`}><Icon size={20}/><span className="max-w-full truncate">{item.title.replace("کتگوری محصولات", "دسته‌ها").replace("درخواست‌های تماس", "درخواست‌ها")}</span></Link>; })}</div></nav>
+    </>
   );
 }

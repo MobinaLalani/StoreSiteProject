@@ -150,7 +150,10 @@ export default function ProductForm({
   }
 
   return (
-    <form onSubmit={handleSubmit(submitHandler)} className="space-y-6">
+    <form onSubmit={handleSubmit(submitHandler)} className="space-y-5">
+      <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+        <div className="mb-5"><h3 className="font-black text-slate-900">اطلاعات اصلی</h3><p className="mt-1 text-xs text-slate-500">مشخصات پایه و محل نمایش محصول را تعیین کنید.</p></div>
+        <div className="grid gap-5 md:grid-cols-2">
       <Input
         label="عنوان محصول"
         placeholder="مثلاً iPhone 16 Pro"
@@ -174,7 +177,11 @@ export default function ProductForm({
       />
 
       <ProductCategorySelect error={errors.categoryId?.message} {...register("categoryId")} />
+        </div>
+      </section>
 
+      <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+        <div className="mb-5"><h3 className="font-black text-slate-900">توضیحات محصول</h3><p className="mt-1 text-xs text-slate-500">اطلاعاتی که مشتری در صفحه محصول مشاهده می‌کند.</p></div>
       <Textarea
         label="توضیحات"
         rows={5}
@@ -183,7 +190,10 @@ export default function ProductForm({
         error={errors.description?.message}
         {...register("description")}
       />
+      </section>
 
+      <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+      <div className="mb-5"><h3 className="font-black text-slate-900">تصاویر و موجودی</h3><p className="mt-1 text-xs text-slate-500">تصویر اصلی، گالری و تعداد موجود را مدیریت کنید.</p></div>
       <div className="space-y-2">
         <p className="text-sm font-medium text-gray-700">تصویر اصلی محصول</p>
 
@@ -201,7 +211,7 @@ export default function ProductForm({
         )}
       </div>
 
-      <div>
+      <div className="mt-5 max-w-xs">
         <Input
           label="موجودی"
           type="number"
@@ -209,8 +219,9 @@ export default function ProductForm({
           {...register("stock")}
         />
       </div>
+      </section>
 
-      <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
+      <section className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-sm font-bold text-gray-800">امتیاز محصول</p>
@@ -259,9 +270,9 @@ export default function ProductForm({
         {errors.rating && (
           <p className="mt-3 text-sm text-red-500">{errors.rating.message}</p>
         )}
-      </div>
+      </section>
 
-      <div className="space-y-2">
+      <section className="space-y-2 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
         <div>
           <p className="text-sm font-medium text-gray-700">گالری تصاویر محصول</p>
           <p className="mt-1 text-xs text-gray-500">می‌توانید چند تصویر را هم‌زمان انتخاب کنید. برای حذف هر تصویر روی علامت × بزنید.</p>
@@ -281,17 +292,13 @@ export default function ProductForm({
         {errors.images && (
           <p className="text-sm text-red-500">{errors.images.message}</p>
         )}
-      </div>
+      </section>
 
-      <div className="flex items-center gap-3">
-        <input type="checkbox" {...register("isFeatured")} />
+      <label className="flex cursor-pointer items-center justify-between rounded-2xl border border-slate-200 bg-white p-4"><span><strong className="block text-sm text-slate-800">محصول ویژه</strong><small className="mt-1 block text-xs text-slate-500">محصول با نشان پیشنهاد ویژه نمایش داده شود.</small></span><input type="checkbox" className="h-5 w-5 accent-red-600" {...register("isFeatured")} /></label>
 
-        <span>محصول ویژه</span>
-      </div>
-
-      <div className="flex justify-end border-t pt-5">
+      <div className="sticky bottom-0 flex flex-col-reverse gap-3 rounded-2xl border border-slate-200 bg-white/95 p-3 shadow-[0_-8px_30px_rgba(15,23,42,.08)] backdrop-blur sm:flex-row sm:items-center sm:justify-end">
         {submissionError && !submissionError.includes("آدرس محصول") && <p role="alert" className="ml-auto rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-600">{submissionError}</p>}
-        <Button type="submit" loading={loading}>
+        <Button type="submit" loading={loading} size="lg" className="bg-red-600 hover:bg-red-700">
           {initialValues ? "ویرایش محصول" : "افزودن محصول"}
         </Button>
       </div>

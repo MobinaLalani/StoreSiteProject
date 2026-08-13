@@ -36,19 +36,19 @@ export default function DeleteProductDialog({
         inset-0
         z-50
         flex
-        items-center
+        items-end
         justify-center
         bg-black/40
-        p-4
+        p-0 sm:items-center sm:p-4
       "
     >
       <div
         className="
           w-full
           max-w-md
-          rounded-2xl
+          rounded-t-3xl
           bg-white
-          p-6
+          p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] sm:rounded-2xl sm:p-6
           shadow-xl
         "
       >
@@ -72,7 +72,7 @@ export default function DeleteProductDialog({
           مطمئن هستید؟
         </p>
 
-        <div className="mt-8 flex gap-3">
+        <div className="mt-8 grid grid-cols-2 gap-3">
           <button
             onClick={onClose}
             className="
@@ -80,7 +80,7 @@ export default function DeleteProductDialog({
               rounded-xl
               border
               border-gray-300
-              py-3
+              min-h-12 py-3
               transition
               hover:bg-gray-100
             "
@@ -95,7 +95,7 @@ export default function DeleteProductDialog({
               flex-1
               rounded-xl
               bg-red-600
-              py-3
+              min-h-12 py-3
               text-white
               transition
               hover:bg-red-700

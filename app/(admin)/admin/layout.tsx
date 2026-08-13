@@ -13,13 +13,13 @@ interface Props {
 
 export default function AdminLayout({ children }: Props) {
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex min-h-dvh bg-slate-50">
       <Sidebar />
 
-      <div className="flex flex-1 flex-col overflow-hidden">
+      <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
         <Header />
 
-        <main className="hide-scrollbar flex-1 overflow-y-auto p-8">{children}</main>
+        <main className="hide-scrollbar flex-1 overflow-y-auto px-3 py-4 pb-24 sm:px-5 md:p-8 md:pb-8">{children}</main>
 
         <Footer />
       </div>

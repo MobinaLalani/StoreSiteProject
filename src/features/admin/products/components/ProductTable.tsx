@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, PackageOpen, Star } from "lucide-react";
 
 import DataTable, {
   Column,
@@ -160,12 +160,15 @@ export default function ProductTable({
     },
   ];
 
+  if (loading) return <div className="rounded-2xl bg-white py-16 text-center text-sm text-slate-500">در حال دریافت محصولات...</div>;
+  if (!products.length) return <div className="rounded-2xl border border-dashed border-slate-300 bg-white px-4 py-16 text-center"><PackageOpen className="mx-auto text-slate-300" size={38}/><p className="mt-3 font-bold text-slate-700">هیچ محصولی وجود ندارد</p></div>;
+
   return (
-    <DataTable<Product>
+    <><div className="grid gap-3 md:hidden">{products.map((product) => <article key={product.id} className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm"><div className="flex gap-3"><div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-slate-50"><Image src={product.thumbnail} alt={product.title} fill sizes="80px" className="object-contain p-1"/></div><div className="min-w-0 flex-1"><h3 className="line-clamp-2 font-black leading-6 text-slate-900">{product.title}</h3><p className="mt-1 truncate text-xs text-slate-400" dir="ltr">/{product.slug.replace(/^\/+/, "")}</p><div className="mt-2 flex flex-wrap gap-1.5"><span className={`rounded-lg px-2 py-1 text-[10px] font-bold ${product.stock > 0 ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-600"}`}>{product.stock > 0 ? `${product.stock.toLocaleString("fa-IR")} موجود` : "ناموجود"}</span>{product.isFeatured && <span className="inline-flex items-center gap-1 rounded-lg bg-amber-50 px-2 py-1 text-[10px] font-bold text-amber-700"><Star size={11}/>ویژه</span>}</div></div></div><div className="mt-3 grid grid-cols-2 gap-2 border-t border-slate-100 pt-3"><button onClick={() => onEdit(product)} className="flex min-h-11 items-center justify-center gap-2 rounded-xl bg-slate-100 text-sm font-bold text-slate-700"><Pencil size={16}/>ویرایش</button><button onClick={() => onDelete(product)} className="flex min-h-11 items-center justify-center gap-2 rounded-xl bg-red-50 text-sm font-bold text-red-600"><Trash2 size={16}/>حذف</button></div></article>)}</div><div className="hidden md:block"><DataTable<Product>
       columns={columns}
       data={products}
       loading={loading}
       emptyMessage="هیچ محصولی وجود ندارد."
-    />
+    /></div></>
   );
 }
