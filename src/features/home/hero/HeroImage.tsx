@@ -2,23 +2,22 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpLeft, PackageCheck } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowUpLeft } from "lucide-react";
 import type { Product } from "@/src/types/product";
+import { usePublicSettings } from "@/src/features/admin/settings/hooks/useSettings";
 
 export default function HeroImage({ products }: { products: Product[] }) {
-  const primary = products[0];
-  if (!primary) return <div className="aspect-square rounded-[2rem] border border-dashed border-slate-300 bg-white/60"/>;
-  const others = products.slice(1, 3);
-  const href = `/products/${encodeURIComponent(primary.slug.replace(/^\/+|\/+$/g, ""))}`;
-  return <div className="relative mx-auto max-w-[34rem]">
-    <div className="absolute inset-8 rounded-full bg-red-200/60 blur-3xl"/>
-    <div className="relative overflow-hidden rounded-[2rem] border border-white/80 bg-white/85 p-3 shadow-[0_30px_80px_rgba(15,23,42,.14)] backdrop-blur-xl sm:rounded-[2.5rem] sm:p-5">
-      <div className="relative aspect-[1.05/1] overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-slate-50 via-white to-red-50 sm:rounded-[2rem]">
-        <Image src={primary.thumbnail} alt={primary.title} fill preload sizes="(max-width: 1024px) 92vw, 44vw" className="object-contain p-7 sm:p-10"/>
-        {primary.isFeatured && <span className="absolute right-3 top-3 rounded-full bg-red-500 px-3 py-1.5 text-[11px] font-black text-white shadow-lg">پیشنهاد ویژه</span>}
-      </div>
-      <div className="flex items-center gap-3 px-1 pb-1 pt-4"><div className="min-w-0 flex-1"><p className="text-xs font-bold text-red-500">جدیدترین انتخاب</p><h2 className="mt-1 truncate text-base font-black text-slate-900 sm:text-lg">{primary.title}</h2></div><Link href={href} aria-label={`مشاهده ${primary.title}`} className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-slate-950 text-white"><ArrowUpLeft size={19}/></Link></div>
-    </div>
-    {others.map((product, index) => <Link key={product.id} href={`/products/${encodeURIComponent(product.slug.replace(/^\/+|\/+$/g, ""))}`} className={`absolute bottom-20 hidden w-44 items-center gap-2 rounded-2xl border border-white bg-white/90 p-2.5 shadow-xl backdrop-blur sm:flex ${index === 0 ? "-right-12" : "-left-10 bottom-40"}`}><span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-slate-50"><Image src={product.thumbnail} alt="" fill sizes="48px" className="object-contain p-1"/></span><span className="min-w-0"><strong className="block truncate text-xs text-slate-800">{product.title}</strong><small className="mt-1 flex items-center gap-1 text-[10px] text-emerald-600"><PackageCheck size={11}/>موجود</small></span></Link>)}
-  </div>;
+  const { data } = usePublicSettings();
+  const product = products[0];
+  const image = data?.appearance.heroImage || "/Image/hero/industrial-showcase.png";
+  const href = product ? `/products/${encodeURIComponent(product.slug.replace(/^\/+|\/+$/g, ""))}` : "/products";
+
+  return <Link href={href} className="group relative block min-h-[20rem] overflow-hidden rounded-[1.5rem] bg-[#c8bdab] sm:min-h-[28rem] sm:rounded-[2rem] lg:h-full lg:min-h-[30rem]">
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_35%,rgba(255,255,255,.45),transparent_38%),linear-gradient(135deg,rgba(255,255,255,.12),transparent_55%)]"/>
+    <div className="absolute -bottom-20 -right-16 h-64 w-64 rounded-full border-[45px] border-white/10"/>
+    <motion.div animate={{ scale: [1, 1.018, 1] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} className="absolute inset-0"><Image src={image} alt={product?.title || data?.store.name || "محصول منتخب"} fill preload sizes="(max-width:1024px) 96vw, 56vw" className="object-cover"/></motion.div>
+    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-white/5"/>
+    {product && <div className="absolute inset-x-3 bottom-3 flex items-center gap-3 rounded-2xl border border-white/40 bg-white/75 p-3 shadow-xl backdrop-blur-xl sm:inset-x-5 sm:bottom-5 sm:rounded-3xl sm:p-4"><div className="min-w-0 flex-1"><p className="text-[10px] font-bold text-slate-500">{data?.appearance.heroProductLabel || "محصول منتخب"}</p><h2 className="mt-1 truncate text-sm font-black text-slate-950 sm:text-lg">{product.title}</h2></div><span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-slate-950 text-white transition group-active:scale-95 sm:h-12 sm:w-12"><ArrowUpLeft size={19}/></span></div>}
+  </Link>;
 }
