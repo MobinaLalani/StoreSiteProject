@@ -192,5 +192,25 @@
     "status": "active",
     "createdAt": "2026-08-13T06:41:53.282Z",
     "updatedAt": "2026-08-13T06:41:53.282Z"
+  },
+  {
+    "id": 7,
+    "rating": 0,
+    "reviewCount": 0,
+    "tags": [],
+    "colors": [],
+    "specifications": [],
+    "isFeatured": false,
+    "title": "fgf",
+    "slug": "fdfgdf",
+    "shortDescription": "جدیدترین گوشی اپل",
+    "description": "xfdfgfdgdgfdg",
+    "thumbnail": "/uploads/products/efeaafeecf609468550c841e5a255d98.webp",
+    "images": [],
+    "stock": 0,
+    "categoryId": 8,
+    "status": "active",
+    "createdAt": "2026-08-14T19:19:56.949Z",
+    "updatedAt": "2026-08-14T19:19:56.949Z"
   }
 ]

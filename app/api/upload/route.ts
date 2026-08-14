@@ -3,6 +3,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/src/lib/api";
+import { productUploadPath } from "@/src/lib/upload-store";
 
 const extensions: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif" };
 export async function POST(request: NextRequest) {
@@ -13,8 +14,9 @@ export async function POST(request: NextRequest) {
   const extension = extensions[file.type];
   if (!extension) return NextResponse.json({ message: "Only JPG, PNG, WEBP and GIF images are allowed" }, { status: 422 });
   const filename = `${randomBytes(16).toString("hex")}.${extension}`;
-  const directory = path.join(process.cwd(), "public", "uploads", "products");
+  const target = productUploadPath(filename);
+  const directory = path.dirname(target);
   await mkdir(directory, { recursive: true });
-  await writeFile(path.join(directory, filename), Buffer.from(await file.arrayBuffer()));
+  await writeFile(target, Buffer.from(await file.arrayBuffer()));
   return NextResponse.json({ url: `/uploads/products/${filename}` }, { status: 201 });
 }
