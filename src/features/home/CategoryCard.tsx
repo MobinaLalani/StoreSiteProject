@@ -2,10 +2,29 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpLeft } from "lucide-react";
 import type { Category } from "@/src/types/category";
 
 export default function CategoryCard({ category }: { category: Category }) {
-  const href = `/products/category/${encodeURIComponent(category.slug.replace(/^\/+|\/+$/g, ""))}`;
-  return <Link href={href} className="group w-[8.75rem] shrink-0 snap-start sm:w-auto"><article className="h-full rounded-2xl border border-slate-200/80 bg-white p-2.5 shadow-sm transition active:scale-[.98] sm:rounded-3xl sm:p-3 sm:hover:-translate-y-1 sm:hover:border-red-200 sm:hover:shadow-xl"><div className="relative aspect-square overflow-hidden rounded-xl bg-gradient-to-br from-slate-50 to-red-50/70 sm:rounded-2xl"><Image src={category.image} alt={category.title} fill sizes="(max-width:640px) 130px, 16vw" className="object-contain p-4 transition duration-300 sm:group-hover:scale-105"/></div><div className="flex items-center justify-between gap-1 px-1 pb-1 pt-3"><h3 className="truncate text-sm font-black text-slate-800">{category.title}</h3><ArrowUpLeft size={15} className="shrink-0 text-slate-300 transition group-hover:text-red-500"/></div></article></Link>;
+  const slug = category.slug.replace(/^\/+|\/+$/g, "");
+
+  return (
+    <Link
+      href={`/products/category/${encodeURIComponent(slug)}`}
+      aria-label={`مشاهده محصولات دسته ${category.title}`}
+      className="group flex w-[4.75rem] shrink-0 flex-col items-center gap-2.5 text-center outline-none min-[390px]:w-[5.25rem] sm:w-[6.25rem] lg:w-[7rem]"
+    >
+      <span className="relative block size-[4.5rem] overflow-hidden rounded-full border border-[#7B604A]/10 bg-[#f1ece7] shadow-[0_8px_24px_-16px_rgba(73,56,43,0.55)] transition duration-300 group-active:scale-95 group-hover:-translate-y-1 group-hover:border-[#7B604A]/30 group-hover:shadow-[0_14px_30px_-15px_rgba(73,56,43,0.55)] group-focus-visible:ring-2 group-focus-visible:ring-[#7B604A] group-focus-visible:ring-offset-3 min-[390px]:size-20 sm:size-24 lg:size-[6.5rem]">
+        <Image
+          src={category.image}
+          alt={category.title}
+          fill
+          sizes="(max-width: 640px) 80px, 104px"
+          className="object-cover transition duration-500 group-hover:scale-105"
+        />
+      </span>
+      <span className="line-clamp-1 w-full text-[11px] font-black text-[#49382b] sm:text-xs lg:text-sm">
+        {category.title}
+      </span>
+    </Link>
+  );
 }

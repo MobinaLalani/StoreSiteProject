@@ -8,12 +8,31 @@ import { usePublicSettings } from "@/src/features/admin/settings/hooks/useSettin
 import type { Product } from "@/src/types/product";
 import type { Category } from "@/src/types/category";
 
-export default function HomeContent({ products, categories }: { products: Product[]; categories: Category[] }) {
+export default function HomeContent({
+  products,
+  categories,
+}: {
+  products: Product[];
+  categories: Category[];
+}) {
   const { data } = usePublicSettings();
-  return <div className="overflow-hidden bg-slate-50">
-    <Hero products={products} categoryCount={categories.length} />
-    {data?.appearance.showCategories !== false && <Categories categories={categories} />}
-    {data?.appearance.showFeaturedProducts !== false && <div className="relative bg-white"><div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-slate-50 to-white"/><div className="relative"><ProductSection products={products} title="تازه‌ترین محصولات" description="جدیدترین محصولات اضافه‌شده به فروشگاه" /></div></div>}
-    <HomeCallToAction />
-  </div>;
+
+  return (
+    <div className="overflow-hidden bg-[#e9e7e2]">
+      <Hero products={products} categoryCount={categories.length} />
+      {data?.appearance.showCategories !== false && (
+        <Categories categories={categories} />
+      )}
+      {data?.appearance.showFeaturedProducts !== false && (
+        <div className="relative bg-[#e9e7e2]">
+          <ProductSection
+            products={products}
+            title="تازه‌ترین محصولات"
+            description="جدیدترین محصولات اضافه‌شده به فروشگاه"
+          />
+        </div>
+      )}
+      <HomeCallToAction />
+    </div>
+  );
 }
