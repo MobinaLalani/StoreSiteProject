@@ -16,7 +16,9 @@ export default function ProductGrid({ products }: ProductGridProps) {
       whileInView="visible"
       viewport={{
         once: true,
-        amount: 0.2,
+        // On mobile the one-column grid can be much taller than the viewport,
+        // so waiting for 20% of the whole grid keeps every card hidden.
+        amount: 0.01,
       }}
       variants={{
         hidden: {},
