@@ -5,15 +5,10 @@ import ReactQueryProvider from "@/src/providers/ReactQueryProvider";
 
 export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
-
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
-  },
-
-  verification: {
-    google: "mR-wwsjNPHLqyfRj4xjqcLPpzA4yaCEQtGcjlURdOuw",
   },
 };
 
@@ -30,6 +25,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fa" dir="rtl">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="mR-wwsjNPHLqyfRj4xjqcLPpzA4yaCEQtGcjlURdOuw"
+        />
+      </head>
+
       <body suppressHydrationWarning className="antialiased">
         <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
