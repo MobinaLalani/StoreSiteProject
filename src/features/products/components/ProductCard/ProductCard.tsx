@@ -6,7 +6,8 @@ import { ArrowUpLeft, PackageCheck, PackageX } from "lucide-react";
 import type { Product } from "@/src/types/product";
 import ProductImage from "./ProductImage";
 import ProductRating from "./ProductRating";
-import ProductActions from "./ProductActions";
+import AddToCartButton from "@/src/features/cart/AddToCartButton";
+import { effectivePrice, formatToman } from "@/src/lib/money";
 
 export default function ProductCard({ product }: { product: Product }) {
   const href = `/products/${encodeURIComponent(product.slug.replace(/^\/+|\/+$/g, ""))}`;
@@ -33,11 +34,12 @@ export default function ProductCard({ product }: { product: Product }) {
         {product.tags.length > 0 && <div className="mt-3 flex min-h-7 flex-wrap gap-1.5 overflow-hidden">{product.tags.slice(0, 2).map((tag) => <span key={tag} className="max-w-28 truncate rounded-lg bg-slate-50 px-2 py-1 text-[10px] font-semibold text-slate-500">{tag}</span>)}</div>}
 
         <div className="mt-auto pt-4">
+          <div className="mb-3 text-left"><strong className="text-lg text-red-600">{effectivePrice(product) > 0 ? formatToman(effectivePrice(product)) : "قیمت ثبت نشده"}</strong></div>
           <div className="mb-3 flex items-center justify-between border-t border-slate-100 pt-3">
             <span className="text-xs text-slate-400">{available ? `${product.stock.toLocaleString("fa-IR")} عدد موجود` : "برای موجودی تماس بگیرید"}</span>
             <Link href={href} aria-label={`مشاهده ${product.title}`} className="inline-flex items-center gap-1 text-xs font-bold text-slate-600 transition hover:text-red-600">جزئیات <ArrowUpLeft size={15} /></Link>
           </div>
-          <ProductActions productId={product.id} productTitle={product.title} />
+          <AddToCartButton product={product} compact />
         </div>
       </div>
     </motion.article>

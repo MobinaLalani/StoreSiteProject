@@ -30,6 +30,12 @@ export interface Product {
 
   stock: number;
 
+  /** Price in toman. */
+  price?: number;
+
+  /** Optional sale price in toman. */
+  salePrice?: number | null;
+
   categoryId: number;
 
   tags: string[];

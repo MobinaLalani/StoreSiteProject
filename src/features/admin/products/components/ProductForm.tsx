@@ -78,6 +78,10 @@ export default function ProductForm({
 
       stock: 0,
 
+      price: 0,
+
+      salePrice: null,
+
       categoryId: 0,
 
       tags: [],
@@ -116,6 +120,10 @@ export default function ProductForm({
       reviewCount: initialValues?.reviewCount ?? 0,
 
       stock: initialValues?.stock ?? 0,
+
+      price: initialValues?.price ?? 0,
+
+      salePrice: initialValues?.salePrice ?? null,
 
       categoryId: initialValues?.categoryId ?? 0,
 
@@ -211,13 +219,15 @@ export default function ProductForm({
         )}
       </div>
 
-      <div className="mt-5 max-w-xs">
+      <div className="mt-5 grid gap-4 sm:grid-cols-3">
         <Input
           label="موجودی"
           type="number"
           error={errors.stock?.message}
           {...register("stock")}
         />
+        <Input label="قیمت (تومان)" type="number" min="0" error={errors.price?.message} {...register("price")} />
+        <Input label="قیمت فروش ویژه (اختیاری)" type="number" min="0" error={errors.salePrice?.message} {...register("salePrice")} />
       </div>
       </section>
 

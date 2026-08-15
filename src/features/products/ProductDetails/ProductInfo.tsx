@@ -6,6 +6,8 @@ import { Star, CheckCircle2, Truck, ShieldCheck } from "lucide-react";
 import { Product } from "@/src/types/product";
 
 import ProductActions from "./ProductActions";
+import AddToCartButton from "@/src/features/cart/AddToCartButton";
+import { effectivePrice, formatToman } from "@/src/lib/money";
 
 interface ProductInfoProps {
   product: Product;
@@ -27,6 +29,8 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       {/* Short Description */}
 
       <p className="leading-8 text-gray-500">{product.shortDescription}</p>
+
+      <div className="rounded-2xl bg-slate-50 p-4"><strong className="text-2xl text-red-600">{effectivePrice(product) > 0 ? formatToman(effectivePrice(product)) : "برای قیمت تماس بگیرید"}</strong>{product.salePrice != null && product.salePrice < Number(product.price) && <del className="mr-3 text-sm text-slate-400">{formatToman(Number(product.price))}</del>}</div>
 
       {/* Rating */}
 
@@ -82,7 +86,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Actions */}
 
-      <ProductActions productId={product.id} productTitle={product.title} />
+      <div className="grid gap-3 sm:grid-cols-2"><AddToCartButton product={product} /><ProductActions productId={product.id} productTitle={product.title} /></div>
 
       {/* Services */}
 

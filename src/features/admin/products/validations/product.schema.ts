@@ -19,6 +19,10 @@ export const productSchema = z.object({
 
   stock: z.coerce.number().min(0),
 
+  price: z.coerce.number().min(0, "قیمت نمی‌تواند منفی باشد."),
+
+  salePrice: z.preprocess((value) => value === "" || value === undefined ? null : value, z.coerce.number().min(0).nullable()),
+
   categoryId: z.coerce.number().int("دسته‌بندی نامعتبر است.").positive("انتخاب دسته‌بندی الزامی است."),
 
   tags: z.array(z.string()),
