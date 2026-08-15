@@ -4,12 +4,14 @@ import { motion } from "framer-motion";
 
 import ProductCard from "../ProductCard";
 import { Product } from "../../../../types/product";
+import { cn } from "@/src/lib/utils";
 
 interface ProductGridProps {
   products: Product[];
+  className?: string;
 }
 
-export default function ProductGrid({ products }: ProductGridProps) {
+export default function ProductGrid({ products, className }: ProductGridProps) {
   return (
     <motion.div
       initial="hidden"
@@ -28,7 +30,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
           },
         },
       }}
-      className="
+      className={cn(`
         grid
         grid-cols-1
         gap-5
@@ -36,7 +38,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
         lg:grid-cols-3
         lg:gap-6
         xl:grid-cols-4
-      "
+      `, className)}
     >
       {products.map((product) => (
         <motion.div
