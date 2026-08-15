@@ -1,11 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ShoppingCart, User } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import Container from "../ui/Container";
 import ProductSearch from "./ProductSearch";
 import { usePublicSettings } from "@/src/features/admin/settings/hooks/useSettings";
 import { useCart } from "@/src/features/cart/CartProvider";
+import CustomerMenu from "@/src/features/customer/CustomerMenu";
 
 export default function Header() {
   const { data } = usePublicSettings(); const { count } = useCart();
@@ -15,7 +16,7 @@ export default function Header() {
       <ProductSearch />
       <div className="flex items-center gap-2 sm:gap-4">
         <Link href="/cart" className="relative grid h-10 w-10 place-items-center rounded-xl hover:bg-slate-100 sm:h-11 sm:w-11" aria-label="سبد خرید"><ShoppingCart />{count > 0 && <span className="absolute -left-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-red-600 px-1 text-[10px] font-bold text-white">{count.toLocaleString("fa-IR")}</span>}</Link>
-        <Link href="/track-order" className="grid h-10 w-10 place-items-center rounded-xl hover:bg-slate-100 sm:h-11 sm:w-11" aria-label="پیگیری سفارش"><User /></Link>
+        <CustomerMenu />
       </div>
     </div></Container>
   </motion.header>;

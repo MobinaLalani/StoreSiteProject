@@ -1,0 +1,13 @@
+"use client";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useState } from "react";
+import { AuthField as Field, AuthShell } from "@/src/features/customer/AuthUI";
+import { useCustomerActions } from "@/src/features/customer/useCustomer";
+function nextPath(value: string | null) { return value?.startsWith("/") && !value.startsWith("//") ? value : "/account"; }
+function RegisterForm() {
+  const router = useRouter(); const params = useSearchParams(); const { refresh } = useCustomerActions(); const [error, setError] = useState(""); const [loading, setLoading] = useState(false);
+  async function submit(event: React.FormEvent<HTMLFormElement>) { event.preventDefault(); const form = new FormData(event.currentTarget); if (form.get("password") !== form.get("confirmPassword")) return setError("تکرار رمز عبور یکسان نیست."); setLoading(true); setError(""); const response = await fetch("/api/customer/register", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ fullName: form.get("fullName"), mobile: form.get("mobile"), email: form.get("email"), password: form.get("password") }) }); const result = await response.json().catch(() => null); if (!response.ok) { setLoading(false); setError(result?.message || "ثبت‌نام ناموفق بود."); return; } await refresh(); router.replace(nextPath(params.get("next"))); router.refresh(); }
+  return <AuthShell title="ساخت حساب کاربری"><form onSubmit={submit} className="space-y-4"><Field name="fullName" label="نام و نام خانوادگی" autoComplete="name"/><Field name="mobile" label="شماره موبایل" inputMode="numeric" autoComplete="tel" pattern="09[0-9]{9}"/><Field name="email" label="ایمیل (اختیاری)" type="email" required={false} autoComplete="email"/><Field name="password" label="رمز عبور (حداقل ۸ کاراکتر، حرف و عدد)" type="password" minLength={8} autoComplete="new-password"/><Field name="confirmPassword" label="تکرار رمز عبور" type="password" minLength={8} autoComplete="new-password"/>{error && <p className="rounded-xl bg-red-50 p-3 text-sm text-red-600">{error}</p>}<button disabled={loading} className="min-h-12 w-full rounded-xl bg-red-600 font-bold text-white disabled:opacity-60">{loading ? "در حال ثبت‌نام..." : "ثبت‌نام"}</button></form><p className="mt-5 text-center text-sm text-slate-500">قبلاً ثبت‌نام کرده‌اید؟ <Link className="font-bold text-red-600" href={`/login?next=${encodeURIComponent(nextPath(params.get("next")))}`}>وارد شوید</Link></p></AuthShell>;
+}
+export default function RegisterPage() { return <Suspense><RegisterForm/></Suspense>; }

@@ -24,6 +24,9 @@ export const products: Product[] = [
 
     stock: 15,
 
+    price: 149900000,
+    salePrice: 139900000,
+
 
 
     categoryId: 1,
@@ -82,6 +85,9 @@ export const products: Product[] = [
 
     stock: 6,
 
+    price: 119900000,
+    salePrice: 112500000,
+
 
 
     categoryId: 2,
@@ -139,6 +145,9 @@ export const products: Product[] = [
 
     stock: 20,
 
+    price: 34800000,
+    salePrice: 31900000,
+
 
 
     categoryId: 3,
@@ -188,6 +197,9 @@ export const products: Product[] = [
     reviewCount: 74,
 
     stock: 10,
+
+    price: 62900000,
+    salePrice: 58900000,
 
 
 

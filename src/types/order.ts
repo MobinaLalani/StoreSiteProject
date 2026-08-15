@@ -22,6 +22,7 @@ export interface OrderCustomer {
 
 export interface Order {
   id: number;
+  customerId?: number;
   trackingCode: string;
   accessToken: string;
   items: OrderItem[];

@@ -47,8 +47,8 @@
     "isFeatured": true,
     "createdAt": "2026-07-26T12:00:00Z",
     "updatedAt": "2026-08-15T10:40:15.686Z",
-    "price": 15000000,
-    "salePrice": 1300000
+    "price": 149900000,
+    "salePrice": 139900000
   },
   {
     "id": 2,
@@ -63,6 +63,8 @@
     "rating": 4.9,
     "reviewCount": 103,
     "stock": 6,
+    "price": 119900000,
+    "salePrice": 112500000,
     "categoryId": 2,
     "tags": [
       "M4",
@@ -105,6 +107,8 @@
     "rating": 4.7,
     "reviewCount": 184,
     "stock": 20,
+    "price": 34800000,
+    "salePrice": 31900000,
     "categoryId": 3,
     "tags": [
       "Bluetooth",
@@ -148,6 +152,8 @@
       "/uploads/products/f840fc7aec6d967c74f39868ddf41324.png"
     ],
     "stock": 4255,
+    "price": 2500000,
+    "salePrice": null,
     "categoryId": 1,
     "createdAt": "2026-08-11T08:44:15.465Z",
     "updatedAt": "2026-08-11T08:44:15.465Z"
@@ -171,6 +177,8 @@
       "/uploads/products/db2f234ae3f98cda73352960897376b7.png"
     ],
     "stock": 12,
+    "price": 850000,
+    "salePrice": 790000,
     "categoryId": 1,
     "createdAt": "2026-08-13T06:37:26.375Z",
     "updatedAt": "2026-08-13T06:37:26.375Z"
@@ -190,6 +198,8 @@
     "thumbnail": "/uploads/products/b75c51cdc018b13d84a6a23cf8152a74.png",
     "images": [],
     "stock": 65,
+    "price": 3200000,
+    "salePrice": null,
     "categoryId": 1,
     "status": "active",
     "createdAt": "2026-08-13T06:41:53.282Z",
@@ -210,6 +220,8 @@
     "thumbnail": "/uploads/products/efeaafeecf609468550c841e5a255d98.webp",
     "images": [],
     "stock": 0,
+    "price": 1000000,
+    "salePrice": null,
     "categoryId": 8,
     "status": "active",
     "createdAt": "2026-08-14T19:19:56.949Z",

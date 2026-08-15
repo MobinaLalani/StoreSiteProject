@@ -13,6 +13,8 @@
     "rating": 4.8,
     "reviewCount": 248,
     "stock": 15,
+    "price": 149900000,
+    "salePrice": 139900000,
     "categoryId": 1,
     "tags": [
       "5G",
@@ -61,6 +63,8 @@
     "rating": 4.9,
     "reviewCount": 103,
     "stock": 6,
+    "price": 119900000,
+    "salePrice": 112500000,
     "categoryId": 2,
     "tags": [
       "M4",
@@ -103,6 +107,8 @@
     "rating": 4.7,
     "reviewCount": 184,
     "stock": 20,
+    "price": 34800000,
+    "salePrice": 31900000,
     "categoryId": 3,
     "tags": [
       "Bluetooth",

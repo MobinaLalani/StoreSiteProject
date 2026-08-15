@@ -1,0 +1,3 @@
+import type { InputHTMLAttributes, ReactNode } from "react";
+export function AuthShell({ title, children }: { title: string; children: ReactNode }) { return <main className="mx-auto flex min-h-[65vh] max-w-md items-center px-4 py-12"><section className="w-full rounded-3xl border bg-white p-6 shadow-xl sm:p-8"><h1 className="mb-6 text-2xl font-black">{title}</h1>{children}</section></main>; }
+export function AuthField({ label, ...props }: InputHTMLAttributes<HTMLInputElement> & { label: string }) { return <label><span className="mb-2 block text-sm font-bold">{label}</span><input required className="w-full rounded-xl border px-4 py-3 outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100" {...props}/></label>; }

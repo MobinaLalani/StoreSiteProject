@@ -1,5 +1,6 @@
 import { randomBytes } from "node:crypto";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { customerFromRequest } from "@/src/lib/customer-auth";
 import { checkoutSchema, freeShippingMinimum, shippingCost } from "@/src/lib/checkout";
 import { effectivePrice } from "@/src/lib/money";
 import { orderRepository } from "@/src/repositories/order.repository";
@@ -7,7 +8,9 @@ import { productRepository } from "@/src/repositories/product.repository";
 
 export const runtime = "nodejs";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
+  const customer = await customerFromRequest(request);
+  if (!customer) return NextResponse.json({ message: "برای ثبت سفارش باید وارد حساب کاربری شوید.", code: "AUTH_REQUIRED" }, { status: 401 });
   const parsed = checkoutSchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ message: "اطلاعات سفارش کامل یا معتبر نیست.", errors: parsed.error.flatten().fieldErrors }, { status: 422 });
 
@@ -26,6 +29,7 @@ export async function POST(request: Request) {
   const delivery = freeShippingMinimum > 0 && subtotal >= freeShippingMinimum ? 0 : shippingCost;
   const authority = randomBytes(18).toString("hex");
   const order = await orderRepository.create({
+    customerId: customer.id,
     items,
     customer: parsed.data.customer,
     subtotal,
