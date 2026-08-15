@@ -5,10 +5,23 @@ import ReactQueryProvider from "@/src/providers/ReactQueryProvider";
 
 export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
-  formatDetection: { email: false, address: false, telephone: false },
+
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+
+  verification: {
+    google: "mR-wwsjNPHLqyfRj4xjqcLPpzA4yaCEQtGcjlURdOuw",
+  },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#ef4444" };
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#ef4444",
+};
 
 export default function RootLayout({
   children,
