@@ -48,6 +48,9 @@ export interface Product {
 
   isFeatured: boolean;
 
+  /** Whether direct wholesale contact details should be shown on this product. */
+  isWholesaleAvailable?: boolean;
+
   createdAt: string;
 
   updatedAt: string;

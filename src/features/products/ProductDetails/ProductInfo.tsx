@@ -1,19 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star, CheckCircle2, Truck, ShieldCheck } from "lucide-react";
+import { Star, CheckCircle2, Truck, ShieldCheck, Building2, MessageCircle, PhoneCall } from "lucide-react";
 
 import { Product } from "@/src/types/product";
 
 import ProductActions from "./ProductActions";
 import AddToCartButton from "@/src/features/cart/AddToCartButton";
 import { effectivePrice, formatToman } from "@/src/lib/money";
+import { usePublicSettings } from "@/src/features/admin/settings/hooks/useSettings";
 
 interface ProductInfoProps {
   product: Product;
 }
 
 export default function ProductInfo({ product }: ProductInfoProps) {
+  const { data: settings } = usePublicSettings();
+  const landline = settings?.store.landline || "";
+  const mobile = settings?.store.mobile || "";
+  const whatsapp = settings?.store.whatsapp || "";
+  const whatsappMessage = `سلام، برای خرید عمده محصول «${product.title}» پیام می‌دهم.`;
+
   return (
     <div className="flex flex-col space-y-8">
       {/* Title */}
@@ -87,6 +94,23 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       {/* Actions */}
 
       <div className="grid gap-3 sm:grid-cols-2"><AddToCartButton product={product} /><ProductActions productId={product.id} productTitle={product.title} /></div>
+
+      {product.isWholesaleAvailable && (
+        <section className="rounded-3xl border border-amber-200 bg-amber-50 p-5" aria-label="خرید عمده">
+          <div className="flex items-start gap-3">
+            <span className="rounded-xl bg-amber-200 p-2 text-amber-900"><Building2 size={22} /></span>
+            <div>
+              <h2 className="font-black text-amber-950">امکان خرید عمده</h2>
+              <p className="mt-1 text-sm leading-6 text-amber-900">برای دریافت قیمت همکاری و شرایط خرید عمده، مستقیم با ما در تماس باشید.</p>
+            </div>
+          </div>
+          <div className="mt-4 grid gap-2 sm:grid-cols-2">
+            {settings?.inquiry.phoneEnabled !== false && landline && <a href={`tel:${landline.replace(/[^\d+]/g, "")}`} className="flex items-center justify-center gap-2 rounded-xl bg-white px-3 py-3 font-bold text-slate-800 shadow-sm"><PhoneCall size={18} className="text-amber-700" /><span dir="ltr">{landline}</span></a>}
+            {settings?.inquiry.phoneEnabled !== false && mobile && <a href={`tel:${mobile.replace(/[^\d+]/g, "")}`} className="flex items-center justify-center gap-2 rounded-xl bg-white px-3 py-3 font-bold text-slate-800 shadow-sm"><PhoneCall size={18} className="text-amber-700" /><span dir="ltr">{mobile}</span></a>}
+            {settings?.inquiry.whatsappEnabled !== false && whatsapp && <a href={`https://wa.me/${whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(whatsappMessage)}`} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-3 py-3 font-bold text-white sm:col-span-2"><MessageCircle size={18} />درخواست خرید عمده در واتساپ</a>}
+          </div>
+        </section>
+      )}
 
       {/* Services */}
 

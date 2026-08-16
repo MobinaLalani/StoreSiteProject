@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Star } from "lucide-react";
+import { Plus, Star, X } from "lucide-react";
 
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -46,6 +46,8 @@ export default function ProductForm({
     handleSubmit,
 
     reset,
+
+    control,
 
     watch,
 
@@ -93,6 +95,8 @@ export default function ProductForm({
       status: "active",
 
       isFeatured: false,
+
+      isWholesaleAvailable: false,
     },
   });
 
@@ -100,6 +104,7 @@ export default function ProductForm({
   const images = watch("images") ?? [];
   const rating = Number(watch("rating") ?? 0);
   const [hoveredRating, setHoveredRating] = useState(0);
+  const { fields: specificationFields, append: appendSpecification, remove: removeSpecification } = useFieldArray({ control, name: "specifications" });
 
   useEffect(() => {
     reset({
@@ -136,21 +141,13 @@ export default function ProductForm({
       status: initialValues?.status ?? "active",
 
       isFeatured: initialValues?.isFeatured ?? false,
+
+      isWholesaleAvailable: initialValues?.isWholesaleAvailable ?? false,
     });
   }, [initialValues, reset]);
 
   async function submitHandler(data: ProductFormValues) {
-    await onSubmit({
-      ...data,
-
-      tags: initialValues?.tags ?? [],
-
-      colors: initialValues?.colors ?? [],
-
-      specifications: initialValues?.specifications ?? [],
-
-      reviewCount: initialValues?.reviewCount ?? 0,
-    });
+    await onSubmit(data);
 
     if (!initialValues) {
       reset();
@@ -189,15 +186,39 @@ export default function ProductForm({
       </section>
 
       <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
-        <div className="mb-5"><h3 className="font-black text-slate-900">توضیحات محصول</h3><p className="mt-1 text-xs text-slate-500">اطلاعاتی که مشتری در صفحه محصول مشاهده می‌کند.</p></div>
+        <div className="mb-5"><h3 className="font-black text-slate-900">معرفی محصول</h3><p className="mt-1 text-xs text-slate-500">این متن در بخش «معرفی محصول» صفحه جزئیات نمایش داده می‌شود.</p></div>
       <Textarea
-        label="توضیحات"
+        label="متن معرفی محصول"
         rows={5}
         showCount
         maxLength={1000}
         error={errors.description?.message}
         {...register("description")}
       />
+      </section>
+
+      <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+        <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <h3 className="font-black text-slate-900">مشخصات فنی</h3>
+            <p className="mt-1 text-xs text-slate-500">هر مورد در جدول مشخصات فنی صفحه محصول نمایش داده می‌شود.</p>
+          </div>
+          <button type="button" onClick={() => appendSpecification({ title: "", value: "" })} className="inline-flex min-h-10 items-center gap-2 rounded-xl bg-slate-900 px-4 text-sm font-bold text-white">
+            <Plus size={17} />افزودن مشخصه
+          </button>
+        </div>
+        <div className="space-y-3">
+          {specificationFields.length === 0 && <p className="rounded-xl border border-dashed border-slate-300 p-4 text-sm text-slate-500">هنوز مشخصه‌ای ثبت نشده است.</p>}
+          {specificationFields.map((field, index) => (
+            <div key={field.id} className="grid gap-3 rounded-xl bg-slate-50 p-3 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
+              <Input label="عنوان مشخصه" placeholder="مثلاً جنس بدنه" {...register(`specifications.${index}.title`)} />
+              <Input label="مقدار" placeholder="مثلاً آلومینیوم" {...register(`specifications.${index}.value`)} />
+              <button type="button" onClick={() => removeSpecification(index)} aria-label="حذف مشخصه" className="flex min-h-11 items-center justify-center rounded-xl bg-red-50 px-3 text-red-600 hover:bg-red-100">
+                <X size={18} />
+              </button>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
@@ -304,7 +325,10 @@ export default function ProductForm({
         )}
       </section>
 
-      <label className="flex cursor-pointer items-center justify-between rounded-2xl border border-slate-200 bg-white p-4"><span><strong className="block text-sm text-slate-800">محصول ویژه</strong><small className="mt-1 block text-xs text-slate-500">محصول با نشان پیشنهاد ویژه نمایش داده شود.</small></span><input type="checkbox" className="h-5 w-5 accent-red-600" {...register("isFeatured")} /></label>
+      <div className="grid gap-4 md:grid-cols-2">
+        <label className="flex cursor-pointer items-center justify-between rounded-2xl border border-slate-200 bg-white p-4"><span><strong className="block text-sm text-slate-800">محصول ویژه</strong><small className="mt-1 block text-xs text-slate-500">محصول با نشان پیشنهاد ویژه نمایش داده شود.</small></span><input type="checkbox" className="h-5 w-5 accent-red-600" {...register("isFeatured")} /></label>
+        <label className="flex cursor-pointer items-center justify-between rounded-2xl border border-amber-200 bg-amber-50 p-4"><span><strong className="block text-sm text-amber-950">فروش عمده دارد</strong><small className="mt-1 block text-xs text-amber-800">اطلاعات تماس عمده‌فروشی در صفحه این محصول نمایش داده شود.</small></span><input type="checkbox" className="h-5 w-5 accent-amber-600" {...register("isWholesaleAvailable")} /></label>
+      </div>
 
       <div className="sticky bottom-0 flex flex-col-reverse gap-3 rounded-2xl border border-slate-200 bg-white/95 p-3 shadow-[0_-8px_30px_rgba(15,23,42,.08)] backdrop-blur sm:flex-row sm:items-center sm:justify-end">
         {submissionError && !submissionError.includes("آدرس محصول") && <p role="alert" className="ml-auto rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-600">{submissionError}</p>}

@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
   if (typeof data.categoryId === "number" && !(await categoryRepository.getById(data.categoryId))) errors.categoryId = "دسته‌بندی انتخاب‌شده وجود ندارد.";
   if (Object.keys(errors).length) return NextResponse.json({ message: "Validation failed", errors }, { status: 422 });
   try {
-    const defaults = { rating: 0, reviewCount: 0, tags: [], colors: [], specifications: [], isFeatured: false };
+    const defaults = { rating: 0, reviewCount: 0, tags: [], colors: [], specifications: [], isFeatured: false, isWholesaleAvailable: false };
     const newProduct = { ...defaults, ...data, status: "active" as const };
     return NextResponse.json(await productRepository.create(newProduct as Omit<Product, "id" | "createdAt" | "updatedAt">), { status: 201 });
   } catch (error) {

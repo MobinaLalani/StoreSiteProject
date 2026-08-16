@@ -1,6 +1,6 @@
 import type { Product } from "@/src/types/product";
 
-const fields = ["title", "slug", "shortDescription", "description", "thumbnail", "images", "rating", "reviewCount", "stock", "price", "salePrice", "categoryId", "tags", "colors", "specifications", "status", "isFeatured"] as const;
+const fields = ["title", "slug", "shortDescription", "description", "thumbnail", "images", "rating", "reviewCount", "stock", "price", "salePrice", "categoryId", "tags", "colors", "specifications", "status", "isFeatured", "isWholesaleAvailable"] as const;
 
 export function filterProduct(body: Record<string, unknown>) {
   return Object.fromEntries(fields.filter((key) => key in body).map((key) => [key, body[key]])) as Partial<Product>;
@@ -17,5 +17,6 @@ export function validateProduct(data: Partial<Product>, creating: boolean) {
   for (const field of ["images", "tags", "colors", "specifications"] as const)
     if (field in data && !Array.isArray(data[field])) errors[field] = `${field} must be an array`;
   if (data.status && !["active", "draft", "archived"].includes(data.status)) errors.status = "Invalid status";
+  if ("isWholesaleAvailable" in data && typeof data.isWholesaleAvailable !== "boolean") errors.isWholesaleAvailable = "isWholesaleAvailable must be a boolean";
   return errors;
 }

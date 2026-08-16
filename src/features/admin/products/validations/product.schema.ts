@@ -39,6 +39,8 @@ export const productSchema = z.object({
   status: z.enum(["active", "draft", "archived"]),
 
   isFeatured: z.boolean(),
+
+  isWholesaleAvailable: z.boolean(),
 });
 
 export type ProductFormValues = z.infer<typeof productSchema>;
