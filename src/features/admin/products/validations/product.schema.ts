@@ -5,6 +5,10 @@ export const productSchema = z.object({
 
   slug: z.string().min(2, "Slug الزامی است."),
 
+  brand: z.string().trim().max(100).optional().default(""),
+
+  mpn: z.string().trim().max(100).optional().default(""),
+
   shortDescription: z.string().min(5, "توضیح کوتاه الزامی است."),
 
   description: z.string().min(10, "توضیحات الزامی است."),

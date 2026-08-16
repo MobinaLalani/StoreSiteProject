@@ -18,9 +18,9 @@ export default async function StoreLayout({ children }: Readonly<{ children: Rea
   const organization = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": absoluteUrl("/#organization", settings),
+    "@id": absoluteUrl("/home#organization", settings),
     name: settings.store.name,
-    url: absoluteUrl("/", settings),
+    url: absoluteUrl("/home", settings),
     description: settings.store.shortDescription,
     logo: settings.store.logo ? absoluteUrl(settings.store.logo, settings) : undefined,
     email: settings.store.email || undefined,

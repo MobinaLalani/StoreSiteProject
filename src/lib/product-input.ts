@@ -1,6 +1,6 @@
 import type { Product } from "@/src/types/product";
 
-const fields = ["title", "slug", "shortDescription", "description", "thumbnail", "images", "rating", "reviewCount", "stock", "price", "salePrice", "categoryId", "tags", "colors", "specifications", "status", "isFeatured", "isWholesaleAvailable"] as const;
+const fields = ["title", "slug", "brand", "mpn", "shortDescription", "description", "thumbnail", "images", "rating", "reviewCount", "stock", "price", "salePrice", "categoryId", "tags", "colors", "specifications", "status", "isFeatured", "isWholesaleAvailable"] as const;
 
 export function filterProduct(body: Record<string, unknown>) {
   return Object.fromEntries(fields.filter((key) => key in body).map((key) => [key, body[key]])) as Partial<Product>;

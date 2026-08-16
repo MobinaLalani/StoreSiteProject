@@ -4,6 +4,7 @@ import type { Metadata, Viewport } from "next";
 import ReactQueryProvider from "@/src/providers/ReactQueryProvider";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://etesalgostarr.ir"),
   manifest: "/manifest.webmanifest",
   formatDetection: {
     email: false,
@@ -25,13 +26,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fa" dir="rtl">
-      <head>
-        <meta
-          name="google-site-verification"
-          content="mR-wwsjNPHLqyfRj4xjqcLPpzA4yaCEQtGcjlURdOuw"
-        />
-      </head>
-
       <body suppressHydrationWarning className="antialiased">
         <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>

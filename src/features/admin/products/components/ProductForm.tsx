@@ -66,6 +66,10 @@ export default function ProductForm({
 
       slug: "",
 
+      brand: "",
+
+      mpn: "",
+
       shortDescription: "",
 
       description: "",
@@ -111,6 +115,10 @@ export default function ProductForm({
       title: initialValues?.title ?? "",
 
       slug: initialValues?.slug ?? "",
+
+      brand: initialValues?.brand ?? "",
+
+      mpn: initialValues?.mpn ?? "",
 
       shortDescription: initialValues?.shortDescription ?? "",
 
@@ -172,6 +180,20 @@ export default function ProductForm({
         error={errors.slug?.message || (submissionError?.includes("آدرس محصول") ? submissionError : undefined)}
         hint="این مقدار آدرس اختصاصی محصول است و نمی‌تواند تکراری باشد."
         {...register("slug")}
+      />
+
+      <Input
+        label="برند / سازنده (برای سئو)"
+        placeholder="مثلاً Bosch"
+        hint="در اطلاعات ساختاریافته محصول برای گوگل استفاده می‌شود."
+        {...register("brand")}
+      />
+
+      <Input
+        label="کد مدل یا MPN (برای سئو)"
+        placeholder="مثلاً GWS 9-115"
+        hint="کد یکتای سازنده یا مدل محصول را وارد کنید."
+        {...register("mpn")}
       />
 
       <Input

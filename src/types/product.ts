@@ -16,6 +16,12 @@ export interface Product {
 
   slug: string;
 
+  /** Manufacturer or brand name used in product structured data. */
+  brand?: string;
+
+  /** Manufacturer part number used in product structured data. */
+  mpn?: string;
+
   shortDescription: string;
 
   description: string;

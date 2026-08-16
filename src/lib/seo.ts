@@ -7,7 +7,9 @@ export const DEFAULT_SITE_URL = "http://localhost:3000";
 export function getSiteUrl(settings?: Partial<SiteSettings>) {
   const configured = settings?.seo?.siteUrl || process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL;
   try {
-    return new URL(configured.startsWith("http") ? configured : `https://${configured}`);
+    const url = new URL(configured.startsWith("http") ? configured : `https://${configured}`);
+    if (url.hostname !== "localhost" && url.protocol === "http:") url.protocol = "https:";
+    return url;
   } catch {
     return new URL(DEFAULT_SITE_URL);
   }
@@ -27,7 +29,7 @@ export function baseMetadata(settings: SiteSettings): Metadata {
   const description = cleanDescription(settings.seo.description, settings.store.shortDescription);
   const shareImage = settings.seo.shareImage
     ? absoluteUrl(settings.seo.shareImage, settings)
-    : undefined;
+    : absoluteUrl("/opengraph-image", settings);
 
   return {
     metadataBase: getSiteUrl(settings),
