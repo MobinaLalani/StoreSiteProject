@@ -9,7 +9,7 @@ const menu = [
   { title: "محصولات", href: "/admin/Products", icon: FolderTree },
   { title: "درخواست‌های تماس", href: "/admin/inquiries", icon: MessageCircle },
   { title: "سفارش‌ها", href: "/admin/orders", icon: ClipboardList },
-  { title: "تنظیمات", href: "/admin/settings", icon: Settings },
+  { title: "تنظیمات", href: "/admin/Settings", icon: Settings },
   { title: "امنیت حساب", href: "/admin/security", icon: ShieldCheck },
 ];
 export default function Sidebar() {

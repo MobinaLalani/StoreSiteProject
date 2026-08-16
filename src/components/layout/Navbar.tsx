@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronDown,
@@ -17,6 +17,7 @@ import {
   House,
   Boxes,
   UserRound,
+  LogOut,
   X,
 } from "lucide-react";
 
@@ -25,6 +26,7 @@ import Container from "../ui/Container";
 import { useCategoriesWithProducts } from "@/src/features/admin/categories/hooks/useCategoriesWithProducts";
 import { Product } from "@/src/types/product";
 import { Category } from "@/src/types/category";
+import { useCustomer, useCustomerActions } from "@/src/features/customer/useCustomer";
 
 const categoryIcons = {
   mobile: Smartphone,
@@ -40,6 +42,9 @@ export default function Navbar() {
   const [desktopOpen, setDesktopOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const { data: customer } = useCustomer();
+  const { logout } = useCustomerActions();
 
   const { data: categories = [], isLoading, isError } = useCategoriesWithProducts();
 
@@ -58,6 +63,13 @@ export default function Navbar() {
       isActive ? "text-red-500" : "text-slate-500"
     }`;
   };
+
+  async function handleLogout() {
+    await logout();
+    setMobileOpen(false);
+    router.replace("/home");
+    router.refresh();
+  }
 
   return (
     <>
@@ -188,6 +200,8 @@ export default function Navbar() {
               </motion.li>
             ))}
           </ul>
+
+          {customer && <button type="button" onClick={handleLogout} className="mr-auto inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-bold text-red-600 transition hover:bg-red-50"><LogOut size={17} />خروج</button>}
         </div>
       </Container>
     </nav>
@@ -257,6 +271,7 @@ export default function Navbar() {
           <span>دسته‌بندی</span>
         </button>
         <Link href="/admin" className={mobileItemClass("/admin")}><UserRound size={21} /><span>مدیریت</span></Link>
+        {customer && <button type="button" onClick={handleLogout} className="flex min-w-0 flex-1 flex-col items-center justify-center gap-1 py-2 text-[11px] font-medium text-red-600 transition"><LogOut size={21} /><span>خروج</span></button>}
       </div>
     </nav>
     </>
