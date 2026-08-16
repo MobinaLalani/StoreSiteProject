@@ -106,5 +106,11 @@
     "success": true,
     "ip": "::1",
     "createdAt": "2026-08-16T07:02:40.911Z"
+  },
+  {
+    "username": "admin",
+    "success": true,
+    "ip": "::1",
+    "createdAt": "2026-08-16T10:26:48.327Z"
   }
 ]

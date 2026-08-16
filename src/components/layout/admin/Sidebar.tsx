@@ -8,7 +8,7 @@ const menu = [
   { title: "دسته‌بندی محصولات", href: "/admin/Categories", icon: Package },
   { title: "محصولات", href: "/admin/Products", icon: FolderTree },
   { title: "درخواست‌های تماس", href: "/admin/inquiries", icon: MessageCircle },
-  { title: "سفارش‌ها", href: "/admin/orders", icon: ClipboardList },
+  { title: "سفارش‌ها", href: "/admin/order", icon: ClipboardList },
   { title: "تنظیمات", href: "/admin/Settings", icon: Settings },
   { title: "امنیت حساب", href: "/admin/security", icon: ShieldCheck },
 ];

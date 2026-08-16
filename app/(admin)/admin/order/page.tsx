@@ -1,0 +1,212 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import type { Order, OrderStatus } from "@/src/types/order";
+import { formatToman } from "@/src/lib/money";
+
+const labels: Record<OrderStatus, string> = {
+  pending_payment: "در انتظار پرداخت",
+  paid: "پرداخت‌شده",
+  processing: "در حال آماده‌سازی",
+  shipped: "ارسال‌شده",
+  delivered: "تحویل‌شده",
+  cancelled: "لغوشده",
+  payment_failed: "پرداخت ناموفق",
+};
+
+export default function AdminOrdersPage() {
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  async function loadOrders() {
+    try {
+      const response = await fetch("/api/admin/orders");
+
+      if (!response.ok) {
+        throw new Error("خطا در دریافت سفارش‌ها");
+      }
+
+      const data: Order[] = await response.json();
+      setOrders(data);
+    } catch (error) {
+      console.error("Failed to load orders:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+useEffect(() => {
+  let cancelled = false;
+
+  async function fetchOrders() {
+    try {
+      const response = await fetch("/api/admin/orders");
+
+      if (!response.ok) {
+        throw new Error("خطا در دریافت سفارش‌ها");
+      }
+
+      const data: Order[] = await response.json();
+
+      if (!cancelled) {
+        setOrders(data);
+        setLoading(false);
+      }
+    } catch (error) {
+      if (!cancelled) {
+        console.error("Failed to load orders:", error);
+        setLoading(false);
+      }
+    }
+  }
+
+  void fetchOrders();
+
+  return () => {
+    cancelled = true;
+  };
+}, []);
+  async function changeOrderStatus(id: number, status: OrderStatus) {
+    try {
+      const response = await fetch(`/api/admin/orders/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status }),
+      });
+
+      if (!response.ok) {
+        throw new Error("خطا در تغییر وضعیت سفارش");
+      }
+
+      await loadOrders();
+    } catch (error) {
+      console.error("Failed to change order status:", error);
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="p-6">
+        <p>در حال دریافت سفارش‌ها...</p>
+      </div>
+    );
+  }
+
+  if (!orders.length) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-2xl font-black">سفارش‌ها</h1>
+
+          <p className="mt-1 text-sm text-slate-500">
+            مشاهده پرداخت‌ها و مدیریت وضعیت ارسال
+          </p>
+        </div>
+
+        <div className="rounded-2xl border bg-white p-12 text-center text-slate-500">
+          هنوز سفارشی ثبت نشده است.
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-black">سفارش‌ها</h1>
+
+        <p className="mt-1 text-sm text-slate-500">
+          مشاهده پرداخت‌ها و مدیریت وضعیت ارسال
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        {[...orders].reverse().map((order) => (
+          <article key={order.id} className="rounded-2xl border bg-white p-5">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <strong>سفارش {order.trackingCode}</strong>
+
+                <p className="mt-1 text-sm text-slate-500">
+                  {order.customer.fullName}
+
+                  {" — "}
+
+                  <span dir="ltr">{order.customer.mobile}</span>
+                </p>
+              </div>
+
+              <div className="text-left">
+                <strong className="text-red-600">
+                  {formatToman(order.total)}
+                </strong>
+
+                <p className="mt-1 text-xs text-slate-400">
+                  {new Date(order.createdAt).toLocaleString("fa-IR")}
+                </p>
+              </div>
+            </div>
+
+            <div className="my-4 border-y py-3 text-sm text-slate-600">
+              {order.items.map((item) => (
+                <p key={item.productId}>
+                  {item.title} × {item.quantity.toLocaleString("fa-IR")}
+                </p>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <span className="rounded-full bg-slate-100 px-3 py-2 text-xs font-bold">
+                {labels[order.status]}
+              </span>
+
+              <select
+                value={order.status}
+                disabled={["pending_payment", "payment_failed"].includes(
+                  order.status,
+                )}
+                onChange={(event) =>
+                  changeOrderStatus(order.id, event.target.value as OrderStatus)
+                }
+                className="rounded-xl border px-3 py-2 text-sm"
+              >
+                <option value="paid">پرداخت‌شده</option>
+
+                <option value="processing">در حال آماده‌سازی</option>
+
+                <option value="shipped">ارسال‌شده</option>
+
+                <option value="delivered">تحویل‌شده</option>
+
+                <option value="cancelled">لغوشده</option>
+
+                {order.status === "pending_payment" && (
+                  <option value="pending_payment">در انتظار پرداخت</option>
+                )}
+
+                {order.status === "payment_failed" && (
+                  <option value="payment_failed">پرداخت ناموفق</option>
+                )}
+              </select>
+            </div>
+
+            <details className="mt-4 text-sm">
+              <summary className="cursor-pointer font-bold">
+                نشانی گیرنده
+              </summary>
+
+              <p className="mt-2 leading-7 text-slate-600">
+                {order.customer.province}، {order.customer.city}،{" "}
+                {order.customer.address}
+                {" — "}
+                کد پستی: {order.customer.postalCode}
+              </p>
+            </details>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}

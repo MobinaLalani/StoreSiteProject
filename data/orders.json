@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "trackingCode": "2026616268",
+    "accessToken": "a44a139ca1384e6ca29e25b0bbbdaf49e9152f0ee0bc1cb0",
+    "customerId": 1,
+    "items": [
+      {
+        "productId": 6,
+        "title": "این دومین تست من هستش",
+        "slug": "2iphone-16-pro",
+        "thumbnail": "/uploads/products/b75c51cdc018b13d84a6a23cf8152a74.png",
+        "unitPrice": 3200000,
+        "quantity": 1
+      }
+    ],
+    "customer": {
+      "fullName": "مبینا محمد حسینی لالانی",
+      "mobile": "09193758860",
+      "email": "mobinalalani529@gmail.com",
+      "province": "تهران",
+      "city": "تهران",
+      "address": "تهران،خیابان حبیب الله ، خیابان شهید قاسمی،پلاک 37، طبقه 4 واحد 16",
+      "postalCode": "1459995841",
+      "note": ""
+    },
+    "subtotal": 3200000,
+    "shippingCost": 0,
+    "total": 3200000,
+    "status": "paid",
+    "paymentAuthority": "b37eb5ae9faf1801725406c69e9d12627590",
+    "paymentReference": "TEST-62143209",
+    "createdAt": "2026-08-16T10:25:56.401Z",
+    "updatedAt": "2026-08-16T10:26:02.768Z"
+  }
+]

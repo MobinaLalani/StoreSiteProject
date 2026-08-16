@@ -173,13 +173,13 @@
     "description": "dffgfdfdfgdf",
     "thumbnail": "/uploads/products/b75c51cdc018b13d84a6a23cf8152a74.png",
     "images": [],
-    "stock": 65,
+    "stock": 64,
     "price": 3200000,
     "salePrice": null,
     "categoryId": 1,
     "status": "active",
     "createdAt": "2026-08-13T06:41:53.282Z",
-    "updatedAt": "2026-08-13T06:41:53.282Z"
+    "updatedAt": "2026-08-16T10:26:02.763Z"
   },
   {
     "id": 7,
