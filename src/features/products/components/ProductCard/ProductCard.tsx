@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowUpLeft, PackageCheck, PackageX } from "lucide-react";
+import { ArrowUpLeft, Building2, PackageCheck, PackageX } from "lucide-react";
 import type { Product } from "@/src/types/product";
 import ProductImage from "./ProductImage";
 import ProductRating from "./ProductRating";
@@ -30,6 +30,8 @@ export default function ProductCard({ product }: { product: Product }) {
           <h3 className="line-clamp-2 min-h-14 text-lg font-black leading-7 text-slate-900 transition-colors group-hover/title:text-red-600">{product.title}</h3>
         </Link>
         <p className="mt-2 line-clamp-2 min-h-12 text-sm leading-6 text-slate-500">{product.shortDescription || product.description}</p>
+
+        {product.isWholesaleAvailable && <span className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-lg bg-amber-50 px-2.5 py-1.5 text-[11px] font-bold text-amber-800"><Building2 size={14} />قابل خرید عمده</span>}
 
         {product.tags.length > 0 && <div className="mt-3 flex min-h-7 flex-wrap gap-1.5 overflow-hidden">{product.tags.slice(0, 2).map((tag) => <span key={tag} className="max-w-28 truncate rounded-lg bg-slate-50 px-2 py-1 text-[10px] font-semibold text-slate-500">{tag}</span>)}</div>}
 

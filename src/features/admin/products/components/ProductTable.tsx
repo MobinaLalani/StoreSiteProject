@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Pencil, Trash2, PackageOpen, Star } from "lucide-react";
+import { Building2, Pencil, Trash2, PackageOpen, Star } from "lucide-react";
 
 import DataTable, {
   Column,
@@ -111,6 +111,16 @@ export default function ProductTable({
         ) : (
           <span className="text-gray-400">-</span>
         ),
+    },
+
+    {
+      key: "isWholesaleAvailable",
+
+      title: "فروش عمده",
+
+      render: (product) => product.isWholesaleAvailable ? (
+        <span className="inline-flex items-center gap-1 rounded-lg bg-amber-50 px-3 py-1 text-xs font-bold text-amber-800"><Building2 size={14} />فعال</span>
+      ) : <span className="text-gray-400">-</span>,
     },
 
     {
