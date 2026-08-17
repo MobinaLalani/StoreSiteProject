@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import MobileNavbar from "./MobileNavbar";
 import {
   ChevronDown,
   Smartphone,
@@ -73,141 +74,164 @@ export default function Navbar() {
 
   return (
     <>
-    <nav className="relative z-50 hidden overflow-visible border-b border-slate-100 bg-white/90 shadow-sm backdrop-blur-xl lg:block">
-      <Container>
-        <div className="flex h-14 items-center gap-10">
-          {/* Category Button */}
-          <div
-            className="relative after:absolute after:inset-x-0 after:top-full after:h-2 after:content-['']"
-            onMouseLeave={() => setDesktopOpen(false)}
-          >
-            <button type="button" aria-expanded={desktopOpen} aria-haspopup="menu" onClick={() => setDesktopOpen((value) => !value)} className="flex items-center gap-2 rounded-xl bg-red-50 px-4 py-2 font-semibold text-red-600 transition hover:bg-red-100">
-              <Menu size={18} />
-              دسته بندی ها
-              <ChevronDown
-                size={18}
-                className={`transition ${desktopOpen ? "rotate-180" : ""}`}
-              />
-            </button>
+      <nav className="relative z-50 hidden overflow-visible border-b border-slate-100 bg-white/90 shadow-sm backdrop-blur-xl lg:block">
+        <Container>
+          <div className="flex h-14 items-center gap-10">
+            {/* Category Button */}
+            <div
+              className="relative after:absolute after:inset-x-0 after:top-full after:h-2 after:content-['']"
+              onMouseLeave={() => setDesktopOpen(false)}
+            >
+              <button
+                type="button"
+                aria-expanded={desktopOpen}
+                aria-haspopup="menu"
+                onClick={() => setDesktopOpen((value) => !value)}
+                className="flex items-center gap-2 rounded-xl bg-red-50 px-4 py-2 font-semibold text-red-600 transition hover:bg-red-100"
+              >
+                <Menu size={18} />
+                دسته بندی ها
+                <ChevronDown
+                  size={18}
+                  className={`transition ${desktopOpen ? "rotate-180" : ""}`}
+                />
+              </button>
 
-            <AnimatePresence>
-              {desktopOpen && (
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                    y: 10,
-                    scale: 0.98,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                  }}
-                  exit={{
-                    opacity: 0,
-                    y: 10,
-                    scale: 0.98,
-                  }}
-                  transition={{
-                    duration: 0.25,
-                  }}
-                  className="absolute right-0 top-[calc(100%+.5rem)] z-[100] flex h-[420px] w-[min(720px,calc(100vw-4rem))] overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-2xl"
-                >
-                  {/* Left */}
-                  <div className="w-64 border-l bg-gray-50">
-                    {isLoading ? (
-                      <div className="p-5">در حال دریافت...</div>
-                    ) : (
-                      categories.map((category: Category) => {
-                        const Icon =
-                          categoryIcons[
-                            category.slug as keyof typeof categoryIcons
-                          ] ?? Menu;
-
-                        return (
-                          <Link
-                            key={category.id}
-                            href={categoryHref(category.slug)}
-                            onMouseEnter={() => setActiveId(category.id)}
-                            onClick={() => setDesktopOpen(false)}
-                            className={`flex w-full items-center gap-3 px-5 py-4 text-right transition ${
-                              active?.id === category.id
-                                ? "bg-white font-bold text-red-600"
-                                : "hover:bg-white"
-                            }`}
-                          >
-                            <Icon size={20} />
-
-                            {category.title}
-                          </Link>
-                        );
-                      })
-                    )}
-                  </div>
-
-                  {/* Right */}
+              <AnimatePresence>
+                {desktopOpen && (
                   <motion.div
-                    key={active?.id}
                     initial={{
                       opacity: 0,
-                      x: 20,
+                      y: 10,
+                      scale: 0.98,
                     }}
                     animate={{
                       opacity: 1,
-                      x: 0,
+                      y: 0,
+                      scale: 1,
+                    }}
+                    exit={{
+                      opacity: 0,
+                      y: 10,
+                      scale: 0.98,
                     }}
                     transition={{
-                      duration: 0.2,
+                      duration: 0.25,
                     }}
-                    className="flex-1 p-8"
+                    className="absolute right-0 top-[calc(100%+.5rem)] z-[100] flex h-[420px] w-[min(720px,calc(100vw-4rem))] overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-2xl"
                   >
-                    {active && <Link href={categoryHref(active.slug)} onClick={() => setDesktopOpen(false)} className="mb-6 inline-block text-xl font-bold hover:text-red-600">{active.title}</Link>}
+                    {/* Left */}
+                    <div className="w-64 border-l bg-gray-50">
+                      {isLoading ? (
+                        <div className="p-5">در حال دریافت...</div>
+                      ) : (
+                        categories.map((category: Category) => {
+                          const Icon =
+                            categoryIcons[
+                              category.slug as keyof typeof categoryIcons
+                            ] ?? Menu;
 
-                    <div className="grid grid-cols-2 gap-4">
-                      {active?.products?.map((product:Product) => (
-                        <motion.div
-                          key={product.id}
-                          whileHover={{
-                            x: -5,
-                          }}
-                          className="cursor-pointer rounded-xl bg-gray-50 p-4 transition hover:bg-red-50 hover:text-red-600"
-                        >
-                          <Link href={`/products/${encodeURIComponent(product.slug)}`} onClick={() => setDesktopOpen(false)} className="block">{product.title}</Link>
-                        </motion.div>
-                      ))}
+                          return (
+                            <Link
+                              key={category.id}
+                              href={categoryHref(category.slug)}
+                              onMouseEnter={() => setActiveId(category.id)}
+                              onClick={() => setDesktopOpen(false)}
+                              className={`flex w-full items-center gap-3 px-5 py-4 text-right transition ${
+                                active?.id === category.id
+                                  ? "bg-white font-bold text-red-600"
+                                  : "hover:bg-white"
+                              }`}
+                            >
+                              <Icon size={20} />
+
+                              {category.title}
+                            </Link>
+                          );
+                        })
+                      )}
                     </div>
+
+                    {/* Right */}
+                    <motion.div
+                      key={active?.id}
+                      initial={{
+                        opacity: 0,
+                        x: 20,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        x: 0,
+                      }}
+                      transition={{
+                        duration: 0.2,
+                      }}
+                      className="flex-1 p-8"
+                    >
+                      {active && (
+                        <Link
+                          href={categoryHref(active.slug)}
+                          onClick={() => setDesktopOpen(false)}
+                          className="mb-6 inline-block text-xl font-bold hover:text-red-600"
+                        >
+                          {active.title}
+                        </Link>
+                      )}
+
+                      <div className="grid grid-cols-2 gap-4">
+                        {active?.products?.map((product: Product) => (
+                          <motion.div
+                            key={product.id}
+                            whileHover={{
+                              x: -5,
+                            }}
+                            className="cursor-pointer rounded-xl bg-gray-50 p-4 transition hover:bg-red-50 hover:text-red-600"
+                          >
+                            <Link
+                              href={`/products/${encodeURIComponent(product.slug)}`}
+                              onClick={() => setDesktopOpen(false)}
+                              className="block"
+                            >
+                              {product.title}
+                            </Link>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+                )}
+              </AnimatePresence>
+            </div>
 
-          {/* Normal Links */}
-          <ul className="flex items-center gap-8">
-            {categories.slice(0, 7).map((category: Category) => (
-              <motion.li
-                key={category.id}
-                whileHover={{
-                  y: -3,
-                  color: "#ef4444",
-                }}
-                transition={{
-                  duration: 0.5,
-                }}
-                className="cursor-pointer text-sm font-medium"
-              >
-                <Link href={categoryHref(category.slug)}>{category.title}</Link>
-              </motion.li>
-            ))}
-          </ul>
-
+            {/* Normal Links */}
+            <ul className="flex items-center gap-8">
+              {categories.slice(0, 7).map((category: Category) => (
+                <motion.li
+                  key={category.id}
+                  whileHover={{
+                    y: -3,
+                    color: "#ef4444",
+                  }}
+                  transition={{
+                    duration: 0.5,
+                  }}
+                  className="cursor-pointer text-sm font-medium"
+                >
+                  <Link href={categoryHref(category.slug)}>
+                    {category.title}
+                  </Link>
+                </motion.li>
+              ))}
+            </ul>
+            {/* 
           {customer && <button type="button" onClick={handleLogout} className="mr-auto inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-bold text-red-600 transition hover:bg-red-50"><LogOut size={17} />خروج</button>}
-        </div>
-      </Container>
-    </nav>
+           */}
+          </div>
+        </Container>
+      </nav>
 
-    <AnimatePresence>
-      {mobileOpen && (
+      {/* <AnimatePresence>
+      {mobileOpen  && (
         <>
           <motion.button
             type="button"
@@ -260,9 +284,9 @@ export default function Navbar() {
           </motion.section>
         </>
       )}
-    </AnimatePresence>
+    </AnimatePresence> */}
 
-    <nav aria-label="ناوبری موبایل" className="fixed inset-x-0 bottom-0 z-[70] border-t border-white/70 bg-white/90 pb-[env(safe-area-inset-bottom)] shadow-[0_-12px_40px_rgba(15,23,42,.13)] backdrop-blur-2xl lg:hidden">
+      {/* <nav aria-label="ناوبری موبایل" className="fixed inset-x-0 bottom-0 z-[70] border-t border-white/70 bg-white/90 pb-[env(safe-area-inset-bottom)] shadow-[0_-12px_40px_rgba(15,23,42,.13)] backdrop-blur-2xl lg:hidden">
       <div className="mx-auto flex h-[4.25rem] max-w-md items-stretch px-2">
         <Link href="/" className={mobileItemClass("/")}><House size={21} /><span>خانه</span></Link>
         <Link href="/products" className={mobileItemClass("/products")}><ShoppingBag size={21} /><span>محصولات</span></Link>
@@ -273,7 +297,16 @@ export default function Navbar() {
         <Link href="/admin" className={mobileItemClass("/admin")}><UserRound size={21} /><span>مدیریت</span></Link>
         {customer && <button type="button" onClick={handleLogout} className="flex min-w-0 flex-1 flex-col items-center justify-center gap-1 py-2 text-[11px] font-medium text-red-600 transition"><LogOut size={21} /><span>خروج</span></button>}
       </div>
-    </nav>
+    </nav> */}
+
+      <MobileNavbar
+        mobileOpen={mobileOpen}
+        setMobileOpen={setMobileOpen}
+        categories={categories}
+        isLoading={isLoading}
+        isError={isError}
+        customer={customer}
+      />
     </>
   );
 }
