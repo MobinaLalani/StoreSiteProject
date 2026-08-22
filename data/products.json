@@ -1,206 +1,213 @@
 [
   {
     "id": 1,
-    "title": "iPhone 16 Pro1",
-    "slug": "iphone-16-pro",
-    "shortDescription": "جدیدترین گوشی اپل",
-    "description": "آیفون 16 پرو با تراشه A18 Pro، نمایشگر OLED و دوربین حرفه‌ای نسل جدیددددد.",
-    "thumbnail": "/Image/products/phone1.jpg",
-    "images": [
-      "/Image/products/phone1.jpg",
-      "/Image/products/phone2.jpg"
-    ],
-    "rating": 5,
-    "reviewCount": 248,
-    "stock": 15,
-    "categoryId": 1,
-    "tags": [
-      "5G",
-      "OLED",
-      "A18 Pro",
-      "Face ID"
-    ],
-    "colors": [
-      "Titanium",
-      "Black",
-      "White"
-    ],
-    "specifications": [
-      {
-        "title": "حافظه",
-        "value": "256GB"
-      },
-      {
-        "title": "رم",
-        "value": "8GB"
-      },
-      {
-        "title": "نمایشگر",
-        "value": "6.3 inch OLED"
-      },
-      {
-        "title": "پردازنده",
-        "value": "Apple A18 Pro"
-      }
-    ],
-    "status": "active",
-    "isFeatured": true,
-    "createdAt": "2026-07-26T12:00:00Z",
-    "updatedAt": "2026-08-16T07:04:54.558Z",
-    "price": 149900000,
-    "salePrice": 139900000,
-    "isWholesaleAvailable": true
-  },
-  {
-    "id": 2,
-    "title": "MacBook Air M4",
-    "slug": "macbook-air-m4",
-    "shortDescription": "قدرت و سبکی",
-    "description": "مک‌بوک ایر M4 با طراحی سبک و پردازنده Apple Silicon.",
-    "thumbnail": "/Image/products/laptop1.jpg",
-    "images": [
-      "/Image/products/laptop1.jpg"
-    ],
-    "rating": 4.9,
-    "reviewCount": 103,
-    "stock": 6,
-    "price": 119900000,
-    "salePrice": 112500000,
-    "categoryId": 2,
-    "tags": [
-      "M4",
-      "Retina",
-      "SSD"
-    ],
-    "colors": [
-      "Silver",
-      "Midnight"
-    ],
-    "specifications": [
-      {
-        "title": "پردازنده",
-        "value": "Apple M4"
-      },
-      {
-        "title": "رم",
-        "value": "16GB"
-      },
-      {
-        "title": "حافظه",
-        "value": "512GB SSD"
-      }
-    ],
-    "status": "active",
-    "isFeatured": true,
-    "createdAt": "2026-07-26T12:00:00Z",
-    "updatedAt": "2026-07-26T12:00:00Z"
-  },
-  {
-    "id": 3,
-    "title": "Sony WH-1000XM5",
-    "slug": "sony-wh1000xm5",
-    "shortDescription": "هدفون نویز کنسلینگ",
-    "description": "هدفون پرچمدار سونی با حذف نویز هوشمند.",
-    "thumbnail": "/Image/products/headphone2.jpg",
-    "images": [
-      "/Image/products/headphone2.jpg"
-    ],
-    "rating": 4.7,
-    "reviewCount": 184,
-    "stock": 20,
-    "price": 34800000,
-    "salePrice": 31900000,
-    "categoryId": 3,
-    "tags": [
-      "Bluetooth",
-      "Noise Cancelling"
-    ],
-    "colors": [
-      "Black",
-      "Silver"
-    ],
-    "specifications": [
-      {
-        "title": "نوع اتصال",
-        "value": "Bluetooth 5.3"
-      },
-      {
-        "title": "شارژدهی",
-        "value": "30 ساعت"
-      }
-    ],
-    "status": "active",
-    "isFeatured": false,
-    "createdAt": "2026-07-26T12:00:00Z",
-    "updatedAt": "2026-07-26T12:00:00Z"
-  },
-  {
-    "id": 5,
-    "rating": 4,
+    "rating": 0,
     "reviewCount": 0,
     "tags": [],
     "colors": [],
-    "specifications": [],
-    "status": "active",
-    "isFeatured": false,
-    "title": "گیره بزرگ",
-    "slug": "/bag",
-    "shortDescription": "بزرگترین سایز گیره",
-    "description": "یبیبیبیییی",
-    "thumbnail": "/uploads/products/1cf1b9d3f0297d2e9a7375eaf6626c36.png",
-    "images": [
-      "/uploads/products/5112045d154b51b6eb3fdd27e5ed5b1c.png",
-      "/uploads/products/db2f234ae3f98cda73352960897376b7.png"
+    "specifications": [
+      {
+        "title": "جنس بدنه",
+        "value": "فلز رسانا"
+      },
+      {
+        "title": "نوع روکش",
+        "value": "تمام روکش"
+      },
+      {
+        "title": "جنس روکش",
+        "value": "پلاستیک PVC عایق"
+      },
+      {
+        "title": "رنگ دسته",
+        "value": "مشکی/قرمز"
+      },
+      {
+        "title": "",
+        "value": ""
+      }
     ],
-    "stock": 12,
-    "price": 850000,
-    "salePrice": 790000,
-    "categoryId": 1,
-    "createdAt": "2026-08-13T06:37:26.375Z",
-    "updatedAt": "2026-08-13T06:37:26.375Z"
-  },
-  {
-    "id": 6,
-    "rating": 3,
-    "reviewCount": 0,
-    "tags": [],
-    "colors": [],
-    "specifications": [],
-    "isFeatured": false,
-    "title": "این دومین تست من هستش",
-    "slug": "2iphone-16-pro",
-    "shortDescription": "جدیدترین گوشی اپل",
-    "description": "dffgfdfdfgdf",
-    "thumbnail": "/uploads/products/b75c51cdc018b13d84a6a23cf8152a74.png",
-    "images": [],
-    "stock": 64,
-    "price": 3200000,
+    "isFeatured": true,
+    "isWholesaleAvailable": true,
+    "title": "گیره و انبر اتصال سایز ۵",
+    "slug": "gire-size5",
+    "brand": "",
+    "mpn": "",
+    "shortDescription": "گیره و انبر اتصال تمام روکش سایز ۵",
+    "description": "این انبر اتصال باتری با بدنه فلزی رسانا و روکش لاستیکی عایق، برای ایجاد اتصال و مطمئن به قطب های باتری و منابع تغذیه و انبر اتصال دستگاه جوش مورد استفاده قرار می‌گیرد. دسته لاستیکی محصول تمام گیره را پوشش داده و علاوه بر ایجاد عایق مناسب، باعث می‌شود استفاده از گیره راحت‌تر و ایمن‌تر باشد. وجود مکانیزم فنری قوی در ساختار انبر علاوه بر افزایش طول عمر محصول،فشار مناسبی برای حفظ اتصال ایجاد می‌کند و امکان استفاده آسان در کاربردهای مختلف الکتریکی، خودرویی،تأسیساتی،تعمیراتی و آزمایشگاهی و غیره را فراهم می‌سازد. این محصول گزینه‌ای مناسب برای اتصال سیم به باتری، منابع تغذیه و سایر تجهیزات الکتریکی در مواقعی است که نیاز به اتصال سریع و ایمن وجود دارد.",
+    "thumbnail": "/uploads/products/24392b517f5cc0fb8ca37c645b509414.png",
+    "images": [
+      "/uploads/products/b8c75e07b9514dc64fcfea2146c95f05.png",
+      "/uploads/products/715d88aec8e2de7248eb62e3d33d22fb.webp",
+      "/uploads/products/b6091209c5f7aa9d246219448a1b5d32.webp",
+      "/uploads/products/dc993992e2c1293802bad60eda5bdc70.webp",
+      "/uploads/products/5c07fde7f4026d67191f9354d0ce4dd2.webp"
+    ],
+    "stock": 100000,
+    "price": 75000,
     "salePrice": null,
     "categoryId": 1,
     "status": "active",
-    "createdAt": "2026-08-13T06:41:53.282Z",
-    "updatedAt": "2026-08-16T10:26:02.763Z"
+    "createdAt": "2026-08-16T17:57:13.063Z",
+    "updatedAt": "2026-08-17T08:27:43.351Z"
   },
   {
-    "id": 7,
+    "id": 2,
+    "rating": 5,
+    "reviewCount": 0,
+    "tags": [],
+    "colors": [],
+    "specifications": [
+      {
+        "title": "جنس بدنه",
+        "value": "فلز رسانا"
+      },
+      {
+        "title": "نوع دسته",
+        "value": "تمام روکش"
+      },
+      {
+        "title": "جنس دسته",
+        "value": "پلاستیک PVC عایق"
+      },
+      {
+        "title": "رنگ دسته",
+        "value": "مشکی/قرمز"
+      }
+    ],
+    "isFeatured": true,
+    "isWholesaleAvailable": true,
+    "title": "گیره اتصال سایز ۴",
+    "slug": "gire-size4",
+    "brand": "",
+    "mpn": "",
+    "shortDescription": "گیره و انبر اتصال تمام روکش سایز ۴",
+    "description": "این انبر اتصال باتری با بدنه فلزی رسانا و روکش لاستیکی عایق، برای ایجاد اتصال و مطمئن به قطب های باتری و منابع تغذیه مورد استفاده قرار می‌گیرد. دسته لاستیکی محصول تمام گیره را پوشش داده و علاوه بر ایجاد عایق مناسب، باعث می‌شود استفاده از گیره راحت‌تر و ایمن‌تر باشد. وجود مکانیزم فنری قوی در ساختار انبر علاوه بر افزایش طول عمر محصول،فشار مناسبی برای حفظ اتصال ایجاد می‌کند و امکان استفاده آسان در کاربردهای مختلف الکتریکی، خودرویی،تأسیساتی،تعمیراتی و آزمایشگاهی و غیره را فراهم می‌سازد. این محصول گزینه‌ای مناسب برای اتصال سیم به باتری، منابع تغذیه و سایر تجهیزات الکتریکی در مواقعی است که نیاز به اتصال سریع و ایمن وجود دارد.",
+    "thumbnail": "/uploads/products/ef94d7f3153874eb4f0010a172679096.png",
+    "images": [
+      "/uploads/products/cf62de4a3ce692b3f60ec768e087204f.webp",
+      "/uploads/products/d85a7c3f5411ed179bc0f7d844b06de8.webp",
+      "/uploads/products/8c57d14c4fad7acd225f8034dbca3d42.webp",
+      "/uploads/products/360d930e32f15589f1452c223c07366d.png"
+    ],
+    "stock": 100000,
+    "price": 35000,
+    "salePrice": null,
+    "categoryId": 1,
+    "status": "active",
+    "createdAt": "2026-08-17T08:24:55.390Z",
+    "updatedAt": "2026-08-17T08:39:54.882Z"
+  },
+  {
+    "id": 3,
+    "rating": 0,
+    "reviewCount": 0,
+    "tags": [],
+    "colors": [],
+    "specifications": [
+      {
+        "title": "جنس بدنه",
+        "value": "فلز رسانا"
+      },
+      {
+        "title": "نوع روکش",
+        "value": "روکش دسته"
+      },
+      {
+        "title": "جنس روکش",
+        "value": "پلاستیک PVC عایق"
+      },
+      {
+        "title": "رنگ دسته",
+        "value": "مشکی/ قرمز"
+      }
+    ],
+    "isFeatured": false,
+    "isWholesaleAvailable": true,
+    "title": "گیره اتصال سایز ۳",
+    "slug": "gire-size3",
+    "brand": "",
+    "mpn": "",
+    "shortDescription": "گیره اتصال روکش‌دار",
+    "description": "این گیره اتصال با بدنه فلزی رسانا و روکش عایق، برای ایجاد اتصال سریع و مطمئن به قطب‌های باتری و منابع تغذیه مورد استفاده قرار می‌گیرد. دسته‌های عایق محصول علاوه بر افزایش ایمنی، امکان استفاده راحت‌تر از گیره را فراهم می‌کنند. وجود مکانیزم فنری مناسب در ساختار انبر، فشار لازم برای حفظ اتصال را ایجاد کرده و باعث می‌شود گیره به‌خوبی روی محل اتصال قرار بگیرد. ابعاد جمع‌وجور این محصول، آن را برای استفاده در کاربردهای مختلف الکتریکی، خودرویی، تعمیراتی، آزمایشگاهی و اتصال سیم به باتری و منابع تغذیه مناسب می‌سازد. این محصول گزینه‌ای کاربردی برای مواقعی است که به یک گیره اتصال کوچک، قابل‌حمل و با قابلیت اتصال سریع و آسان نیاز دارید",
+    "thumbnail": "/uploads/products/96db50f17a33ab33bc8505151bea380f.png",
+    "images": ["/uploads/products/7fbab6d66e9e1d030dd360549e855202.webp"],
+    "stock": 50000,
+    "price": 13500,
+    "salePrice": null,
+    "categoryId": 1,
+    "status": "active",
+    "createdAt": "2026-08-17T08:33:05.288Z",
+    "updatedAt": "2026-08-17T11:59:40.071Z"
+  },
+  {
+    "id": 4,
     "rating": 0,
     "reviewCount": 0,
     "tags": [],
     "colors": [],
     "specifications": [],
     "isFeatured": false,
-    "title": "fgf",
-    "slug": "fdfgdf",
-    "shortDescription": "جدیدترین گوشی اپل",
-    "description": "xfdfgfdgdgfdg",
-    "thumbnail": "/uploads/products/efeaafeecf609468550c841e5a255d98.webp",
-    "images": [],
-    "stock": 0,
-    "price": 1000000,
+    "isWholesaleAvailable": true,
+    "title": "گیره اتصال سایز ۲",
+    "slug": "gire-size2",
+    "brand": "",
+    "mpn": "",
+    "shortDescription": "گیره اتصال سوسماری سایز ۲",
+    "description": "این گیره اتصال کوچک، که با اسم گیره سوسماری نیز شناخته میشود، ابزاری کاربردی برای برقراری اتصال موقت میان سیم، باتری و سایر تجهیزات الکتریکی است. طراحی کوچک و جمع‌وجور آن باعث می‌شود در فضاهای محدود و برای اتصالاتی که به گیره‌ای با ابعاد کم نیاز دارند، به‌راحتی مورد استفاده قرار گیرد. بدنه فلزی گیره امکان برقراری اتصال الکتریکی را فراهم کرده و روکش عایق دسته‌ها، استفاده از آن را آسان‌تر و ایمن‌تر می‌کند. ساختار فنری انبر نیز باعث می‌شود دهانه گیره پس از قرار گرفتن روی محل اتصال، به‌خوبی در جای خود قرار بگیرد. این محصول برای استفاده در کارهای الکترونیکی، تعمیرات، آزمایش‌ها، اتصالات به باتری و دیگر پروژه‌های سبک که نیاز به یک اتصال سریع و موقت دارند، انتخابی مناسب و کم‌حجم است",
+    "thumbnail": "/uploads/products/871265be4c48a3946b5a8f89c763ec6e.png",
+    "images": [
+      "/uploads/products/1c4a99df8b2d12da066c1e3585c43af1.webp",
+      "/uploads/products/91798fdc46ae93b11fa8a6bab57919a6.webp"
+    ],
+    "stock": 50000,
+    "price": 9000,
     "salePrice": null,
-    "categoryId": 8,
+    "categoryId": 1,
     "status": "active",
-    "createdAt": "2026-08-14T19:19:56.949Z",
-    "updatedAt": "2026-08-14T19:19:56.949Z"
+    "createdAt": "2026-08-17T08:50:07.090Z",
+    "updatedAt": "2026-08-17T08:59:31.812Z"
+  },
+  {
+    "id": 5,
+    "rating": 0,
+    "reviewCount": 0,
+    "tags": [],
+    "colors": [],
+    "specifications": [
+      {
+        "title": "جنس بدنه",
+        "value": "فلز رسانا"
+      },
+      {
+        "title": "نوع روکش",
+        "value": "تمام روکش"
+      },
+      {
+        "title": "جنس روکش",
+        "value": "پلاستیک PVC عایق"
+      }
+    ],
+    "isFeatured": false,
+    "isWholesaleAvailable": true,
+    "title": "گیره اتصال سایز ۱",
+    "slug": "gire-size1",
+    "brand": "",
+    "mpn": "",
+    "shortDescription": "گیره اتصال سوسماری سایز ۱",
+    "description": "این گیره اتصال سوسماری با طراحی ساده و کاربردی، برای ایجاد اتصال موقت و سریع در مدارها و تجهیزات الکتریکی مورد استفاده قرار می‌گیرد. فک فلزی دندانه‌دار گیره امکان گرفتن مناسب سیم، پایه قطعات و نقاط اتصال مختلف را فراهم می‌کند و روکش عایق قرمز و مشکی نیز قسمت فلزی دسته را پوشانده و استفاده از آن را راحت‌تر می‌سازد. طراحی جمع‌وجور این گیره باعث می‌شود برای کارهای الکترونیکی، آزمایشگاهی، تعمیرات، تست مدار و اتصال سیم به باتری یا منبع تغذیه گزینه‌ای مناسب باشد. این محصول به‌خصوص در مواقعی که نیاز به ایجاد یک اتصال سریع، موقت و قابل جدا کردن وجود دارد، کاربرد زیادی دارد",
+    "thumbnail": "/uploads/products/6ccf72efd6ac6a82c82d13b280816163.png",
+    "images": [
+      "/uploads/products/d14bfd038349037b7c06a42ec34491f1.webp",
+      "/uploads/products/e5ae2764d4d1a46d1cba64d334b01304.webp",
+      "/uploads/products/7c6a4dc376b7f8b0cff4e9bec2e46575.webp"
+    ],
+    "stock": 30000,
+    "price": 12000,
+    "salePrice": null,
+    "categoryId": 1,
+    "status": "active",
+    "createdAt": "2026-08-17T08:58:54.194Z",
+    "updatedAt": "2026-08-17T08:58:54.194Z"
   }
 ]
