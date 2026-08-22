@@ -50,7 +50,7 @@ const accountMenuItems: AccountMenuItem[] = [
   {
     title: "لیست‌های من",
     icon: Heart,
-    href: "#",
+    href: "/account/lists",
   },
   {
     title: "دیدگاه‌ها و پرسش‌ها",
@@ -158,10 +158,12 @@ export default function AccountPage() {
             </p>
           </div>
         </div>
-
-        <button type="button">
+        <Link
+          href="/account/PersonalInfo"
+          className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-slate-100"
+        >
           <Pencil size={20} />
-        </button>
+        </Link>
       </section>
 
       {/* Wallet Cards */}
@@ -269,6 +271,7 @@ export default function AccountPage() {
             key={title}
             href={href}
             className="
+                   
                   flex
                   h-14
                   items-center
@@ -276,13 +279,12 @@ export default function AccountPage() {
                   px-4
                 "
           >
-            <ChevronLeft size={18} />
-
             <div className="flex items-center gap-3">
               <Icon size={20} />
 
               <span>{title}</span>
             </div>
+            <ChevronLeft size={18} />
           </Link>
         ))}
       </section>
