@@ -6,7 +6,14 @@ import { settingsRepository } from "@/src/repositories/settings.repository";
 import type { SiteSettings } from "@/src/features/admin/settings/types";
 
 export const dynamic = "force-dynamic";
-export const metadata: Metadata = { title: "ورود مدیریت", robots: { index: false, follow: false, nocache: true } };
+
+export const metadata: Metadata = {
+  title: "ورود",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function LoginPage() {
   const settings = await settingsRepository.getPublic() as unknown as SiteSettings;
