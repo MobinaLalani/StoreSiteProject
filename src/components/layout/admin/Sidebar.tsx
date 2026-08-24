@@ -7,7 +7,7 @@ import { title } from "process";
 const menu = [
   { title: "داشبورد", href: "/admin", icon: LayoutDashboard },
   { title: "دسته‌بندی محصولات", href: "/admin/Categories", icon: Package },
-  { title: "تنظیمات تگ", href: "/admin/Tags", icon: Tag },
+  { title: "تنظیمات تگ", href: "/admin/Tag", icon: Tag },
   { title: "محصولات", href: "/admin/Products", icon: FolderTree },
   { title: "درخواست‌های تماس", href: "/admin/inquiries", icon: MessageCircle },
   { title: "سفارش‌ها", href: "/admin/order", icon: ClipboardList },
