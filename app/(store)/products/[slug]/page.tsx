@@ -1,96 +1,458 @@
-import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
-import { productRepository } from "@/src/repositories/product.repository";
 import {
+  ProductDescription,
   ProductGallery,
   ProductInfo,
-  ProductDescription,
   ProductSpecifications,
   RelatedProducts,
 } from "@/src/features/products/ProductDetails";
-import { settingsRepository } from "@/src/repositories/settings.repository";
+
 import type { SiteSettings } from "@/src/features/admin/settings/types";
+
+import { categoryRepository } from "@/src/repositories/category.repository";
+import { productRepository } from "@/src/repositories/product.repository";
+import { settingsRepository } from "@/src/repositories/settings.repository";
+
 import { absoluteUrl, cleanDescription, safeJsonLd } from "@/src/lib/seo";
+
 import { effectivePrice } from "@/src/lib/money";
 
 interface ProductPageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{
+    slug: string;
+  }>;
 }
 
 export const dynamic = "force-dynamic";
 
-export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+/**
+ * Dynamic SEO metadata for every product page
+ */
+export async function generateMetadata({
+  params,
+}: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
+
+  const decodedSlug = decodeURIComponent(slug);
+
   const [products, settings] = await Promise.all([
     productRepository.getAll(),
+
     settingsRepository.getPublic() as Promise<unknown> as Promise<SiteSettings>,
   ]);
-  const product = products.find((item) => item.slug === decodeURIComponent(slug) && item.status === "active");
-  if (!product) return { title: "محصول پیدا نشد", robots: { index: false, follow: false } };
 
-  const description = cleanDescription(product.shortDescription || product.description, `مشخصات و استعلام ${product.title}`);
-  const canonical = `/products/${encodeURIComponent(product.slug)}`;
-  const image = product.thumbnail || settings.seo.shareImage || absoluteUrl("/opengraph-image", settings);
+  const product = products.find(
+    (item) => item.slug === decodedSlug && item.status === "active",
+  );
+  console.log("product/[slug]", product);
+  if (!product) {
+    return {
+      title: "محصول پیدا نشد",
+
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
+
+  const canonicalPath = `/products/${encodeURIComponent(product.slug)}`;
+
+  const canonicalUrl = absoluteUrl(canonicalPath, settings);
+
+  const description = cleanDescription(
+    product.shortDescription || product.description,
+    `مشخصات، قیمت و استعلام ${product.title}`,
+  );
+
+  /**
+   * If later you add metaTitle / metaDescription to Product,
+   * simply replace these fallbacks.
+   */
+  const seoTitle = product.title;
+
+  const seoDescription = description;
+
+  /**
+   * Tags are useful here as metadata/context,
+   * but they are NOT a replacement for proper SEO content.
+   */
+  const keywords = [
+    product.title,
+
+    product.brand,
+
+    product.mpn,
+
+    productCategoryKeyword(product.title),
+
+    ...(product.tags ?? []),
+  ]
+    .filter(
+      (value): value is string =>
+        typeof value === "string" && value.trim().length > 0,
+    )
+    .map((value) => value.trim());
+
+  const uniqueKeywords = [...new Set(keywords)];
+
+  /**
+   * Always try to provide an absolute OG image URL.
+   */
+  const rawImage =
+    product.thumbnail || settings.seo?.shareImage || "/opengraph-image";
+
+  const image = absoluteUrl(rawImage, settings);
+
   return {
-    title: product.title,
-    description,
-    alternates: { canonical },
-    openGraph: { type: "website", url: canonical, title: product.title, description, images: image ? [{ url: image, alt: product.title }] : undefined },
-    twitter: { card: "summary_large_image", title: product.title, description, images: image ? [image] : undefined },
+    title: seoTitle,
+
+    description: seoDescription,
+
+    keywords: uniqueKeywords,
+
+    alternates: {
+      canonical: canonicalUrl,
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+
+      googleBot: {
+        index: true,
+        follow: true,
+
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
+
+    openGraph: {
+      type: "website",
+
+      locale: "fa_IR",
+
+      url: canonicalUrl,
+
+      title: seoTitle,
+
+      description: seoDescription,
+
+      siteName: settings.store?.name,
+
+      images: [
+        {
+          url: image,
+
+          alt: product.title,
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+
+      title: seoTitle,
+
+      description: seoDescription,
+
+      images: [image],
+    },
   };
 }
 
+/**
+ * Product details page
+ */
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
+
+  const decodedSlug = decodeURIComponent(slug);
+
   const [products, settings] = await Promise.all([
     productRepository.getAll(),
+
     settingsRepository.getPublic() as Promise<unknown> as Promise<SiteSettings>,
   ]);
-  const product = products.find((item) => item.slug === decodeURIComponent(slug) && item.status === "active");
-  if (!product) notFound();
 
-  const relatedProducts = products.filter((item) => item.categoryId === product.categoryId && item.id !== product.id && item.status === "active").slice(0, 4);
-  const category = (await import("@/src/repositories/category.repository")).categoryRepository;
-  const productCategory = await category.getById(product.categoryId);
-  const canonical = absoluteUrl(`/products/${encodeURIComponent(product.slug)}`, settings);
+  const product = products.find(
+    (item) => item.slug === decodedSlug && item.status === "active",
+  );
+
+  if (!product) {
+    notFound();
+  }
+
+  /**
+   * Category
+   */
+  const productCategory = await categoryRepository.getById(product.categoryId);
+
+  /**
+   * Related products
+   */
+  const relatedProducts = products
+    .filter(
+      (item) =>
+        item.categoryId === product.categoryId &&
+        item.id !== product.id &&
+        item.status === "active",
+    )
+    .slice(0, 4);
+
+  /**
+   * Canonical URL
+   */
+  const canonical = absoluteUrl(
+    `/products/${encodeURIComponent(product.slug)}`,
+    settings,
+  );
+
+  /**
+   * Effective price is in Toman.
+   *
+   * Schema.org uses IRR here,
+   * therefore convert Toman → Rial.
+   */
   const priceInToman = effectivePrice(product);
-  const offer = priceInToman > 0 ? {
-    "@type": "Offer",
-    url: canonical,
-    price: priceInToman * 10,
-    priceCurrency: "IRR",
-    itemCondition: "https://schema.org/NewCondition",
-    availability: product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-  } : undefined;
+
+  const priceInRial = priceInToman > 0 ? priceInToman * 10 : 0;
+
+  /**
+   * Offer schema
+   */
+  const offer =
+    priceInRial > 0
+      ? {
+          "@type": "Offer",
+
+          url: canonical,
+
+          price: priceInRial,
+
+          priceCurrency: "IRR",
+
+          itemCondition: "https://schema.org/NewCondition",
+
+          availability:
+            product.stock > 0
+              ? "https://schema.org/InStock"
+              : "https://schema.org/OutOfStock",
+        }
+      : undefined;
+
+  /**
+   * Product images
+   */
+  const productImages = [product.thumbnail, ...(product.images ?? [])]
+    .filter(
+      (image): image is string =>
+        typeof image === "string" && image.trim().length > 0,
+    )
+    .map((image) => absoluteUrl(image, settings));
+
+  const uniqueProductImages = [...new Set(productImages)];
+
+  /**
+   * Product structured data
+   */
   const productSchema = {
     "@context": "https://schema.org",
+
     "@type": "Product",
+
     "@id": `${canonical}#product`,
+
     name: product.title,
-    description: cleanDescription(product.description, product.shortDescription),
-    image: [...new Set([product.thumbnail, ...product.images].filter(Boolean))].map((image) => absoluteUrl(image, settings)),
-    brand: { "@type": "Brand", name: product.brand || settings.store.name },
-    sku: String(product.id),
-    mpn: product.mpn || undefined,
-    category: productCategory?.title,
-    color: product.colors.length ? product.colors.join(", ") : undefined,
-    additionalProperty: product.specifications.map((item) => ({ "@type": "PropertyValue", name: item.title, value: item.value })),
+
     url: canonical,
+
+    description: cleanDescription(
+      product.description,
+      product.shortDescription,
+    ),
+
+    image: uniqueProductImages.length > 0 ? uniqueProductImages : undefined,
+
+    sku: String(product.id),
+
+    mpn: product.mpn?.trim() || undefined,
+
+    brand: {
+      "@type": "Brand",
+
+      name: product.brand?.trim() || settings.store?.name,
+    },
+
+    category: productCategory?.title || undefined,
+
+    color: product.colors?.length ? product.colors.join(", ") : undefined,
+
+    additionalProperty: product.specifications?.length
+      ? product.specifications
+          .filter((item) => item.title?.trim() && item.value?.trim())
+          .map((item) => ({
+            "@type": "PropertyValue",
+
+            name: item.title,
+
+            value: item.value,
+          }))
+      : undefined,
+
     offers: offer,
   };
-  const breadcrumbSchema = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "خانه", item: absoluteUrl("/home", settings) }, { "@type": "ListItem", position: 2, name: "محصولات", item: absoluteUrl("/products", settings) }, ...(productCategory ? [{ "@type": "ListItem", position: 3, name: productCategory.title, item: absoluteUrl(`/products/category/${encodeURIComponent(productCategory.slug)}`, settings) }] : []), { "@type": "ListItem", position: productCategory ? 4 : 3, name: product.title, item: canonical }] };
+
+  /**
+   * Breadcrumb structured data
+   */
+  const breadcrumbItems = [
+    {
+      "@type": "ListItem",
+
+      position: 1,
+
+      name: "خانه",
+
+      item: absoluteUrl("/home", settings),
+    },
+
+    {
+      "@type": "ListItem",
+
+      position: 2,
+
+      name: "محصولات",
+
+      item: absoluteUrl("/products", settings),
+    },
+
+    ...(productCategory
+      ? [
+          {
+            "@type": "ListItem",
+
+            position: 3,
+
+            name: productCategory.title,
+
+            item: absoluteUrl(
+              `/products/category/${encodeURIComponent(productCategory.slug)}`,
+              settings,
+            ),
+          },
+        ]
+      : []),
+
+    {
+      "@type": "ListItem",
+
+      position: productCategory ? 4 : 3,
+
+      name: product.title,
+
+      item: canonical,
+    },
+  ];
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+
+    "@type": "BreadcrumbList",
+
+    itemListElement: breadcrumbItems,
+  };
 
   return (
     <main className="mx-auto max-w-7xl space-y-20 px-4 py-10">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(productSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }} />
-      <nav aria-label="مسیر صفحه" className="text-sm text-gray-500"><ol className="flex flex-wrap gap-2"><li><Link href="/home">خانه</Link></li><li aria-hidden="true">/</li><li><Link href="/products">محصولات</Link></li>{productCategory && <><li aria-hidden="true">/</li><li><Link href={`/products/category/${encodeURIComponent(productCategory.slug)}`}>{productCategory.title}</Link></li></>}<li aria-hidden="true">/</li><li aria-current="page">{product.title}</li></ol></nav>
-      <section className="grid gap-12 lg:grid-cols-2"><ProductGallery product={product} /><ProductInfo product={product} /></section>
+      {/* Product structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: safeJsonLd(productSchema),
+        }}
+      />
+
+      {/* Breadcrumb structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: safeJsonLd(breadcrumbSchema),
+        }}
+      />
+
+      {/* Breadcrumb UI */}
+      <nav aria-label="مسیر صفحه" className="text-sm text-gray-500">
+        <ol className="flex flex-wrap items-center gap-2">
+          <li>
+            <Link href="/home" className="transition hover:text-gray-900">
+              خانه
+            </Link>
+          </li>
+
+          <li aria-hidden="true">/</li>
+
+          <li>
+            <Link href="/products" className="transition hover:text-gray-900">
+              محصولات
+            </Link>
+          </li>
+
+          {productCategory && (
+            <>
+              <li aria-hidden="true">/</li>
+
+              <li>
+                <Link
+                  href={`/products/category/${encodeURIComponent(
+                    productCategory.slug,
+                  )}`}
+                  className="transition hover:text-gray-900"
+                >
+                  {productCategory.title}
+                </Link>
+              </li>
+            </>
+          )}
+
+          <li aria-hidden="true">/</li>
+
+          <li aria-current="page" className="text-gray-900">
+            {product.title}
+          </li>
+        </ol>
+      </nav>
+
+      {/* Main product information */}
+      <section className="grid gap-12 lg:grid-cols-2">
+        <ProductGallery product={product} />
+
+        <ProductInfo product={product} />
+      </section>
+
+      {/* Product description */}
       <ProductDescription product={product} />
+
+      {/* Technical specifications */}
       <ProductSpecifications product={product} />
-      <RelatedProducts products={relatedProducts} />
+
+      {/* Related products */}
+      {relatedProducts.length > 0 && (
+        <RelatedProducts products={relatedProducts} />
+      )}
     </main>
   );
+}
+
+/**
+ * Can later be removed once we have
+ * dedicated SEO keywords/meta fields.
+ */
+function productCategoryKeyword(title: string) {
+  return `خرید ${title}`;
 }
