@@ -1,6 +1,6 @@
 import {TagType} from "@/src/types/tag";
 
-const BASE_URL = "/api/tags";
+const BASE_URL = "/api/tag";
 
 async function tagError(response: Response, fallback: string) {
   const body = await response.json().catch(() => null) as { message?: string } | null;

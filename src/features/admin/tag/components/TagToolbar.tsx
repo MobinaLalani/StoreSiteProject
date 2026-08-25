@@ -34,7 +34,7 @@ export default function CategoryToolbar({
       <SearchInput
         value={search}
         onChange={onSearchChange}
-        placeholder="جستجوی دسته‌بندی..."
+        placeholder="جستجو تگ ها"
       />
 
       <button
@@ -54,7 +54,7 @@ export default function CategoryToolbar({
         "
       >
         <Plus size={18} />
-        افزودن دسته‌بندی
+        افزودن تگ
       </button>
     </div>
   );
