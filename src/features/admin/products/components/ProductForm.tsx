@@ -14,7 +14,7 @@ import Input from "@/src/features/admin/shared/ui/Input";
 import Textarea from "@/src/features/admin/shared/ui/Textarea";
 import Button from "@/src/features/admin/shared/ui/Button";
 import ProductCategorySelect from "./ProductCategorySelect";
-
+import { useTags } from "@/src/features/admin/tag";
 import ImageUpload from "@/src/features/admin/shared/components/ImageUpload";
 
 type ProductFormValues = z.infer<typeof productSchema>;
@@ -103,7 +103,7 @@ export default function ProductForm({
       isWholesaleAvailable: false,
     },
   });
-
+   const { data: tags = [], isLoading } = useTags();
   const thumbnail = watch("thumbnail");
   const images = watch("images") ?? [];
   const selectedTags = watch("tags") ?? [];
@@ -223,9 +223,9 @@ const Tags = [
             multiple
             maxItems={10}
             value={selectedTags}
-            options={Tags.map((tag) => ({
-              label: tag.title,
-              value: tag.title,
+            options={tags.map((tag) => ({
+              label: tag.label,
+              value: tag.value,
             }))}
             onChange={(value) => {
               setValue("tags", value as string[], {
