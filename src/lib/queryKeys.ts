@@ -7,4 +7,5 @@ export const queryKeys = {
   orders: ["orders"] as const,
 
   users: ["users"] as const,
+  tags: ["tags"] as const,
 };

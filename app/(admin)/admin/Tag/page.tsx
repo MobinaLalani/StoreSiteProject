@@ -1,11 +1,9 @@
-import React from 'react'
+import { TagPage } from "@/src/features/admin/tag";
 
-function page() {
+export default function Page() {
   return (
     <div>
-      DSFgdfgdfgdfgdfg
+      <TagPage />
     </div>
-  )
+  );
 }
-
-export default page
