@@ -124,5 +124,11 @@
     "success": true,
     "ip": "::1",
     "createdAt": "2026-08-24T07:21:07.960Z"
+  },
+  {
+    "username": "admin",
+    "success": true,
+    "ip": "::1",
+    "createdAt": "2026-08-25T05:54:00.544Z"
   }
 ]

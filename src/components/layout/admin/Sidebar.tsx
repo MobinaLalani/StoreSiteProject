@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ClipboardList, FolderTree, LayoutDashboard, MessageCircle, Package, Settings, ShieldCheck  , Tag} from "lucide-react";
-import { title } from "process";
+
 
 const menu = [
   { title: "داشبورد", href: "/admin", icon: LayoutDashboard },
