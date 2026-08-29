@@ -31,7 +31,7 @@ export const products: Product[] = [
 
     categoryId: 1,
 
-    tags: ["5G", "OLED", "A18 Pro", "Face ID"],
+    tags: [],
 
     colors: ["Titanium", "Black", "White"],
 
@@ -92,7 +92,7 @@ export const products: Product[] = [
 
     categoryId: 2,
 
-    tags: ["M4", "Retina", "SSD"],
+    tags: [],
 
     colors: ["Silver", "Midnight"],
 
@@ -152,7 +152,7 @@ export const products: Product[] = [
 
     categoryId: 3,
 
-    tags: ["Bluetooth", "Noise Cancelling"],
+    tags: [],
 
     colors: ["Black", "Silver"],
 
@@ -205,7 +205,7 @@ export const products: Product[] = [
 
     categoryId: 4,
 
-    tags: ["GPS", "WatchOS"],
+    tags: [],
 
     colors: ["Titanium"],
 

@@ -1,5 +1,28 @@
-import { permanentRedirect } from "next/navigation";
+import type { Metadata } from "next";
+import HomeContent from "@/src/features/home/HomeContent";
+import { productRepository } from "@/src/repositories/product.repository";
+import { categoryRepository } from "@/src/repositories/category.repository";
 
-export default function HomePage() {
-  permanentRedirect("/home");
+export const dynamic = "force-dynamic";
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    url: "/",
+  },
+  other: {
+    enamad: "24823126",
+  },
+};
+export default async function HomePage() {
+  const [products, categories] = await Promise.all([
+    productRepository.getAll(),
+    categoryRepository.getAll(),
+  ]);
+  const visibleProducts = products
+    .filter((product) => product.status === "active")
+    .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))
+    .slice(0, 8);
+  return <HomeContent products={visibleProducts} categories={categories} />;
 }
