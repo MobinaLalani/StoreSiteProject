@@ -33,7 +33,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
         {product.isWholesaleAvailable && <span className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-lg bg-amber-50 px-2.5 py-1.5 text-[11px] font-bold text-amber-800"><Building2 size={14} />قابل خرید عمده</span>}
 
-        {product.tags.length > 0 && <div className="mt-3 flex min-h-7 flex-wrap gap-1.5 overflow-hidden">{product.tags.slice(0, 2).map((tag) => <span key={tag} className="max-w-28 truncate rounded-lg bg-slate-50 px-2 py-1 text-[10px] font-semibold text-slate-500">{tag}</span>)}</div>}
+        {/* {product.tags.length > 0 && <div className="mt-3 flex min-h-7 flex-wrap gap-1.5 overflow-hidden">{product.tags.slice(0, 2).map((tag) => <span key={tag} className="max-w-28 truncate rounded-lg bg-slate-50 px-2 py-1 text-[10px] font-semibold text-slate-500">{tag}</span>)}</div>} */}
 
         <div className="mt-auto pt-4">
           <div className="mb-3 text-left"><strong className="text-lg text-red-600">{effectivePrice(product) > 0 ? formatToman(effectivePrice(product)) : "قیمت ثبت نشده"}</strong></div>

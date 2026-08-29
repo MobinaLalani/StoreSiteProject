@@ -174,7 +174,9 @@
     "id": 5,
     "rating": 0,
     "reviewCount": 0,
-    "tags": [],
+    "tags": [
+      1
+    ],
     "colors": [],
     "specifications": [
       {
@@ -210,7 +212,7 @@
     "categoryId": 1,
     "status": "active",
     "createdAt": "2026-08-17T08:58:54.194Z",
-    "updatedAt": "2026-08-17T08:58:54.194Z"
+    "updatedAt": "2026-08-29T07:07:41.909Z"
   },
   {
     "id": 6,
