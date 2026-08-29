@@ -44,7 +44,7 @@ export interface Product {
 
   categoryId: number;
 
-  tags: string[];
+  tags: number[];
 
   colors: string[];
 

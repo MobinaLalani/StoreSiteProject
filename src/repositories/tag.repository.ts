@@ -16,12 +16,20 @@ export class TagRepository {
   async create(data: Omit<TagType, "value">): Promise<TagType> {
     let newTag!: TagType;
     await updateJson<TagType[]>(filename, [], (tags) => {
-      newTag = { value: tags.length ? Math.max(...tags.map((item) => item.value)) + 1 : 1, ...data };
+      newTag = {
+        value: tags.length
+          ? Math.max(...tags.map((item) => item.value)) + 1
+          : 1,
+        ...data,
+      };
       return [...tags, newTag];
     });
     return newTag;
   }
-  async update(id: number, data: Partial<Omit<TagType, "value">>): Promise<TagType | null> {    
+  async update(
+    id: number,
+    data: Partial<Omit<TagType, "value">>,
+  ): Promise<TagType | null> {
     let updatedTag: TagType | null = null;
     await updateJson<TagType[]>(filename, [], (tags) => {
       const index = tags.findIndex((tag) => tag.value === id);
@@ -31,9 +39,9 @@ export class TagRepository {
       }
       return [...tags];
     });
-    return updatedTag; 
-   }
-   async delete(id: number): Promise<boolean> {
+    return updatedTag;
+  }
+  async delete(id: number): Promise<boolean> {
     let deleted = false;
 
     await updateJson<TagType[]>(filename, [], (tags) => {
@@ -44,8 +52,13 @@ export class TagRepository {
       }
       return [...tags];
     });
-    return deleted; 
-    }
+    return deleted;
   }
+  async getByValue(value: number): Promise<TagType | undefined> {
+    const tags = await this.getAll();
+
+    return tags.find((tag) => tag.value === value);
+  }
+}
 
   export const tagRepository = new TagRepository();

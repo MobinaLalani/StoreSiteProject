@@ -103,18 +103,20 @@ export default function ProductForm({
       isWholesaleAvailable: false,
     },
   });
-   const { data: tags = [], isLoading } = useTags();
+  const { data: tags = [] } = useTags();
   const thumbnail = watch("thumbnail");
   const images = watch("images") ?? [];
-  const selectedTags = watch("tags") ?? [];
+  const selectedTags = (watch("tags") ?? []) as number[];
   const rating = Number(watch("rating") ?? 0);
   const [hoveredRating, setHoveredRating] = useState(0);
-  const { fields: specificationFields, append: appendSpecification, remove: removeSpecification } = useFieldArray({ control, name: "specifications" });
-const Tags = [
-  { id: 1, title: "اتصالات " },
-  { id: 2, title: "باطری ها" },
-  { id: 3, title: "ابزار" },
-];
+  const {
+    fields: specificationFields,
+    append: appendSpecification,
+    remove: removeSpecification,
+  } = useFieldArray({
+    control,
+    name: "specifications",
+  });
   useEffect(() => {
     reset({
       title: initialValues?.title ?? "",
@@ -145,7 +147,7 @@ const Tags = [
 
       categoryId: initialValues?.categoryId ?? 0,
 
-      tags: initialValues?.tags ?? [],
+      tags: (initialValues?.tags ?? []).map((value) => Number(value)),
 
       colors: initialValues?.colors ?? [],
 
@@ -228,7 +230,11 @@ const Tags = [
               value: tag.value,
             }))}
             onChange={(value) => {
-              setValue("tags", value as string[], {
+              const tagValues = (Array.isArray(value) ? value : [value])
+                .map((item) => Number(item))
+                .filter((item) => Number.isFinite(item));
+
+              setValue("tags", tagValues, {
                 shouldDirty: true,
                 shouldValidate: true,
               });

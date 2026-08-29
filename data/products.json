@@ -217,9 +217,9 @@
     "rating": 0,
     "reviewCount": 0,
     "tags": [
-      "باطری ها",
-      "اتصالات ",
-      "ابزار"
+      1,
+      3,
+      2
     ],
     "colors": [],
     "specifications": [],
@@ -239,6 +239,6 @@
     "categoryId": 1,
     "status": "active",
     "createdAt": "2026-08-24T08:52:40.608Z",
-    "updatedAt": "2026-08-24T08:52:40.608Z"
+    "updatedAt": "2026-08-29T07:06:40.216Z"
   }
 ]

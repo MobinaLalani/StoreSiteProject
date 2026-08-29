@@ -25,11 +25,17 @@ export const productSchema = z.object({
 
   price: z.coerce.number().min(0, "قیمت نمی‌تواند منفی باشد."),
 
-  salePrice: z.preprocess((value) => value === "" || value === undefined ? null : value, z.coerce.number().min(0).nullable()),
+  salePrice: z.preprocess(
+    (value) => (value === "" || value === undefined ? null : value),
+    z.coerce.number().min(0).nullable(),
+  ),
 
-  categoryId: z.coerce.number().int("دسته‌بندی نامعتبر است.").positive("انتخاب دسته‌بندی الزامی است."),
+  categoryId: z.coerce
+    .number()
+    .int("دسته‌بندی نامعتبر است.")
+    .positive("انتخاب دسته‌بندی الزامی است."),
 
-  tags: z.array(z.string()),
+  tags: z.array(z.number()).max(10, "حداکثر ۱۰ تگ می‌توانید انتخاب کنید."),
 
   colors: z.array(z.string()),
 
