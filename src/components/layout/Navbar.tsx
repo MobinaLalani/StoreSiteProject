@@ -223,82 +223,9 @@ export default function Navbar() {
                 </motion.li>
               ))}
             </ul>
-            {/* 
-          {customer && <button type="button" onClick={handleLogout} className="mr-auto inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-bold text-red-600 transition hover:bg-red-50"><LogOut size={17} />خروج</button>}
-           */}
           </div>
         </Container>
       </nav>
-
-      {/* <AnimatePresence>
-      {mobileOpen  && (
-        <>
-          <motion.button
-            type="button"
-            aria-label="بستن دسته‌بندی‌ها"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setMobileOpen(false)}
-            className="fixed inset-0 z-[55] bg-black/35 backdrop-blur-[2px] lg:hidden"
-          />
-          <motion.section
-            role="dialog"
-            aria-modal="true"
-            aria-label="دسته‌بندی محصولات"
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "100%" }}
-            transition={{ type: "spring", damping: 28, stiffness: 320 }}
-            className="fixed inset-x-0 bottom-[calc(4.25rem+env(safe-area-inset-bottom))] z-[60] max-h-[65dvh] overflow-y-auto rounded-t-3xl bg-white px-4 pb-5 pt-3 shadow-2xl lg:hidden"
-          >
-            <div className="mx-auto mb-3 h-1 w-12 rounded-full bg-slate-200" />
-            <div className="mb-4 flex items-center justify-between">
-              <div>
-                <h2 className="text-lg font-black">دسته‌بندی‌ها</h2>
-                <p className="text-xs text-slate-400">دسته موردنظر را انتخاب کنید</p>
-              </div>
-              <button type="button" aria-label="بستن" onClick={() => setMobileOpen(false)} className="grid h-10 w-10 place-items-center rounded-xl bg-slate-100">
-                <X size={19} />
-              </button>
-            </div>
-            {isLoading ? (
-              <div className="py-10 text-center text-sm text-slate-500">در حال دریافت دسته‌بندی‌ها...</div>
-            ) : isError ? (
-              <div className="rounded-2xl bg-red-50 px-4 py-8 text-center text-sm text-red-600">دریافت دسته‌بندی‌ها ناموفق بود. دوباره تلاش کنید.</div>
-            ) : categories.length === 0 ? (
-              <div className="py-10 text-center text-sm text-slate-500">هنوز دسته‌بندی‌ای ثبت نشده است.</div>
-            ) : (
-            <div className="grid grid-cols-2 gap-2">
-              {categories.map((category: Category) => {
-                const Icon = categoryIcons[category.slug.replace(/^\/+/, "") as keyof typeof categoryIcons] ?? Menu;
-                return (
-                  <Link key={category.id} href={categoryHref(category.slug)} onClick={() => setMobileOpen(false)} className="flex min-h-14 items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 text-sm font-semibold active:scale-[.98]">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white text-red-500"><Icon size={18} /></span>
-                    <span className="truncate">{category.title}</span>
-                  </Link>
-                );
-              })}
-            </div>
-            )}
-          </motion.section>
-        </>
-      )}
-    </AnimatePresence> */}
-
-      {/* <nav aria-label="ناوبری موبایل" className="fixed inset-x-0 bottom-0 z-[70] border-t border-white/70 bg-white/90 pb-[env(safe-area-inset-bottom)] shadow-[0_-12px_40px_rgba(15,23,42,.13)] backdrop-blur-2xl lg:hidden">
-      <div className="mx-auto flex h-[4.25rem] max-w-md items-stretch px-2">
-        <Link href="/" className={mobileItemClass("/")}><House size={21} /><span>خانه</span></Link>
-        <Link href="/products" className={mobileItemClass("/products")}><ShoppingBag size={21} /><span>محصولات</span></Link>
-        <button type="button" aria-expanded={mobileOpen} aria-haspopup="dialog" onClick={() => setMobileOpen((value) => !value)} className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-1 py-2 text-[11px] font-medium transition ${mobileOpen ? "text-red-500" : "text-slate-500"}`}>
-          <span className={`grid h-10 w-10 place-items-center rounded-2xl transition ${mobileOpen ? "bg-red-500 text-white" : "bg-red-50 text-red-500"}`}><Boxes size={21} /></span>
-          <span>دسته‌بندی</span>
-        </button>
-        <Link href="/admin" className={mobileItemClass("/admin")}><UserRound size={21} /><span>مدیریت</span></Link>
-        {customer && <button type="button" onClick={handleLogout} className="flex min-w-0 flex-1 flex-col items-center justify-center gap-1 py-2 text-[11px] font-medium text-red-600 transition"><LogOut size={21} /><span>خروج</span></button>}
-      </div>
-    </nav> */}
-
       <MobileNavbar
         mobileOpen={mobileOpen}
         setMobileOpen={setMobileOpen}
