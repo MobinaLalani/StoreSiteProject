@@ -1,16 +1,11 @@
-
 "use client";
 
 import { useState } from "react";
 
-import {
-  sendOtp,
-  verifyOtp,
-  registerUser,
-} from "../services/auth.service";
-
 import type {
   AuthStep,
+  OtpFormValues,
+  PhoneFormValues,
   RegisterFormValues,
 } from "../type/type";
 
@@ -20,204 +15,133 @@ interface UseAuthFlowReturn {
   isLoading: boolean;
   error: string | null;
 
-  handlePhoneSubmit: (
-    phoneNumber: string
-  ) => Promise<void>;
+  handlePhoneSubmit: (phoneNumber: string) => Promise<void>;
 
-  handleOtpSubmit: (
-    otp: string
-  ) => Promise<void>;
+  handleOtpSubmit: (otp: string) => Promise<void>;
 
-  handleRegisterSubmit: (
-    values: RegisterFormValues
-  ) => Promise<void>;
+  handleRegisterSubmit: (values: RegisterFormValues) => Promise<void>;
 
   backToPhone: () => void;
-
-  clearError: () => void;
 }
 
-export const useAuthFlow =
-  (): UseAuthFlowReturn => {
-    const [step, setStep] =
-      useState<AuthStep>("phone");
+export function useAuthFlow(): UseAuthFlowReturn {
+  const [step, setStep] = useState<AuthStep>("phone");
 
-    const [phoneNumber, setPhoneNumber] =
-      useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
 
-    const [isLoading, setIsLoading] =
-      useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const [error, setError] =
-      useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-    /**
-     * مرحله اول:
-     * ارسال شماره موبایل
-     */
-    const handlePhoneSubmit = async (
-      phone: string
-    ): Promise<void> => {
-      try {
-        setIsLoading(true);
-        setError(null);
+  // -----------------------------
+  // شماره موبایل
+  // -----------------------------
 
-        const response =
-          await sendOtp({
-            phoneNumber: phone,
-          });
+  const handlePhoneSubmit = async (phone: string): Promise<void> => {
+    setError(null);
+    setIsLoading(true);
 
-        if (!response.success) {
-          setError(
-            response.message ??
-              "ارسال کد تایید ناموفق بود"
-          );
+    try {
+      // فعلاً استاتیک
+      console.log("Send OTP:", phone);
 
-          return;
-        }
+      // شبیه‌سازی درخواست API
+      await new Promise<void>((resolve) => {
+        setTimeout(resolve, 500);
+      });
 
-        setPhoneNumber(phone);
+      setPhoneNumber(phone);
 
-        setStep("otp");
-      } catch {
-        setError(
-          "خطایی در ارسال کد تایید رخ داد"
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    /**
-     * مرحله دوم:
-     * بررسی OTP
-     */
-    const handleOtpSubmit = async (
-      otp: string
-    ): Promise<void> => {
-      try {
-        setIsLoading(true);
-        setError(null);
-
-        const response =
-          await verifyOtp({
-            phoneNumber,
-            otp,
-          });
-
-        if (!response.success) {
-          setError(
-            response.message ??
-              "کد تایید صحیح نیست"
-          );
-
-          return;
-        }
-
-        /**
-         * اگر کاربر جدید باشد
-         * وارد مرحله ثبت نام می‌شویم.
-         */
-        if (response.isNewUser) {
-          setStep("register");
-          return;
-        }
-
-        /**
-         * اگر کاربر قبلاً ثبت نام کرده باشد
-         * اینجا باید Login انجام شود.
-         */
-        console.log(
-          "Existing user - Login"
-        );
-
-        // TODO:
-        // ذخیره Token
-        // Redirect
-      } catch {
-        setError(
-          "خطایی در بررسی کد تایید رخ داد"
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    /**
-     * مرحله سوم:
-     * ثبت نام کاربر جدید
-     */
-    const handleRegisterSubmit = async (
-      values: RegisterFormValues
-    ): Promise<void> => {
-      try {
-        setIsLoading(true);
-        setError(null);
-
-        const response =
-          await registerUser({
-            phoneNumber,
-            firstName: values.firstName,
-            lastName: values.lastName,
-          });
-
-        if (!response.success) {
-          setError(
-            response.message ??
-              "ثبت نام ناموفق بود"
-          );
-
-          return;
-        }
-
-        /**
-         * ثبت نام موفق
-         *
-         * اینجا معمولاً:
-         * 1. Token دریافت می‌کنیم
-         * 2. Token را ذخیره می‌کنیم
-         * 3. کاربر را Redirect می‌کنیم
-         */
-
-        console.log(
-          "Registration successful"
-        );
-      } catch {
-        setError(
-          "خطایی در ثبت نام رخ داد"
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    /**
-     * برگشت از OTP به شماره موبایل
-     */
-    const backToPhone = (): void => {
-      setStep("phone");
-      setError(null);
-    };
-
-    /**
-     * پاک کردن Error
-     */
-    const clearError = (): void => {
-      setError(null);
-    };
-
-    return {
-      step,
-      phoneNumber,
-      isLoading,
-      error,
-
-      handlePhoneSubmit,
-      handleOtpSubmit,
-      handleRegisterSubmit,
-
-      backToPhone,
-      clearError,
-    };
+      // رفتن به مرحله OTP
+      setStep("otp");
+    } catch {
+      setError("ارسال کد تأیید با خطا مواجه شد");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
+  // -----------------------------
+  // تأیید OTP
+  // -----------------------------
+
+  const handleOtpSubmit = async (otp: string): Promise<void> => {
+    setError(null);
+    setIsLoading(true);
+
+    try {
+      // فعلاً کد ثابت برای تست
+      console.log("Verify OTP:", phoneNumber, otp);
+
+      // شبیه‌سازی درخواست
+      await new Promise<void>((resolve) => {
+        setTimeout(resolve, 500);
+      });
+
+      // کد صحیح تستی
+      if (otp !== "111111") {
+        setError("کد تأیید وارد شده صحیح نیست");
+        return;
+      }
+
+      // کد صحیح است
+      console.log("OTP verified successfully");
+
+      // فعلاً مستقیم برو مرحله ثبت‌نام
+      setStep("register");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // -----------------------------
+  // ثبت نام
+  // -----------------------------
+
+  const handleRegisterSubmit = async (
+    values: RegisterFormValues,
+  ): Promise<void> => {
+    setError(null);
+    setIsLoading(true);
+
+    try {
+      console.log("Register:", phoneNumber, values);
+
+      await new Promise<void>((resolve) => {
+        setTimeout(resolve, 500);
+      });
+
+      console.log("Registration successful");
+
+      // بعداً اینجا:
+      // SetUserToken(...)
+      // router.push(...)
+    } catch {
+      setError("ثبت‌نام با خطا مواجه شد");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // -----------------------------
+  // برگشت به شماره موبایل
+  // -----------------------------
+
+  const backToPhone = (): void => {
+    setError(null);
+    setStep("phone");
+  };
+
+  return {
+    step,
+    phoneNumber,
+    isLoading,
+    error,
+
+    handlePhoneSubmit,
+    handleOtpSubmit,
+    handleRegisterSubmit,
+
+    backToPhone,
+  };
+}
